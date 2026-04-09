@@ -1,0 +1,1027 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 9.1.0" type="baseline" client="gradle" dependencies="false" name="AGP (9.1.0)" variant="all" version="9.1.0">
+
+    <issue
+        id="OldTargetApi"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details."
+        errorLine1="        targetSdk = 34"
+        errorLine2="        ~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="12"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of `compileSdk` than 34 is available: 36"
+        errorLine1="    compileSdk = 34"
+        errorLine2="    ~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="8"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.material:material than 1.12.0 is available: 1.13.0"
+        errorLine1="    implementation(&quot;com.google.android.material:material:1.12.0&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="73"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.core:core-splashscreen than 1.0.1 is available: 1.2.0"
+        errorLine1="    implementation(&quot;androidx.core:core-splashscreen:1.0.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="74"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of org.jetbrains.kotlin:kotlin-stdlib-jdk7 than 2.2.10 is available: 2.3.0"
+        errorLine1="    implementation(&quot;org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="78"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="NewerVersionAvailable"
+        message="A newer version of com.google.code.gson:gson than 2.10.1 is available: 2.13.2"
+        errorLine1="    implementation(&quot;com.google.code.gson:gson:2.10.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="77"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;source_code_title&quot; is not translated in &quot;bn&quot; (Bangla) or &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;source_code_title&quot;>Source Code&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="4"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;disable_charge_now&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;disable_charge_now&quot;>Disable charge now&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="8"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;limit_by_voltage&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;limit_by_voltage&quot;>Limit by voltage&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="9"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_voltage_threshold&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;custom_voltage_threshold&quot;>Custom Voltage threshold&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="10"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;notify&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;notify&quot;>Notify when limit is reached&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="12"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;status_ctrl_data_label&quot; is not translated in &quot;bn&quot; (Bangla) or &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;status_ctrl_data_label&quot;>Control file data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="16"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;issues&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;issues&quot;>KNOWN ISSUES&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="18"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;disable&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;disable&quot;>Disable&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="21"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;disable_temporarily&quot; is not translated in &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;bn&quot; (Bangla), &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;disable_temporarily&quot;>Disable temporarily&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="22"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;dismiss&quot; is not translated in &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;bn&quot; (Bangla), &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;dismiss&quot;>Dismiss&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="23"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;open_app&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;open_app&quot;>Open App&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;file_data&quot; is not translated in &quot;bn&quot; (Bangla) or &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;file_data&quot;>(CTRL file data will appear here)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="25"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;maintaining_description&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;maintaining_description&quot;>If device becomes unplugged, disable service&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="40"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;waiting_description&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;waiting_description&quot;>Battery will stop charging once limit is reached&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="42"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;show_temperature_in_notification&quot; is not translated in &quot;bn&quot; (Bangla) or &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;show_temperature_in_notification&quot;>Show Temperature in Notification&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="62"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;disable_auto_recharge&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;disable_auto_recharge&quot;> Disable auto recharge&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="71"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;disable_auto_recharge_desc&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;disable_auto_recharge_desc&quot;>Experimental: Enabling this option also hides notification after limit reached. Important: Disable this option before uninstalling or reboot after uninstalling&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="72"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;hide_toast_on_service_change&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;hide_toast_on_service_change&quot;>Hide Toast on Service Changes&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="74"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_file_settings&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;control_file_settings&quot;>Control File Data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="76"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;current_ctrl_data_title&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;current_ctrl_data_title&quot;>Configured File Data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="77"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_file_option_summary_on&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;control_file_option_summary_on&quot;>User specified CTRL file data being utilized&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="78"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_file_option_summary_off&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;control_file_option_summary_off&quot;>Pre-defined CTRL file being utilized&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="79"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_file_alert_title&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;control_file_alert_title&quot;>Advanced Users Only!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="80"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_file_alert_desc&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;control_file_alert_desc&quot;>WARNING: Tampering with this section without knowledge of what you are changing may cause problems to your device that are unforeseen. Rebooting the device usually fixes a lot of issues, however, some may not be as easily fixed. PROCEED WITH CAUTION!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="81"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_understand&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;control_understand&quot;>I understand&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="82"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_file_heads_up_title&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;control_file_heads_up_title&quot;>Control File Information&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="83"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_file_heads_up_desc&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;control_file_heads_up_desc&quot;>Only control files detected on your device will show up as available. If a control file is detected, but for another device, it should be safe to use. Open an issue or send a pull request on GitHub for your device with the control file data to be added to this list.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="84"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_data_title&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_data_title&quot;>Configurable CTRL File Data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="86"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_data_setup_title&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_data_setup_title&quot;>Configure Control Data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="87"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_path_title&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_path_title&quot;>Set Path to Desired File&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="88"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_path_hint&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_path_hint&quot;>/sys/folder/folder/desired_file&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="89"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_enabled_title&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_enabled_title&quot;>Set Enabled Value&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="90"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_enabled_hint&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_enabled_hint&quot;>1, enabled, desired_value&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="91"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_disabled_title&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_disabled_title&quot;>Set Disabled Value&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="92"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_disabled_hint&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_disabled_hint&quot;>0, disabled, desired_value&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="93"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_updated_info&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_updated_info&quot;>Updated data will appear here once you update the information&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="94"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_heads_up&quot; is not translated in &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_heads_up&quot;>If you experience issues with app crashes or the service not working properly, try enabling Always Write CTRL File in settings. There is NO guarantee that this configurable control file function will support all devices and files/values. Try adjusting the settings if issues occur or ensure the data is correct.&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="95"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;custom_ctrl_file_update_data&quot; is not translated in &quot;bn&quot; (Bangla) or &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;custom_ctrl_file_update_data&quot;>Update CTRL File Data&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="96"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;theme&quot; is not translated in &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;theme&quot;>Theme&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="98"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;light&quot; is not translated in &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;light&quot;>Light&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="99"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;dark&quot; is not translated in &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish)"
+        errorLine1="    &lt;string name=&quot;dark&quot;>Dark&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="100"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;black&quot; is not translated in &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;black&quot;>Black - AMOLED&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="101"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;current_voltage_threshold&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;current_voltage_threshold&quot;>Current Voltage Threshold&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="102"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;default_voltage_threshold&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;default_voltage_threshold&quot;>Default Voltage Threshold&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="103"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_battery_charge_permission_label&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;control_battery_charge_permission_label&quot;>Control battery charge&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="104"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;control_battery_charge_permission_description&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;control_battery_charge_permission_description&quot;>control battery charge&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="105"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;version&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;version&quot;>Version&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="106"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;app_author&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;app_author&quot;>© 2021—2022 &lt;a href=&quot;https://github.com/MuntashirAkon&quot;>Muntashir Al-Islam&lt;/a>&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="107"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;license_title&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;license_title&quot;>License&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="108"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;credits_title&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;credits_title&quot;>Credits&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="109"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;credits_details&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;credits_details&quot;>To the authors of"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="110"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;close&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;close&quot;>Close&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="114"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;voltage_threshold_title&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
+        errorLine1="    &lt;string name=&quot;voltage_threshold_title&quot;>Voltage Threshold (in mV or µV)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="115"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="Untranslatable"
+        message="The resource string &quot;source_code&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;ta&quot; (Tamil) here"
+        errorLine1="    &lt;string name=&quot;source_code&quot; translatable=&quot;false&quot;>&lt;a href=&quot;https://github.com/sriharshaarangi/BatteryChargeLimit&quot;>Source Code&lt;/a>&lt;/string>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-ta/strings.xml"
+            line="5"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="Untranslatable"
+        message="The resource string &quot;source_code&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;zh&quot; (Chinese) here"
+        errorLine1="    &lt;string name=&quot;source_code&quot; translatable=&quot;false&quot;>&lt;a href=&quot;https://github.com/sriharshaarangi/BatteryChargeLimit&quot;>Source Code&lt;/a>&lt;/string>"
+        errorLine2="                               ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-zh-rCN/strings.xml"
+            line="5"
+            column="32"/>
+    </issue>
+
+    <issue
+        id="Untranslatable"
+        message="The resource string &quot;xda_thread&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;ta&quot; (Tamil) here"
+        errorLine1="    &lt;string name=&quot;xda_thread&quot; translatable=&quot;false&quot;>&lt;a href=&quot;https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/&quot;>XDA Thread&lt;/a>&lt;/string>"
+        errorLine2="                              ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-ta/strings.xml"
+            line="6"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="Untranslatable"
+        message="The resource string &quot;xda_thread&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;zh&quot; (Chinese) here"
+        errorLine1="    &lt;string name=&quot;xda_thread&quot; translatable=&quot;false&quot;>&lt;a href=&quot;https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/&quot;>XDA Thread&lt;/a>&lt;/string>"
+        errorLine2="                              ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-zh-rCN/strings.xml"
+            line="6"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="DataExtractionRules"
+        message="The attribute `android:allowBackup` is deprecated from Android 12 and higher and may be removed in future versions. Consider adding the attribute `android:dataExtractionRules` specifying an `@xml` resource which configures cloud backups and device transfers on Android 12 and higher."
+        errorLine1="        android:allowBackup=&quot;false&quot;"
+        errorLine2="                             ~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="18"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.source_code` appears to be unused"
+        errorLine1="    &lt;string name=&quot;source_code&quot; translatable=&quot;false&quot;>&lt;a href=&quot;https://github.com/sriharshaarangi/BatteryChargeLimit&quot;>Source Code&lt;/a>&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="5"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.xda_thread` appears to be unused"
+        errorLine1="    &lt;string name=&quot;xda_thread&quot; translatable=&quot;false&quot;>&lt;a href=&quot;https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/&quot;>XDA Thread&lt;/a>&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="6"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.disable` appears to be unused"
+        errorLine1="    &lt;string name=&quot;disable&quot;>Disable&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="21"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.maintaining_description` appears to be unused"
+        errorLine1="    &lt;string name=&quot;maintaining_description&quot;>If device becomes unplugged, disable service&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="40"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.theme` appears to be unused"
+        errorLine1="    &lt;string name=&quot;theme&quot;>Theme&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="98"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive icon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    Utils.getSettings(context).edit().putString(Constants.DEFAULT_VOLTAGE_LIMIT, it.out[0]).apply()"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/receivers/BootReceiver.kt"
+            line="23"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, enable).apply()"
+        errorLine2="                ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/receivers/ControlBatteryChargeReceiver.kt"
+            line="25"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="            settings.edit().putString(Constants.SAVED_DISABLED_DATA, customDisabledData).apply()"
+        errorLine2="            ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/CustomCtrlFileDataActivity.kt"
+            line="92"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, enable).apply()"
+        errorLine2="                ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/EnableWidget.kt"
+            line="32"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        settings.edit().putBoolean(NOTIFICATION_LIVE, true).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/ForegroundService.kt"
+            line="61"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        settings.edit().putBoolean(NOTIFICATION_LIVE, false).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/ForegroundService.kt"
+            line="143"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="            prefs.edit().putInt(SETTINGS_VERSION, versionCode.toInt()).apply()"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainActivity.kt"
+            line="95"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    prefs.edit().putBoolean(getString(R.string.previously_started), true).apply()"
+        errorLine2="                    ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainActivity.kt"
+            line="104"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                            fragment.settings?.edit()?.putString(Constants.DEFAULT_VOLTAGE_LIMIT, voltage)?.apply()"
+        errorLine2="                            ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="57"
+            column="29"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    settings?.edit()?.putString(Constants.CUSTOM_VOLTAGE_LIMIT, newThreshold)?.apply()"
+        errorLine2="                    ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="107"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    settings?.edit()?.putString(Constants.CUSTOM_VOLTAGE_LIMIT, newThreshold)?.apply()"
+        errorLine2="                    ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="107"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="            settings?.edit()?.putInt(Constants.MIN, min)?.apply()"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="141"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, true)?.apply()"
+        errorLine2="                    ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="198"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, false)?.apply()"
+        errorLine2="                    ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="202"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    settings?.edit()?.putBoolean(Constants.LIMIT_BY_VOLTAGE, true)?.apply()"
+        errorLine2="                    ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="212"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    settings?.edit()?.putBoolean(Constants.LIMIT_BY_VOLTAGE, false)?.apply()"
+        errorLine2="                    ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="219"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                        settings.edit().putBoolean(&quot;has_opened_ctrl_file&quot;, true).apply()"
+        errorLine2="                        ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/settings/PrefsFragment.kt"
+            line="31"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        getSettings(context)"
+        errorLine2="        ^">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
+            line="143"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="        settings.edit().putInt(LIMIT, limit).putInt(MIN, min).apply()"
+        errorLine2="        ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
+            line="212"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, false).apply()"
+        errorLine2="                ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
+            line="228"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                    settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, true).apply()"
+        errorLine2="                    ~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
+            line="238"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                sharedPrefs.edit().putString(Constants.DEFAULT_VOLTAGE_LIMIT, voltage).apply()"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
+            line="394"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="KtxExtensionAvailable"
+        message="Add suffix `-ktx` to enable the Kotlin extensions for this library"
+        errorLine1="    implementation(&quot;androidx.preference:preference:1.2.1&quot;)"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle.kts"
+            line="75"
+            column="20"/>
+    </issue>
+
+</issues>

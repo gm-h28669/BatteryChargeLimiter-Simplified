@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -69,11 +69,10 @@ android {
 }
 
 dependencies {
-    val kotlin_version: String by rootProject.extra
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation("androidx.preference:preference:1.2.1")
-    implementation("com.github.topjohnwu.libsu:core:5.2.2")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+    implementation(libs.google.material)
+    implementation(libs.androidx.splashscreen)
+    implementation(libs.androidx.preference)
+    implementation(libs.libsu.core)
+    implementation(libs.google.gson)
+    implementation(libs.kotlin.stdlib.jdk7)
 }

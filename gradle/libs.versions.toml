@@ -1,21 +1,19 @@
 [versions]
 agp = "9.1.0"
-kotlin = "2.2.10"
-coreKtx = "1.13.1"
-material = "1.12.0"
+kotlin = "2.3.20"
+material = "1.13.0"
 splashscreen = "1.0.1"
 preference = "1.2.1"
 libsu = "5.2.2"
-gson = "2.10.1"
+gson = "2.13.2"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 androidx-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 libsu-core = { group = "com.github.topjohnwu.libsu", name = "core", version.ref = "libsu" }
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
-kotlin-stdlib-jdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlin" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

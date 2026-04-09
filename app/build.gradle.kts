@@ -58,13 +58,15 @@ android {
         buildConfig = true
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
 }
 
@@ -74,5 +76,5 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.libsu.core)
     implementation(libs.google.gson)
-    implementation(libs.kotlin.stdlib.jdk7)
+    implementation(libs.kotlin.stdlib)
 }

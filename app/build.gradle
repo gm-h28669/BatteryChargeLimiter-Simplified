@@ -11,9 +11,6 @@ android {
         versionCode 27
         versionName "1.1.0"
     }
-    lintOptions {
-        abortOnError false
-    }
     buildTypes {
         debug {
             applicationIdSuffix '.debug'
@@ -58,6 +55,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
+    }
+    lint {
+        abortOnError false
     }
 }
 

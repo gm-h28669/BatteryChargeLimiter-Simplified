@@ -111,16 +111,12 @@ class MainFragment: Fragment() {
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        setStatusCTRLFileData()
-    }
-
     override fun onStart() {
         super.onStart()
         context?.registerReceiver(charging, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         // the limits could have been changed by an Intent, so update the UI here
         updateUi()
+        setStatusCTRLFileData()
     }
 
     override fun onStop() {

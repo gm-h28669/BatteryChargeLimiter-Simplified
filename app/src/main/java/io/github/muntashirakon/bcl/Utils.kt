@@ -446,4 +446,13 @@ object Utils {
             insets
         }
     }
+
+    // emulate that device has root rights in debug mode
+    // this allows running app in emulator without root rights
+    fun isRooted(): Boolean {
+        return if (!BuildConfig.DEBUG)
+            Shell.getShell().isRoot
+        else
+            true
+    }
 }

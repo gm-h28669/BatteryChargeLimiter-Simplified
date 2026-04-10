@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setTitle(R.string.app_name)
 
         // Exit immediately if no root support
-        if (!Shell.getShell().isRoot) {
+        if (!Utils.isRooted()) {
             showNoRootDialog()
             return
         }

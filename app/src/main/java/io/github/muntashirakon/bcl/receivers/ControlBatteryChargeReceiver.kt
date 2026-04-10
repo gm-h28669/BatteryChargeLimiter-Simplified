@@ -20,7 +20,7 @@ class ControlBatteryChargeReceiver : BroadcastReceiver() {
             Utils.stopService(context, false)
         } else if (intent.action == Constants.INTENT_TOGGLE_ACTION) {
             val settings = Utils.getSettings(context)
-            if (Shell.getShell().isRoot) {
+            if (Utils.isRooted()) {
                 val enable = !settings.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false)
                 settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, enable).apply()
                 if (enable) {

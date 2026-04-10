@@ -6,8 +6,6 @@
     <string name="xda_thread" translatable="false"><a href="https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/">XDA Thread</a></string>
     <string name="about">关于</string>
     <string name="disable_charge_now">立即禁用充电</string>
-    <string name="limit_by_voltage">电压限制</string>
-    <string name="custom_voltage_threshold">自定义电压阈值（）</string>
     <string name="enable">启用充电限制</string>
     <string name="notify">达到限制时发送通知</string>
     <string name="limit">充至 %1$d%% 时停止</string>
@@ -98,8 +96,6 @@
     <string name="light">白天</string>
     <string name="dark">黑暗</string>
     <string name="black">黑暗 - AMOLED</string>
-    <string name="current_voltage_threshold">当前电压阈值</string>
-    <string name="default_voltage_threshold">默认的电压阈值</string>
     <string name="control_battery_charge_permission_label">控制电池充电</string>
     <string name="control_battery_charge_permission_description">控制电池充电</string>
     <string name="version">版本</string>
@@ -111,5 +107,4 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">关闭</string>
-    <string name="voltage_threshold_title">电压阈值（以 mV 或 µV 为单位）</string>
 </resources>

@@ -6,8 +6,6 @@
     <string name="xda_thread" translatable="false"><a href="https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/">XDA Thread</a></string>
     <string name="about">தகவல்</string>
     <string name="disable_charge_now">இப்போது சார்ஜை முடக்கு</string>
-    <string name="limit_by_voltage">மின்னழுத்தத்தால் வரம்பு</string>
-    <string name="custom_voltage_threshold">தனிப்பயன் மின்னழுத்த வரம்பு</string>
     <string name="enable">சார்ஜின் வரம்பை இயக்கவும்</string>
     <string name="notify">வரம்பை அடைந்ததும் தெரிவிக்கவும்</string>
     <string name="limit">சார்ஜ் செய்வதை %1$d%% ஆக வரம்பிடவும்</string>
@@ -98,8 +96,6 @@
     <string name="light">ஒளி</string>
     <string name="dark">இருள்</string>
     <string name="black">கருப்பு - AMOLED</string>
-    <string name="current_voltage_threshold">தற்போதைய மின்னழுத்த வரம்பு</string>
-    <string name="default_voltage_threshold">இயல்புநிலை மின்னழுத்த வரம்பு</string>
     <string name="control_battery_charge_permission_label">பேட்டரி சார்ஜ் கட்டுப்படுத்தவும்</string>
     <string name="control_battery_charge_permission_description">பேட்டரி சார்ஜ் கட்டுப்படுத்த</string>
     <string name="version">பதிப்பு</string>
@@ -111,5 +107,4 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">மூடு</string>
-    <string name="voltage_threshold_title">மின்னழுத்த வரம்பு (mV அல்லது µV இல்)</string>
 </resources>

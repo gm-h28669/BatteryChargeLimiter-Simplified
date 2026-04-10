@@ -153,7 +153,5 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
-        const val MSG_UPDATE_VOLTAGE_THRESHOLD = 1
-        const val VOLTAGE_THRESHOLD = "voltageThreshold"
     }
 }

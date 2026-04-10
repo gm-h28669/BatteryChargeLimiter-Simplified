@@ -8,9 +8,8 @@ _This app is a work in progress. If a feature is not working, do not hesitate to
 
 ## Features
 - Free and open source.
-- Material 3 with dynamic colours.
-- Control when to start and stop charging — either directly or via an widget.
-- Set voltage threshold.
+- Material 3 with dynamic colors.
+- Control when to start and stop charging based on battery percentage — either directly or via a widget.
 - Set custom battery control configuration if the supplied ones cannot be used properly.
 
 ### Same as ACC?

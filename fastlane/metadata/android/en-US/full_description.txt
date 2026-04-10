@@ -5,9 +5,8 @@
 <b>Features:</b>
 <ul>
     <li>Free and open source.</li>
-    <li>Material 3 with dynamic colours.</li>
-    <li>Control when to start and stop charging — either directly or via an widget.</li>
-    <li>Set voltage threshold.</li>
+    <li>Material 3 with dynamic colors.</li>
+    <li>Control when to start and stop charging based on battery percentage — either directly or via a widget.</li>
     <li>Set custom battery control configuration if the supplied ones cannot be used properly.</li>
 </ul>
 

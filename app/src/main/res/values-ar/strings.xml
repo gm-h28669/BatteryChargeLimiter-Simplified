@@ -5,8 +5,6 @@
     <string name="source_code_title">الشفرة المصدرية</string>
     <string name="about">حول</string>
     <string name="disable_charge_now">تعطيل الشحن الآن</string>
-    <string name="limit_by_voltage">الحد من الفولطية</string>
-    <string name="custom_voltage_threshold">عتبة فولطية مخصصة</string>
     <string name="enable">تمكين حد الشحن</string>
     <string name="notify">الإشعار عند الوصول إلى الحد</string>
     <string name="limit">الحد من الشحن إلى %1$d%%</string>

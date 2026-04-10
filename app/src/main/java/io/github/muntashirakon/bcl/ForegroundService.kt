@@ -76,7 +76,18 @@ class ForegroundService : Service() {
             .setSmallIcon(R.drawable.ic_notif_charge)
             .setColor(ContextCompat.getColor(this, R.color.colorPrimary))
             .build()
-        startForeground(notifyID, notification)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            startForeground(
+                notifyID,
+                notification,
+                android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE or android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            )
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(notifyID, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
+        } else {
+            startForeground(notifyID, notification)
+        }
 
         batteryReceiver = BatteryReceiver(this@ForegroundService)
         registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))

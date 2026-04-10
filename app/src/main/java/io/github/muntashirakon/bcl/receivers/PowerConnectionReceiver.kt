@@ -26,8 +26,6 @@ class PowerConnectionReceiver : BroadcastReceiver() {
         val action = intent.action
         Log.d(tag, "Received action: $action")
 
-        Utils.setVoltageThreshold(null, true, context, null)
-
         //Ignore new events after power change or during state fixing
         if (!Utils.getPrefs(context).getBoolean(PrefsFragment.KEY_IMMEDIATE_POWER_INTENT_HANDLING, false)
             && Utils.isChangePending((BatteryReceiver.backOffTime * 2).coerceAtLeast(POWER_CHANGE_TOLERANCE_MS))

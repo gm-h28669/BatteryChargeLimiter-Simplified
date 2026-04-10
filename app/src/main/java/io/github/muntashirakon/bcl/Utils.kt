@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.os.BatteryManager
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -35,7 +34,6 @@ import io.github.muntashirakon.bcl.Constants.LIMIT
 import io.github.muntashirakon.bcl.Constants.MIN
 import io.github.muntashirakon.bcl.Constants.NOTIFICATION_LIVE
 import io.github.muntashirakon.bcl.Constants.SETTINGS
-import io.github.muntashirakon.bcl.activities.MainActivity
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 import java.io.InputStreamReader
 import java.nio.charset.Charset
@@ -345,78 +343,6 @@ object Utils {
         activity.setTheme(theme)
         AppCompatDelegate.setDefaultNightMode(nightMode)
         WindowCompat.setDecorFitsSystemWindows(activity.window, false)
-    }
-
-    /**
-     * FUTURE provide customisability if required
-     */
-    fun getVoltageFile(): String {
-        return Constants.DEFAULT_VOLTAGE_FILE
-    }
-
-    private var vfInitialized = false
-
-    fun setVoltageThreshold(voltage: String?, onlyIfEnabled: Boolean, context: Context, handler: Handler?) {
-        if (onlyIfEnabled && !getSettings(context).getBoolean(Constants.LIMIT_BY_VOLTAGE, false)) {
-            return
-        }
-
-        val voltageThreshold = voltage ?: getSettings(context).getString(Constants.CUSTOM_VOLTAGE_LIMIT, null)
-
-        if (voltageThreshold == null) {
-            Log.e(TAG, "Custom Voltage Threshold not valid")
-            return
-        }
-
-        val switchCommands: Array<String>
-        val voltageFile = getVoltageFile()
-        if (vfInitialized) {
-            switchCommands = arrayOf("echo $voltageThreshold > $voltageFile")
-        } else {
-            vfInitialized = true
-            switchCommands = arrayOf(
-                "mount -o rw,remount $voltageFile", "chmod u+w $voltageFile",
-                "echo $voltageThreshold > $voltageFile"
-            )
-        }
-
-        Shell.cmd(switchCommands.joinToString(separator = " && ")).submit()
-        getCurrentVoltageThresholdAsync(context, handler)
-    }
-
-    fun getCurrentVoltageThresholdAsync(context: Context, handler: Handler?) {
-        val voltageFile = getVoltageFile()
-        Shell.cmd("cat $voltageFile").submit {
-            if (it.out.size == 0) return@submit
-            val voltage = it.out[0]
-            val sharedPrefs = getSettings(context)
-            if (sharedPrefs.getString(Constants.DEFAULT_VOLTAGE_LIMIT, null) == null) {
-                sharedPrefs.edit().putString(Constants.DEFAULT_VOLTAGE_LIMIT, voltage).apply()
-            }
-            if (handler == null) return@submit
-            val msg = handler.obtainMessage(MainActivity.MSG_UPDATE_VOLTAGE_THRESHOLD)
-            val bundle = Bundle()
-            bundle.putString(MainActivity.VOLTAGE_THRESHOLD, voltage)
-            msg.data = bundle
-            handler.sendMessage(msg)
-        }
-    }
-
-    /**
-     * We assume the voltage is atleast 4 digits, and the first 4 digits make milli-Volts
-     */
-    fun isValidVoltageThreshold(newThreshold: String, currentThreshold: String): Boolean {
-        if (newThreshold.length == currentThreshold.length && newThreshold.length > 3) {
-            Log.i("copy: ", "outer")
-            val voltage = newThreshold.substring(0, 4).toInt()
-            val minVolThres = Constants.MIN_VOLTAGE_THRESHOLD_MV.toInt()
-            val manVolThres = Constants.MAX_VOLTAGE_THRESHOLD_MV.toInt()
-            if (voltage in minVolThres..manVolThres) {
-                return true
-            }
-        }
-        Log.i(TAG, "$newThreshold not valid. Current threshold: $currentThreshold")
-        return false
     }
 
     // Copied from App Manager

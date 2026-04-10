@@ -29,17 +29,11 @@ class MainFragment: Fragment() {
     private val enableSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.enable_switch) }
     private val disableChargeSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.disable_charge_switch) }
     private var preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
-    private lateinit var currentThreshold: String
-    private val mHandler = MainHandler(this)
     private var prefs: SharedPreferences? = null
     private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         if (granted) {
             Utils.startServiceIfLimitEnabled(requireContext())
         } else requireActivity().finishAndRemoveTask()
-    }
-
-    private class MainHandler(fragment: MainFragment) : Handler(Looper.getMainLooper()) {
-        private val mFragment by lazy(LazyThreadSafetyMode.NONE) { WeakReference(fragment) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,10 +55,6 @@ class MainFragment: Fragment() {
             }
         }
         prefs?.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
-
-        Utils.getCurrentVoltageThresholdAsync(requireContext(), mHandler)
-
-        currentThreshold = settings?.getString(Constants.DEFAULT_VOLTAGE_LIMIT, "4300")!!
 
         val resetBatteryStatsButton = view.findViewById<Button>(R.id.reset_battery_stats)
 //        val autoResetSwitch = view.findViewById(R.id.auto_stats_reset) as CheckBox

@@ -16,13 +16,7 @@ import io.github.muntashirakon.bcl.Utils
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (Intent.ACTION_BOOT_COMPLETED == intent.action) {
-            Utils.setVoltageThreshold(null, true, context, null)
             Utils.startServiceIfLimitEnabled(context)
-            Shell.cmd("cat ${Utils.getVoltageFile()}").submit {
-                if (it.out.size != 0) {
-                    Utils.getSettings(context).edit().putString(Constants.DEFAULT_VOLTAGE_LIMIT, it.out[0]).apply()
-                }
-            }
         }
     }
 }

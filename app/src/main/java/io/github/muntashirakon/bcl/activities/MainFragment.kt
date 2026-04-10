@@ -7,7 +7,6 @@ import android.os.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -29,10 +28,6 @@ class MainFragment: Fragment() {
     private val batteryInfo by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.battery_info) }
     private val enableSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.enable_switch) }
     private val disableChargeSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.disable_charge_switch) }
-    private val limitByVoltageSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.limit_by_voltage) }
-    private val customThresholdEditView by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<EditText>(R.id.voltage_threshold) }
-    private val currentThresholdTextView by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.current_voltage_threshold) }
-    private val defaultThresholdTextView by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.default_voltage_threshold) }
     private var preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
     private lateinit var currentThreshold: String
     private val mHandler = MainHandler(this)
@@ -45,22 +40,6 @@ class MainFragment: Fragment() {
 
     private class MainHandler(fragment: MainFragment) : Handler(Looper.getMainLooper()) {
         private val mFragment by lazy(LazyThreadSafetyMode.NONE) { WeakReference(fragment) }
-        override fun handleMessage(msg: Message) {
-            val fragment = mFragment.get()
-            if (fragment != null) {
-                when (msg.what) {
-                    MainActivity.MSG_UPDATE_VOLTAGE_THRESHOLD -> {
-                        val voltage = msg.data.getString(MainActivity.VOLTAGE_THRESHOLD)
-                        fragment.currentThreshold = voltage!!
-                        fragment.currentThresholdTextView?.text = voltage
-                        if (fragment.settings?.getString(Constants.DEFAULT_VOLTAGE_LIMIT, null) == null) {
-                            fragment.settings?.edit()?.putString(Constants.DEFAULT_VOLTAGE_LIMIT, voltage)?.apply()
-                            fragment.defaultThresholdTextView?.text = voltage
-                        }
-                    }
-                }
-            }
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -83,32 +62,9 @@ class MainFragment: Fragment() {
         }
         prefs?.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
 
-        customThresholdEditView?.setOnEditorActionListener { _, actionId, _ ->
-            var handled = false
-            if (actionId == EditorInfo.IME_ACTION_GO) {
-                hideKeybord()
-                customThresholdEditView!!.clearFocus()
-                handled = true
-            }
-            handled
-        }
-
         Utils.getCurrentVoltageThresholdAsync(requireContext(), mHandler)
 
         currentThreshold = settings?.getString(Constants.DEFAULT_VOLTAGE_LIMIT, "4300")!!
-
-        customThresholdEditView?.setText(settings?.getString(Constants.CUSTOM_VOLTAGE_LIMIT, ""))
-        defaultThresholdTextView?.text = settings?.getString(Constants.DEFAULT_VOLTAGE_LIMIT, "")
-
-        customThresholdEditView?.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                val newThreshold = customThresholdEditView?.text.toString()
-                if (Utils.isValidVoltageThreshold(newThreshold, currentThreshold)) {
-                    settings?.edit()?.putString(Constants.CUSTOM_VOLTAGE_LIMIT, newThreshold)?.apply()
-                    Utils.setVoltageThreshold(null, true, v.context, mHandler)
-                }
-            }
-        }
 
         val resetBatteryStatsButton = view.findViewById<Button>(R.id.reset_battery_stats)
 //        val autoResetSwitch = view.findViewById(R.id.auto_stats_reset) as CheckBox
@@ -122,7 +78,6 @@ class MainFragment: Fragment() {
 
         enableSwitch?.setOnCheckedChangeListener(switchListener)
         disableChargeSwitch?.setOnCheckedChangeListener(switchListener)
-        limitByVoltageSwitch?.setOnCheckedChangeListener(switchListener)
         maxPicker?.setOnValueChangedListener { _, _, max ->
             Utils.setLimit(max, settings!!)
             maxText?.text = getString(R.string.limit, max)
@@ -185,10 +140,10 @@ class MainFragment: Fragment() {
                 settings?.edit()?.putBoolean(Constants.CHARGE_LIMIT_ENABLED, isChecked)?.apply()
                 if (isChecked) {
                     Utils.startServiceIfLimitEnabled(requireContext())
-                    disableSwitches(listOf(disableChargeSwitch, limitByVoltageSwitch))
+                    disableSwitches(listOf(disableChargeSwitch))
                 } else {
                     Utils.stopService(requireContext())
-                    enableSwitches(listOf(disableChargeSwitch, limitByVoltageSwitch))
+                    enableSwitches(listOf(disableChargeSwitch))
                 }
                 EnableWidget.updateWidget(requireContext(), isChecked)
             }
@@ -196,28 +151,11 @@ class MainFragment: Fragment() {
                 if (isChecked) {
                     Utils.changeState(requireContext(), Utils.CHARGE_OFF)
                     settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, true)?.apply()
-                    disableSwitches(listOf(enableSwitch, limitByVoltageSwitch))
+                    disableSwitches(listOf(enableSwitch))
                 } else {
                     Utils.changeState(requireContext(), Utils.CHARGE_ON)
                     settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, false)?.apply()
-                    enableSwitches(listOf(enableSwitch, limitByVoltageSwitch))
-                }
-            }
-            R.id.limit_by_voltage -> {
-                if (isChecked) {
-                    Utils.setVoltageThreshold(
-                        settings?.getString(Constants.CUSTOM_VOLTAGE_LIMIT, Constants.DEFAULT_VOLTAGE_THRESHOLD_MV),
-                        false, requireContext(), mHandler
-                    )
-                    settings?.edit()?.putBoolean(Constants.LIMIT_BY_VOLTAGE, true)?.apply()
-                    disableSwitches(listOf(enableSwitch, disableChargeSwitch))
-                } else {
-                    Utils.setVoltageThreshold(
-                        settings?.getString(Constants.DEFAULT_VOLTAGE_LIMIT, "4300"),
-                        false, requireContext(), mHandler
-                    )
-                    settings?.edit()?.putBoolean(Constants.LIMIT_BY_VOLTAGE, false)?.apply()
-                    enableSwitches(listOf(enableSwitch, disableChargeSwitch))
+                    enableSwitches(listOf(enableSwitch))
                 }
             }
         }
@@ -306,7 +244,6 @@ class MainFragment: Fragment() {
     private fun updateUi() {
         enableSwitch?.isChecked = settings?.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false) == true
         disableChargeSwitch?.isChecked = settings?.getBoolean(Constants.DISABLE_CHARGE_NOW, false) == true
-        limitByVoltageSwitch?.isChecked = settings?.getBoolean(Constants.LIMIT_BY_VOLTAGE, false) == true
         val max = settings?.getInt(Constants.LIMIT, 80) ?: 80
         val min = settings?.getInt(Constants.MIN, max - 2) ?: (max - 2)
         maxPicker?.value = max

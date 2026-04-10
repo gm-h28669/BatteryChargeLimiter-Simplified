@@ -96,7 +96,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         val triggerState = lastState
         handler.postDelayed({
             // continue only if the state didn't change in the meantime
-            if (triggerState == lastState && !Utils.isPhonePluggedIn(service)) {
+            if (triggerState == lastState && !Utils.isDevicePluggedIn(service)) {
                 Utils.stopService(service, false)
             }
         }, POWER_CHANGE_TOLERANCE_MS)

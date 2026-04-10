@@ -146,7 +146,7 @@ object Utils {
         startServiceIfLimitEnabled(context)
     }
 
-    fun isPhonePluggedIn(context: Context): Boolean {
+    fun isDevicePluggedIn(context: Context): Boolean {
         val batteryIntent = context.applicationContext.registerReceiver(
             null,
             IntentFilter(Intent.ACTION_BATTERY_CHANGED)

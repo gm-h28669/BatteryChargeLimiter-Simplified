@@ -14,20 +14,30 @@ android {
         versionName = "1.1.0"
     }
 
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("dev_keystore.jks")
+            storePassword = "kJCp!Bda#PBdN2RLK%yMK@hatq&69E"
+            keyPassword = "kJCp!Bda#PBdN2RLK%yMK@hatq&69E"
+            keyAlias = "key0"
+        }
+    }
+
     buildTypes {
         getByName("debug") {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
             resValue("string", "app_name", "BCL Debug")
             resValue("string", "app_short_name", "BCL Debug")
+            signingConfig = signingConfigs.getByName("debug")
         }
         getByName("release") {
-            isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             resValue("string", "app_name", "Battery Charge Limiter")
             resValue("string", "app_short_name", "BCL")
+            signingConfig = signingConfigs.getByName("debug")
         }
         create("fdroid") {
             applicationIdSuffix = ".fdroid"
@@ -37,21 +47,13 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             resValue("string", "app_name", "Battery Charge Limiter")
             resValue("string", "app_short_name", "BCL")
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
     lint {
         baseline = file("lint-baseline.xml")
-        abortOnError = false
-    }
-
-    signingConfigs {
-        getByName("debug") {
-            storeFile = file("dev_keystore.jks")
-            storePassword = "kJCp!Bda#PBdN2RLK%yMK@hatq&69E"
-            keyPassword = "kJCp!Bda#PBdN2RLK%yMK@hatq&69E"
-            keyAlias = "key0"
-        }
+        abortOnError = true
     }
 
     buildFeatures {

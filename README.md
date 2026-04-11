@@ -39,7 +39,8 @@ If BCL cannot start or stop charging correctly, enable **Always Write CTRL File*
 
 ## Screenshots
 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" height="500dp" /><img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" height="500dp" />
+<img src="screenshots/main-light-theme.png" alt="App Screenshot Light Theme" />
+<img src="screenshots/main-dark-theme.png" alt="App Screenshot Dark Theme" />
 
 ## License
 

@@ -10,8 +10,8 @@ android {
         applicationId = "io.github.muntashirakon.bcl"
         minSdk = 21
         targetSdk = 34
-        versionCode = 29
-        versionName = "1.3.0"
+        versionCode = 30
+        versionName = "1.3.1"
     }
 
     signingConfigs {

@@ -4,6 +4,12 @@ A fork of **Battery Charge Limit** whose development has been stalled for some t
 
 **NOTE:** This is app currently requires root to function. While it is not possible to control charging without root, an alarm-based solution might be implemented for no-root users in the future.
 
+## What's changed in release 1.3.1
+- **Localized About Dialog**: Added and synchronized translations for the "About" dialog across all 12 languages.
+- **Fix**: Corrected the battery info format string across all languages to match the updated 3-parameter format used in the English version.
+- **Updated Copyright**: Refreshed app authorship and credits to reflect 2026 and the new repository home.
+- **Clarity Improvements**: Renamed "Disable charge now" to "Pause charging" across all supported languages for better consistency.
+
 ## What's changed in release 1.3.0
 - **Modernized UI**: Refactored the dashboard with a cleaner look. Switches are now cards that change color (green/orange) to clearly show their state.
 - **Better Sliders**: Both sliders now have a fixed 0-100% range for better stability—no more confusing jumps!

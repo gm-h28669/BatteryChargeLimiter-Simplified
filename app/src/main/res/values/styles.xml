@@ -4,6 +4,12 @@
     <style name="BaseTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:statusBarColor">#99000000</item>
         <item name="android:navigationBarColor">#99000000</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorSecondaryContainer">#293F51B5</item> <!-- 16% opacity primary -->
+        <item name="colorOnSecondaryContainer">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme">

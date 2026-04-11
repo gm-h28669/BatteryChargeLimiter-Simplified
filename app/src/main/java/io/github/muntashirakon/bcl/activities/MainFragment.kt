@@ -13,23 +13,24 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import io.github.muntashirakon.bcl.*
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 import java.lang.ref.WeakReference
 
 class MainFragment: Fragment() {
-    private val minPicker by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<NumberPicker>(R.id.min_picker)  }
+    private val minSlider by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<Slider>(R.id.min_slider)  }
     private val minText by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.min_text) }
-    private val maxPicker by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<NumberPicker>(R.id.max_picker) }
+    private val maxSlider by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<Slider>(R.id.max_slider) }
     private val maxText by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.max_text) }
     private val settings by lazy(LazyThreadSafetyMode.NONE) { activity?.getSharedPreferences(Constants.SETTINGS, 0) }
     private val statusText by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.status) }
     private val batteryInfo by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.battery_info) }
     private val enableSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.enable_switch) }
     private val disableChargeSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.disable_charge_switch) }
-    private val enableCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.enable_card) }
-    private val disableChargeCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.disable_charge_card) }
+    private val statusCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.status_card) }
+    private val controlsCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.controls_card) }
     private var preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
     private var prefs: SharedPreferences? = null
     private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -64,27 +65,43 @@ class MainFragment: Fragment() {
 
 //        autoResetSwitch.isChecked = settings?.getBoolean(AUTO_RESET_STATS, false)
 //        notificationSound.isChecked = settings?.getBoolean(NOTIFICATION_SOUND, false)
-        maxPicker?.minValue = Constants.MIN_ALLOWED_LIMIT_PC
-        maxPicker?.maxValue = Constants.MAX_ALLOWED_LIMIT_PC
-        minPicker?.minValue = 0
+        maxSlider?.valueFrom = Constants.MIN_ALLOWED_LIMIT_PC.toFloat()
+        maxSlider?.valueTo = Constants.MAX_ALLOWED_LIMIT_PC.toFloat()
+        minSlider?.valueFrom = 0f
+        minSlider?.valueTo = (Constants.MAX_ALLOWED_LIMIT_PC - 1).toFloat()
 
         enableSwitch?.setOnCheckedChangeListener(switchListener)
         disableChargeSwitch?.setOnCheckedChangeListener(switchListener)
-        maxPicker?.setOnValueChangedListener { _, _, max ->
+        maxSlider?.addOnChangeListener { _, value, fromUser ->
+            if (!fromUser) return@addOnChangeListener
+            val max = value.toInt()
             Utils.setLimit(max, settings!!)
             maxText?.text = getString(R.string.limit, max)
-            val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC)
-            minPicker?.maxValue = max
-            if (min != null) {
-                minPicker?.value = min
+            
+            // Sync UI for min slider if it was pushed down by Utils.setLimit
+            val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC) ?: Constants.DEFAULT_MIN_PC
+            if (minSlider?.value?.toInt() != min) {
+                minSlider?.value = min.toFloat()
+                updateMinText(min)
             }
-            updateMinText(min)
+
             if (!ForegroundService.isRunning) {
                 Utils.startServiceIfLimitEnabled(requireContext())
             }
         }
 
-        minPicker?.setOnValueChangedListener { _, _, min ->
+        minSlider?.addOnChangeListener { _, value, fromUser ->
+            if (!fromUser) return@addOnChangeListener
+            val min = value.toInt()
+            val max = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC
+            
+            if (min >= max) {
+                val newMax = min + 1
+                settings?.edit()?.putInt(Constants.LIMIT, newMax)?.apply()
+                maxSlider?.value = newMax.toFloat()
+                maxText?.text = getString(R.string.limit, newMax)
+            }
+            
             settings?.edit()?.putInt(Constants.MIN, min)?.apply()
             updateMinText(min)
         }
@@ -162,29 +179,25 @@ class MainFragment: Fragment() {
                         statusText?.setText(R.string.charging)
                         statusText?.setTextColor(ContextCompat.getColor(context, R.color.darkGreen))
                         val chargingColor = ContextCompat.getColor(context, R.color.charging_bg)
-                        enableCard?.setCardBackgroundColor(chargingColor)
-                        disableChargeCard?.setCardBackgroundColor(chargingColor)
+                        statusCard?.setCardBackgroundColor(chargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_DISCHARGING -> {
                         statusText?.setText(R.string.discharging)
                         statusText?.setTextColor(ContextCompat.getColor(context, R.color.orange))
                         val dischargingColor = ContextCompat.getColor(context, R.color.discharging_bg)
-                        enableCard?.setCardBackgroundColor(dischargingColor)
-                        disableChargeCard?.setCardBackgroundColor(dischargingColor)
+                        statusCard?.setCardBackgroundColor(dischargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_FULL -> {
                         statusText?.setText(R.string.full)
                         statusText?.setTextColor(ContextCompat.getColor(context, R.color.darkGreen))
                         val chargingColor = ContextCompat.getColor(context, R.color.charging_bg)
-                        enableCard?.setCardBackgroundColor(chargingColor)
-                        disableChargeCard?.setCardBackgroundColor(chargingColor)
+                        statusCard?.setCardBackgroundColor(chargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_NOT_CHARGING -> {
                         statusText?.setText(R.string.not_charging)
                         statusText?.setTextColor(ContextCompat.getColor(context, R.color.orange))
                         val dischargingColor = ContextCompat.getColor(context, R.color.discharging_bg)
-                        enableCard?.setCardBackgroundColor(dischargingColor)
-                        disableChargeCard?.setCardBackgroundColor(dischargingColor)
+                        statusCard?.setCardBackgroundColor(dischargingColor)
                     }
                     else -> {
                         statusText?.setText(R.string.unknown)
@@ -244,10 +257,11 @@ class MainFragment: Fragment() {
         disableChargeSwitch?.isChecked = settings?.getBoolean(Constants.DISABLE_CHARGE_NOW, false) == true
         val max = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC
         val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC) ?: Constants.DEFAULT_MIN_PC
-        maxPicker?.value = max
+        
+        maxSlider?.value = max.toFloat()
+        minSlider?.value = min.toFloat()
+
         maxText?.text = getString(R.string.limit, max)
-        minPicker?.maxValue = max
-        minPicker?.value = min
         updateMinText(min)
     }
 }

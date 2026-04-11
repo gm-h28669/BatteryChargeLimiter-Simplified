@@ -27,8 +27,8 @@ android {
         getByName("debug") {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
-            resValue("string", "app_name", "BCL Debug")
-            resValue("string", "app_short_name", "BCL Debug")
+            resValue("string", "app_name", "Battery Charge Limiter")
+            resValue("string", "app_short_name", "BCL")
             signingConfig = signingConfigs.getByName("debug")
         }
         getByName("release") {

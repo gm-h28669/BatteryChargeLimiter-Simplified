@@ -217,10 +217,12 @@ object Utils {
     }
 
     fun setLimit(limit: Int, settings: SharedPreferences) {
-        val max = settings.getInt(LIMIT, Constants.DEFAULT_LIMIT_PC)
-        // calculate new recharge threshold from previous distance
-        val min = (limit - (max - settings.getInt(MIN, Constants.DEFAULT_MIN_PC))).coerceAtLeast(0)
-        settings.edit().putInt(LIMIT, limit).putInt(MIN, min).apply()
+        val min = settings.getInt(MIN, Constants.DEFAULT_MIN_PC)
+        val edit = settings.edit().putInt(LIMIT, limit)
+        if (min >= limit) {
+            edit.putInt(MIN, (limit - 1).coerceAtLeast(0))
+        }
+        edit.apply()
     }
 
     fun handleLimitChange(context: Context, newLimit: Any?) {

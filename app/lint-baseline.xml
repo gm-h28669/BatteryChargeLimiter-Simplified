@@ -58,17 +58,6 @@
 
     <issue
         id="MissingTranslation"
-        message="&quot;disable_charge_now&quot; is not translated in &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;disable_charge_now&quot;>Disable charge now&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="9"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
         message="&quot;notify&quot; is not translated in &quot;es&quot; (Spanish)"
         errorLine1="    &lt;string name=&quot;notify&quot;>Notify when limit is reached&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~">
@@ -519,61 +508,6 @@
     </issue>
 
     <issue
-        id="MissingTranslation"
-        message="&quot;app_author&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;app_author&quot;>© 2021—2022 &lt;a href=&quot;https://github.com/MuntashirAkon&quot;>Muntashir Al-Islam&lt;/a>&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="104"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;license_title&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;license_title&quot;>License&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="105"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;credits_title&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;credits_title&quot;>Credits&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="106"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;credits_details&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;credits_details&quot;>To the authors of"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="107"
-            column="13"/>
-    </issue>
-
-    <issue
-        id="MissingTranslation"
-        message="&quot;close&quot; is not translated in &quot;ar&quot; (Arabic), &quot;de&quot; (German), &quot;ru&quot; (Russian), &quot;pt&quot; (Portuguese), &quot;it&quot; (Italian), &quot;bn&quot; (Bangla), &quot;ro&quot; (Romanian), &quot;es&quot; (Spanish), &quot;nl&quot; (Dutch), &quot;tr&quot; (Turkish)"
-        errorLine1="    &lt;string name=&quot;close&quot;>Close&lt;/string>"
-        errorLine2="            ~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/strings.xml"
-            line="111"
-            column="13"/>
-    </issue>
-
-    <issue
         id="Untranslatable"
         message="The resource string &quot;source_code&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;ta&quot; (Tamil) here"
         errorLine1="    &lt;string name=&quot;source_code&quot; translatable=&quot;false&quot;>&lt;a href=&quot;https://github.com/sriharshaarangi/BatteryChargeLimit&quot;>Source Code&lt;/a>&lt;/string>"
@@ -647,6 +581,17 @@
         <location
             file="src/main/res/values/strings.xml"
             line="20"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.file_data` appears to be unused"
+        errorLine1="    &lt;string name=&quot;file_data&quot;>(CTRL file data will appear here)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="24"
             column="13"/>
     </issue>
 
@@ -734,7 +679,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/io/github/muntashirakon/bcl/ForegroundService.kt"
-            line="150"
+            line="154"
             column="9"/>
     </issue>
 
@@ -763,11 +708,22 @@
     <issue
         id="UseKtx"
         message="Use the KTX extension function `SharedPreferences.edit` instead?"
+        errorLine1="                settings?.edit()?.putInt(Constants.LIMIT, newMax)?.apply()"
+        errorLine2="                ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
+            line="100"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="UseKtx"
+        message="Use the KTX extension function `SharedPreferences.edit` instead?"
         errorLine1="            settings?.edit()?.putInt(Constants.MIN, min)?.apply()"
         errorLine2="            ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
-            line="86"
+            line="105"
             column="13"/>
     </issue>
 
@@ -778,7 +734,7 @@
         errorLine2="                    ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
-            line="139"
+            line="158"
             column="21"/>
     </issue>
 
@@ -789,7 +745,7 @@
         errorLine2="                    ~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/io/github/muntashirakon/bcl/activities/MainFragment.kt"
-            line="143"
+            line="162"
             column="21"/>
     </issue>
 
@@ -811,19 +767,19 @@
         errorLine2="        ^">
         <location
             file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
-            line="141"
+            line="143"
             column="9"/>
     </issue>
 
     <issue
         id="UseKtx"
         message="Use the KTX extension function `SharedPreferences.edit` instead?"
-        errorLine1="        settings.edit().putInt(LIMIT, limit).putInt(MIN, min).apply()"
-        errorLine2="        ~~~~~~~~~~~~~~~">
+        errorLine1="        val edit = settings.edit().putInt(LIMIT, limit)"
+        errorLine2="                   ~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
-            line="210"
-            column="9"/>
+            line="221"
+            column="20"/>
     </issue>
 
     <issue
@@ -833,7 +789,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
-            line="226"
+            line="241"
             column="17"/>
     </issue>
 
@@ -844,7 +800,7 @@
         errorLine2="                    ~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/io/github/muntashirakon/bcl/Utils.kt"
-            line="236"
+            line="251"
             column="21"/>
     </issue>
 

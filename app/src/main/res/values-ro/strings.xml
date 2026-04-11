@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Translation by Y0lin(XDA username: Y0lin) on 16/08/2018-->
 <resources>
+    <string name="disable_charge_now">Întrerupe încărcarea</string>
     <string name="action_settings">Setări</string>
     <string name="source_code_title">Cod sursă</string>
     <string name="about">Despre</string>
@@ -36,8 +37,8 @@
     <string name="maintaining_description">Dacă dispozitivul este deconectat, dezactivează serviciul</string>
     <string name="waiting_until_x">Se încarcă până la %1$d%%</string>
     <string name="waiting_description">Bateria se ve opri din încărcat atunci când limita a fost atinsă</string>
-    <string name="battery_info_C">U: %1$.3f V, T: %2$.1f &#8451;</string>
-    <string name="battery_info_F">U: %1$.3f V, T: %2$.1f &#8457;</string>
+    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
+    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
 
     <string name="root_denied">Aplicaţia nu are acces ROOT sau dispozitivul nu este ROOTAT!</string>
     <string name="stats_reset_success">Statisticile bateriei au fost resetate cu succes</string>
@@ -87,4 +88,12 @@
     <string name="custom_ctrl_file_updated_info">Datele actualizate vor apărea aici după ce actualizezi informaţiile</string>
     <string name="custom_ctrl_file_heads_up">Dacă ai probleme cu aplicaţia sau serviciul nu functionează corect, încearcă să activezi \'Modifică necondiţionat fişierul CTRL\' în setări. Nu e garantat că fişierul configurabil de control va fi compatibil cu toate dispozitivele şi cu fişierele/valorile setate. Dacă ai probleme încearcă să ajustezi setările sau verifică dacă datele introduse sunt corecte.</string>
     <string name="custom_ctrl_file_update_data">ACTUALIZEAZĂ FIŞIERUL CTRL</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">Licență</string>
+    <string name="credits_title">Credite</string>
+    <string name="credits_details">Către autorii:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">Închide</string>
 </resources>

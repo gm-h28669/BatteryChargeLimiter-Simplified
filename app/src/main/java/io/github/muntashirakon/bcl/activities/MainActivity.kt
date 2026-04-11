@@ -138,8 +138,7 @@ class MainActivity : AppCompatActivity() {
         try {
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
             val version = packageInfo.versionName
-            val versionCode = PackageInfoCompat.getLongVersionCode(packageInfo)
-            versionTV.text = String.format(Locale.ROOT, "%s (%d)", version, versionCode)
+            versionTV.text = String.format(Locale.ROOT, "%s", version)
         } catch (e: Exception) {
             e.printStackTrace()
         }

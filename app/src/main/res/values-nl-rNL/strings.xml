@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="source_code_title">Broncode</string>
+    <string name="disable_charge_now">Opladen pauzeren</string>
     <string name="action_settings">Instellingen</string>
     <string name="about">Over</string>
     <string name="enable">Activeer Oplaadlimiet</string>
@@ -35,8 +36,8 @@
     <string name="root_denied">App heeft geen ROOT-toegang of apparaat is niet geroot!</string>
     <string name="stats_reset_success">Reset van batterijstatistieken successvol</string>
     <string name="intent_handle_activity">Oplaadlimiet Handling Activity</string>
-    <string name="battery_info_C">U: %1$.3f V, T: %2$.1f ℃</string>
-    <string name="battery_info_F">U: %1$.3f V, T: %2$.1f ℉</string>
+    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
+    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
     <string name="intent_limit_invalid">Het aangegeven limiet was ongeldig.</string>
     <string name="intent_invalid">De aangegeven Intent was ongeldig.</string>
     <string name="intent_limit_accepted">Het oplaadlimiet was gewijzigd naar %1$d%%.</string>
@@ -76,4 +77,12 @@
     <string name="custom_ctrl_file_heads_up">Als u problemen ervaart met crashes of een niet-werkende service, probeer \"Schrijf altijd naar het besturingsbestand\" in te schakelen in de instellingen. Er is GEEN garantie dat deze oplossing op alle apparaten zal werken.</string>
     <string name="custom_ctrl_file_update_data">ACTUALISEER BESTURINGSBESTANDSGEGEVENS</string>
     <string name="dark">Donker</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">Licentie</string>
+    <string name="credits_title">Credits</string>
+    <string name="credits_details">Aan de auteurs van:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">Sluit</string>
 </resources>

@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:autoLink="web"
             android:textColor="?attr/colorOnSurfaceVariant"
-            android:text="https://github.com/MuntashirAkon/BatteryChargeLimiter"
+            android:text="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified"
             tools:ignore="HardcodedText" />
 
         <com.google.android.material.textview.MaterialTextView

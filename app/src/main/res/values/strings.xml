@@ -101,10 +101,10 @@
     <string name="control_battery_charge_permission_label">Control battery charge</string>
     <string name="control_battery_charge_permission_description">control battery charge</string>
     <string name="version">Version</string>
-    <string name="app_author">© 2021—2022 <a href="https://github.com/MuntashirAkon">Muntashir Al-Islam</a></string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">License</string>
     <string name="credits_title">Credits</string>
-    <string name="credits_details">To the authors of
+    <string name="credits_details">To the authors of:
         \n- The Android Open Source Project
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>

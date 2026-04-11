@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Translation by Jose(XDA username: Joseahfer) on 03/11/2017-->
 <resources>
+    <string name="disable_charge_now">Pausar carga</string>
         <string name="action_settings">Ajustes</string>
         <string name="about">Sobre la aplicación</string>
         <string name="enable">Activar límite de carga</string>
@@ -25,8 +26,8 @@
         <string name="please_wait">Espere, por favor</string>
         <string name="maintaining_x_to_y">Manteniendo %1$d%% - %2$d%% SI está conectado"</string>
         <string name="waiting_until_x">Esperando hasta %1$d%%</string>
-        <string name="battery_info_C">V: %1$.3f v, T: %2$.1f &#8451;</string>
-        <string name="battery_info_F">V: %1$.3f v, T: %2$.1f &#8457;</string>
+        <string name="battery_info_C">V: %1$s v, I: %2$s mA, T: %3$s &#8451;</string>
+        <string name="battery_info_F">V: %1$s v, I: %2$s mA, T: %3$s &#8457;</string>
 
         <string name="root_denied">Aplicación o dispositivo sin acceso root.</string>
         <string name="stats_reset_success">Estadísticas de batería restaurados</string>
@@ -51,4 +52,12 @@
         <string name="advanced_settings">Ajustes avanzados</string>
         <string name="immediate_power_intent_handling">Siempre registrar eventos</string>
         <string name="immediate_power_intent_handling_desc">Si se activa, los cambios de carga serán reconocidos inmediatamente incluso directamente después de los cambios del archivo de control.\n¡Úsalo sólo en archivos de control soportados como battery_charging_enabled o store_mode!</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">Licencia</string>
+    <string name="credits_title">Créditos</string>
+    <string name="credits_details">A los autores de:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">Cerrar</string>
 </resources>

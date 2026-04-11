@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="disable_charge_now">Pausar carregamento</string>
     <string name="action_settings">Configurações</string>
     <string name="source_code_title">Código Fonte</string>
     <string name="about">Sobre</string>
@@ -33,8 +34,8 @@
     <string name="maintaining_description">Se desconectar, desabilita o serviço</string>
     <string name="waiting_until_x">Carregando até %1$d%%</string>
     <string name="waiting_description">Battery will stop charging once limit is reached</string>
-    <string name="battery_info_C">U: %1$.3f V, T: %2$.1f &#8451;</string>
-    <string name="battery_info_F">U: %1$.3f V, T: %2$.1f &#8457;</string>
+    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
+    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
 
     <string name="root_denied">Foi negado acesso ROOT ao app ou o dispositivo não possui root!</string>
     <string name="stats_reset_success">Estatísticas da Bateria foram restauradas com sucesso</string>
@@ -83,4 +84,12 @@
     <string name="custom_ctrl_file_updated_info">Dados atualizados aparecerão aqui assim que você atualizar a informação</string>
     <string name="custom_ctrl_file_heads_up">Se você experimentar problemas com qubras do app ou o serviço não funcionar direito, tente habilitar Sempre Escrever Arquivo de Controle nas configurações. NÃO há garantia de que esta função de arquivo de controle configurável suportará todos os dispositivos e arquivos/valores. Tente ajustar as configurações de ocorrerem erros ou garanta que os dados estão corretos.</string>
     <string name="custom_ctrl_file_update_data">ATUALIZAR DADOS DO ARQUIVO DE CONTROLE</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">Licença</string>
+    <string name="credits_title">Créditos</string>
+    <string name="credits_details">Aos autores de:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">Fechar</string>
 </resources>

@@ -1,4 +1,5 @@
 <resources>
+    <string name="disable_charge_now">চার্জিং সাময়িক বন্ধ করুন</string>
     <string name="action_settings">সেটিংস</string>
     <string name="about">সম্বন্ধে</string>
     <string name="enable">ব্যাটারি চার্জ লিমিট সচল</string>
@@ -29,8 +30,8 @@
     <string name="maintaining_description">চার্জার খুলে ফেললে, সার্ভিস বন্ধ কর</string>
     <string name="waiting_until_x">%1$d%% এর জন্য অপেক্ষমান</string>
     <string name="waiting_description">নির্ধারিত সীমায় পৌঁছলে ব্যাটারি চার্জ হওয়া বন্ধ করে দিবে</string>
-    <string name="battery_info_C">ইউ: %1$.3f ভো., তা: %2$.1f &#8451;</string>
-    <string name="battery_info_F">ইউ: %1$.3f ভো., তা: %2$.1f &#8457;</string>
+    <string name="battery_info_C">ইউ: %1$s ভো., আই: %2$s এমএ, তা: %3$s &#8451;</string>
+    <string name="battery_info_F">ইউ: %1$s ভো., আই: %2$s এমএ, তা: %3$s &#8457;</string>
 
     <string name="root_denied">অ্যাপকে রুট পারমিশন দেয়া হয়নি অথবা ডিভাইসটি রুটেড নয়!</string>
     <string name="stats_reset_success">ব্যাটারি তত্ত্ব সফলভাবে পুনঃস্থাপিত হয়েছে!</string>
@@ -78,4 +79,12 @@
     <string name="custom_ctrl_file_disabled_hint">0, বন্ধ, নির্ধারিত_মান</string>
     <string name="custom_ctrl_file_updated_info">হালনাগাদকৃত তত্ত্ব এখানে দেখাবে, যখন তুমি তথ্য হালনাগাদ করবে।</string>
     <string name="custom_ctrl_file_heads_up">যদি অ্যাপ কাজ না করে অথবা ক্রাশ করে, তাহলে সেটিংস থেকে কন্ট্রল ফাইল চালু করে দেখতে পারো। তবে এর কাজ করার কোন নিশ্চয়তা নেই, খেয়াল রাখবে নির্ধারিত মান ও ফাইল ঠিকঠাক আছে।</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">লাইসেন্স</string>
+    <string name="credits_title">স্বীকৃতি</string>
+    <string name="credits_details">যাদের অবদানে:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">বন্ধ</string>
 </resources>

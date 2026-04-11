@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="disable_charge_now">Şarjı duraklat</string>
     <string name="action_settings">Ayarlar</string>
     <string name="source_code_title">Kaynak Kodu</string>
     <string name="about">Hakkında</string>
@@ -35,8 +36,8 @@
     <string name="maintaining_description">Cihaz çıkarıldığında, hizmeti devre dışı bırak</string>
     <string name="waiting_until_x">%1$d%% seviyesine kadar şarj oluyor</string>
     <string name="waiting_description">Limite ulaşıldığında pil şarjı durduracak</string>
-    <string name="battery_info_C">U: %1$.3f V, S: %2$.1f &#8451;</string>
-    <string name="battery_info_F">U: %1$.3f V, S: %2$.1f &#8457;</string>
+    <string name="battery_info_C">U: %1$s V, I: %2$s mA, S: %3$s &#8451;</string>
+    <string name="battery_info_F">U: %1$s V, I: %2$s mA, S: %3$s &#8457;</string>
 
     <string name="root_denied">Uygulamaya ROOT izni verilmedi veya cihaz rootlanmamış!</string>
     <string name="stats_reset_success">Pil İstatistikleri Sıfırlandı</string>
@@ -86,4 +87,12 @@
     <string name="custom_ctrl_file_heads_up">Uygulama çökmeleriyle ilgili sorunlar yaşarsanız veya hizmet düzgün çalışmazsa, ayarlardan her zaman CTRL dosyasına yazmayı etkinleştirmeyi deneyin. Bu yapılandırılabilir kontrol dosyası işlevinin tüm cihazları ve dosyaları/değerleri destekleyeceğine dair bir garanti YOKTUR. Sorun çıkarsa ayarları düzeltmeyi deneyin veya verilerin doğruluğundan emin olun.</string>
     <string name="custom_ctrl_file_update_data">CTRL DOSYASI VERİLERİNİ GÜNCELLE</string>
     <string name="dark">Koyu</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">Lisans</string>
+    <string name="credits_title">Krediler</string>
+    <string name="credits_details">Yazarlara:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">Kapat</string>
 </resources>

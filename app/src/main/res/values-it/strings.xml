@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="disable_charge_now">Sospendi ricarica</string>
     <string name="action_settings">Impostazioni</string>
     <string name="source_code_title">Codice sorgente</string>
     <string name="about">Info su</string>
@@ -35,8 +36,8 @@
     <string name="maintaining_description">Se il dispositivo viene staccato, disabilita il servizio</string>
     <string name="waiting_until_x">In carica fino al %1$d%%</string>
     <string name="waiting_description">La batteria smette di ricaricarsi quando il limite è stato raggiunto</string>
-    <string name="battery_info_C">U: %1$.3f V, T: %2$.1f &#8451;</string>
-    <string name="battery_info_F">U: %1$.3f V, T: %2$.1f &#8457;</string>
+    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
+    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
 
     <string name="root_denied">L\'app ha bisogno dei permessi di ROOT o il dispositivo non è ROOTATO!</string>
     <string name="stats_reset_success">"Battery Stats" reset avvenuto</string>
@@ -86,4 +87,12 @@
     <string name="custom_ctrl_file_updated_info">I dati aggiornati appariranno una volta che aggiornerai le informazioni</string>
     <string name="custom_ctrl_file_heads_up">Se riscontri qualche errore o qualche crash, prova a abilitare "Forza scrittura File di Controllo" nelle impostazioni. Non c\'è NESSUNA garanzia che questo tipo di configurazione del File di Controllo funzioni per tutti i tipi di dispositivi. Prova a regolare le impostazioni in caso di problemi o assicurati che i dati siano corretti.</string>
     <string name="custom_ctrl_file_update_data">AGGIORNA DATI DEL FILE DI CONTROLLO</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">Licenza</string>
+    <string name="credits_title">Crediti</string>
+    <string name="credits_details">Agli autori di:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">Chiudi</string>
 </resources>

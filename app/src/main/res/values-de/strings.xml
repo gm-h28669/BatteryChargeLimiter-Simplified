@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="disable_charge_now">Ladevorgang pausieren</string>
     <string name="action_settings">Einstellungen</string>
     <string name="source_code_title">Quelltext</string>
     <string name="about">Über</string>
@@ -35,8 +36,8 @@
     <string name="maintaining_description">Wenn das Gerät abgesteckt wird, Dienst abschalten</string>
     <string name="waiting_until_x">Warte bis %1$d%%</string>
     <string name="waiting_description">Die Batterie wird nicht mehr geladen sobald die Grenze erreicht ist</string>
-    <string name="battery_info_C">U: %1$.3f V, T: %2$.1f ℃</string>
-    <string name="battery_info_F">U: %1$.3f V, T: %2$.1f ℉</string>
+    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
+    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
 
     <string name="root_denied">Rootzugriff verweigert oder Gerät nicht gerootet!</string>
     <string name="stats_reset_success">Reset der Batterie-Statistik erfolgreich</string>
@@ -91,4 +92,12 @@
     <string name="light">Hell</string>
     <string name="dark">Dunkel</string>
     <string name="black">Schwarz</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">Lizenz</string>
+    <string name="credits_title">Credits</string>
+    <string name="credits_details">An die Autoren von:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">Schließen</string>
 </resources>

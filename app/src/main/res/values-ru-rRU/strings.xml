@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="disable_charge_now">Приостановить зарядку</string>
     <string name="action_settings">Настройки</string>
     <string name="source_code_title">Исходный код</string>
     <string name="about">О приложении</string>
@@ -33,8 +34,8 @@
     <string name="maintaining_description">Если устройство отключено от сети, отключите сервис.</string>
     <string name="waiting_until_x">Зарядка до %1$d%%</string>
     <string name="waiting_description">Аккумулятор перестанет заряжатся после достижения лимита.</string>
-    <string name="battery_info_C">U: %1$.3f V, T: %2$.1f &#8451;</string>
-    <string name="battery_info_F">U: %1$.3f V, T: %2$.1f &#8457;</string>
+    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
+    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
 
     <string name="root_denied">Приложению отказаны права ROOT доступа или устройство не root\'ированно!</string>
     <string name="stats_reset_success">Статистика аккумулятора успешно сброшена!</string>
@@ -83,4 +84,12 @@
     <string name="custom_ctrl_file_updated_info">Обновлённые данные появятся здесь, как только Вы их обновите.</string>
     <string name="custom_ctrl_file_heads_up">Если Вы испытываете проблемы в работе приложения, либо сервис работает не дожным образом, то попробуйте включить "Всегда писать контрольный файл" в настройках. Нет НИКАКИХ Гарантий, что функция конфигурации управляющего файла будет поддерживать все устройства и файлы/значения. Попробуйте настроить параметры если возникникают какие-либо проблемы, или убедитесь, что данные - коректны.</string>
     <string name="custom_ctrl_file_update_data">ОБНОВИТЬ ДАННЫЕ УПРАВЛЯЮЩЕГО ФАЙЛА</string>
+    <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
+    <string name="license_title">Лицензия</string>
+    <string name="credits_title">Благодарности</string>
+    <string name="credits_details">Авторам:
+        \n- The Android Open Source Project
+        \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
+    </string>
+    <string name="close">Закрыть</string>
 </resources>

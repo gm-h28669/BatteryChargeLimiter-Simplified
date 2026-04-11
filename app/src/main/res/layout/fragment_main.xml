@@ -53,6 +53,7 @@
         </RelativeLayout>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/enable_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardBackgroundColor="?attr/colorSecondaryContainer"
@@ -73,19 +74,28 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/disable_charge_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="16dp">
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="?attr/colorSecondaryContainer"
+            app:contentPaddingBottom="8dp"
+            app:contentPaddingLeft="16dp"
+            app:contentPaddingRight="16dp"
+            app:contentPaddingTop="8dp"
+            app:strokeWidth="0dp">
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/disable_charge_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/disable_charge_now"
-                android:textAppearance="?attr/textAppearanceTitleSmall" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/colorOnSecondaryContainer"
+                app:trackTint="?attr/colorSurface" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"

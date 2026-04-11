@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.preference.PreferenceManager
+import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.Constants.CHARGING_CHANGE_TOLERANCE_MS
 import io.github.muntashirakon.bcl.Constants.LIMIT
 import io.github.muntashirakon.bcl.Constants.MAX_BACK_OFF_TIME
@@ -69,8 +70,8 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         chargedToLimit = false
         lastState = -1
         backOffTime = CHARGING_CHANGE_TOLERANCE_MS
-        limitPercentage = settings.getInt(LIMIT, 80)
-        rechargePercentage = settings.getInt(MIN, limitPercentage - 2)
+        limitPercentage = settings.getInt(LIMIT, Constants.DEFAULT_LIMIT_PC)
+        rechargePercentage = settings.getInt(MIN, Constants.DEFAULT_MIN_PC)
         // manually fire onReceive() to update state if service is enabled
         onReceive(service, service.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))!!)
     }

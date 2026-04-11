@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import java.util.Locale
 import androidx.preference.PreferenceManager
 import com.google.android.material.internal.ViewUtils.doOnApplyWindowInsets
 import com.google.gson.Gson
@@ -45,6 +46,7 @@ object Utils {
     private val TAG = Utils::class.java.simpleName
     const val CHARGE_ON = 0
     const val CHARGE_OFF = 1
+    private const val NOT_AVAILABLE = "---"
 
     // remember pending state change
     private var changePending: Long = 0
@@ -170,10 +172,21 @@ object Utils {
     fun getBatteryInfo(context: Context, intent: Intent, useFahrenheit: Boolean): String {
         val batteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
         val batteryTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
+        val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+        val rawAverageCurrent = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
+
+        val voltageStr = if (batteryVoltage != -1) String.format(Locale.ROOT, "%.3f", batteryVoltage.toFloat() / 1000f) else NOT_AVAILABLE
+        val currentStr = if (rawAverageCurrent != Int.MIN_VALUE && rawAverageCurrent != 0) (rawAverageCurrent / 1000).toString() else NOT_AVAILABLE
+        val temperatureStr = if (batteryTemperature != -1) {
+            val temp = if (useFahrenheit) 32f + batteryTemperature * 1.8f / 10f else batteryTemperature / 10f
+            String.format(Locale.ROOT, "%.1f", temp)
+        } else NOT_AVAILABLE
+
         return context.getString(
             if (useFahrenheit) R.string.battery_info_F else R.string.battery_info_C,
-            batteryVoltage.toFloat() / 1000f,
-            if (useFahrenheit) 32f + batteryTemperature * 1.8f / 10f else batteryTemperature / 10f
+            voltageStr,
+            currentStr,
+            temperatureStr
         )
     }
 
@@ -206,7 +219,7 @@ object Utils {
     fun setLimit(limit: Int, settings: SharedPreferences) {
         val max = settings.getInt(LIMIT, Constants.DEFAULT_LIMIT_PC)
         // calculate new recharge threshold from previous distance
-        val min = (limit - (max - settings.getInt(MIN, max - 2))).coerceAtLeast(0)
+        val min = (limit - (max - settings.getInt(MIN, Constants.DEFAULT_MIN_PC))).coerceAtLeast(0)
         settings.edit().putInt(LIMIT, limit).putInt(MIN, min).apply()
     }
 

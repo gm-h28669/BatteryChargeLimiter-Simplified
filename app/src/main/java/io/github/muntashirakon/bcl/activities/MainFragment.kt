@@ -28,6 +28,8 @@ class MainFragment: Fragment() {
     private val batteryInfo by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.battery_info) }
     private val enableSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.enable_switch) }
     private val disableChargeSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.disable_charge_switch) }
+    private val enableCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.enable_card) }
+    private val disableChargeCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.disable_charge_card) }
     private var preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
     private var prefs: SharedPreferences? = null
     private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -71,7 +73,7 @@ class MainFragment: Fragment() {
         maxPicker?.setOnValueChangedListener { _, _, max ->
             Utils.setLimit(max, settings!!)
             maxText?.text = getString(R.string.limit, max)
-            val min = settings?.getInt(Constants.MIN, max - 2)
+            val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC)
             minPicker?.maxValue = max
             if (min != null) {
                 minPicker?.value = min
@@ -159,18 +161,30 @@ class MainFragment: Fragment() {
                     BatteryManager.BATTERY_STATUS_CHARGING -> {
                         statusText?.setText(R.string.charging)
                         statusText?.setTextColor(ContextCompat.getColor(context, R.color.darkGreen))
+                        val chargingColor = ContextCompat.getColor(context, R.color.charging_bg)
+                        enableCard?.setCardBackgroundColor(chargingColor)
+                        disableChargeCard?.setCardBackgroundColor(chargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_DISCHARGING -> {
                         statusText?.setText(R.string.discharging)
                         statusText?.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                        val dischargingColor = ContextCompat.getColor(context, R.color.discharging_bg)
+                        enableCard?.setCardBackgroundColor(dischargingColor)
+                        disableChargeCard?.setCardBackgroundColor(dischargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_FULL -> {
                         statusText?.setText(R.string.full)
                         statusText?.setTextColor(ContextCompat.getColor(context, R.color.darkGreen))
+                        val chargingColor = ContextCompat.getColor(context, R.color.charging_bg)
+                        enableCard?.setCardBackgroundColor(chargingColor)
+                        disableChargeCard?.setCardBackgroundColor(chargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_NOT_CHARGING -> {
                         statusText?.setText(R.string.not_charging)
                         statusText?.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                        val dischargingColor = ContextCompat.getColor(context, R.color.discharging_bg)
+                        enableCard?.setCardBackgroundColor(dischargingColor)
+                        disableChargeCard?.setCardBackgroundColor(dischargingColor)
                     }
                     else -> {
                         statusText?.setText(R.string.unknown)
@@ -183,11 +197,9 @@ class MainFragment: Fragment() {
     }
 
     private fun updateBatteryInfo(intent: Intent) {
-        batteryInfo?.text = String.format(
-            " (%s)", Utils.getBatteryInfo(
-                requireContext(), intent,
-                prefs?.getBoolean(PrefsFragment.KEY_TEMP_FAHRENHEIT, false)!!
-            )
+        batteryInfo?.text = Utils.getBatteryInfo(
+            requireContext(), intent,
+            prefs?.getBoolean(PrefsFragment.KEY_TEMP_FAHRENHEIT, false)!!
         )
     }
 
@@ -230,8 +242,8 @@ class MainFragment: Fragment() {
     private fun updateUi() {
         enableSwitch?.isChecked = settings?.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false) == true
         disableChargeSwitch?.isChecked = settings?.getBoolean(Constants.DISABLE_CHARGE_NOW, false) == true
-        val max = settings?.getInt(Constants.LIMIT, 80) ?: 80
-        val min = settings?.getInt(Constants.MIN, max - 2) ?: (max - 2)
+        val max = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC
+        val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC) ?: Constants.DEFAULT_MIN_PC
         maxPicker?.value = max
         maxText?.text = getString(R.string.limit, max)
         minPicker?.maxValue = max

@@ -5,4 +5,7 @@
     <color name="darkGreen">#388e3c</color>
     <color name="orange">#ff6f00</color>
     <color name="red">#bf360c</color>
+
+    <color name="charging_bg">#1A388E3C</color> <!-- 10% darkGreen -->
+    <color name="discharging_bg">#1AFF6F00</color> <!-- 10% orange -->
 </resources>

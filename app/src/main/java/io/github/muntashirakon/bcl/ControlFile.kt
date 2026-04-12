@@ -45,14 +45,13 @@ class ControlFile {
     @WorkerThread
     fun validate() {
         if (!checked) {
-            // emulate that device contains the file in debug mode
+            // emulate that device contains the file in emulator
             // this allows running app in emulator without file existing in file system
-            valid = if (!BuildConfig.DEBUG)
-                Shell.cmd("test -e ${file!!}").exec().isSuccess
-            else
+            valid = if (Utils.isEmulator())
                 true
+            else
+                Shell.cmd("test -e ${file!!}").exec().isSuccess
             checked = true
         }
     }
-
 }

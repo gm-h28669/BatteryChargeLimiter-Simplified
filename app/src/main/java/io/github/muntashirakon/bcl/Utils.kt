@@ -170,11 +170,41 @@ object Utils {
         }
     }
 
+    // returns averaged current in uA
+    // for current measurement the files seem to be more reliable and more likely to contain correct readings (in uA)
+    // therefore prioritize files (if they exist) and try to query BatteryManager only if file based approach fails
+    fun getAverageCurrent(batteryManager: BatteryManager): Int {
+        val currentAvgFiles = arrayOf(
+            "/sys/class/power_supply/battery/batt_current_ua_avg",
+            "/sys/class/power_supply/battery/current_avg"
+        )
+
+        var rawAverageCurrent = Int.MIN_VALUE
+        for (path in currentAvgFiles) {
+            val result = Shell.cmd("if [ -f \"$path\" ]; then cat \"$path\"; fi").exec()
+            if (result.isSuccess && result.out.isNotEmpty()) {
+                val line = result.out[0].trim()
+                if (line.isNotEmpty()) {
+                    val value = line.toIntOrNull()
+                    if (value != null) {
+                        rawAverageCurrent = value
+                        break
+                    }
+                }
+            }
+        }
+        if (rawAverageCurrent == Int.MIN_VALUE) {
+            // fallback
+            rawAverageCurrent = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
+        }
+        return rawAverageCurrent
+    }
+
     fun getBatteryInfo(context: Context, intent: Intent, useFahrenheit: Boolean): String {
         val batteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
         val batteryTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
         val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-        val rawAverageCurrent = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
+        val rawAverageCurrent = getAverageCurrent(batteryManager)
 
         val voltageStr = if (batteryVoltage != -1) String.format(Locale.ROOT, "%.3f", batteryVoltage.toFloat() / 1000f) else NOT_AVAILABLE
         val currentStr = if (rawAverageCurrent != Int.MIN_VALUE && rawAverageCurrent != 0) (rawAverageCurrent / 1000).toString() else NOT_AVAILABLE
@@ -189,6 +219,16 @@ object Utils {
             currentStr,
             temperatureStr
         )
+    }
+
+     // Asynchronously fetches battery info and returns it via a listener on the Main Thread.
+    fun getBatteryInfoAsync(context: Context, intent: Intent, useFahrenheit: Boolean, listener: (String) -> Unit) {
+        executor.execute {
+            val info = getBatteryInfo(context, intent, useFahrenheit)
+            Handler(Looper.getMainLooper()).post {
+                listener(info)
+            }
+        }
     }
 
     //    @SuppressLint("PrivateApi")

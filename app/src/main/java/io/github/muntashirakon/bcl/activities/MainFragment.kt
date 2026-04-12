@@ -210,10 +210,12 @@ class MainFragment: Fragment() {
     }
 
     private fun updateBatteryInfo(intent: Intent) {
-        batteryInfo?.text = Utils.getBatteryInfo(
+        Utils.getBatteryInfoAsync(
             requireContext(), intent,
             prefs?.getBoolean(PrefsFragment.KEY_TEMP_FAHRENHEIT, false)!!
-        )
+        ) { info ->
+            batteryInfo?.text = info
+        }
     }
 
     private fun hideKeybord() {

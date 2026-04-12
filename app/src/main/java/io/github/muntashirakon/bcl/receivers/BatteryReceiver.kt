@@ -43,14 +43,13 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
             when (key) {
                 PrefsFragment.KEY_TEMP_FAHRENHEIT -> {
                     useFahrenheit = sharedPreferences.getBoolean(PrefsFragment.KEY_TEMP_FAHRENHEIT, false)
-                    service.setNotificationContentText(
-                        Utils.getBatteryInfo(
-                            service,
-                            service.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))!!,
-                            useFahrenheit
-                        )
-                    )
-                    service.updateNotification()
+                    val batteryIntent = service.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+                    if (batteryIntent != null) {
+                        Utils.getBatteryInfoAsync(service, batteryIntent, useFahrenheit) { info ->
+                            service.setNotificationContentText(info)
+                            service.updateNotification()
+                        }
+                    }
                 }
                 LIMIT, MIN -> {
                     reset(sharedPreferences)
@@ -118,7 +117,10 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         if (!showTempInNotif) {
             service.setNotificationContentText(service.getString(R.string.waiting_description))
         } else {
-            service.setNotificationContentText(Utils.getBatteryInfo(service, intent, useFahrenheit))
+            Utils.getBatteryInfoAsync(service, intent, useFahrenheit) { info ->
+                service.setNotificationContentText(info)
+                service.updateNotification()
+            }
         }
         // when the service was "freshly started", charge until limit
         if (!chargedToLimit && batteryLevel < limitPercentage) {

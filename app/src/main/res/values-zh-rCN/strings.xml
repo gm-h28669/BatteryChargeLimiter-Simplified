@@ -56,7 +56,7 @@
     <string name="set_control_file">设置 CTRL 文件</string>
     <string name="select_control_file">选择 CTRL 文件</string>
     <string name="show_temperature_fahrenheit">温度使用华氏度 &#8457;</string>
-    <string name="show_temperature_in_notification">在通知中显示温度</string>
+    <string name="show_battery_info_in_notification">在通知中显示电池信息</string>
     <string name="enforce_charge_limit">强制使用充电限制</string>
     <string name="enforce_charge_limit_desc">试图通过切换 CTRL 文件的状态来迫使设备识别 CTRL 文件的变化，其延迟时间不断增加(recognize changes to the control file by toggling its state with an increasing delay)</string>
     <string name="always_write_cf">总是覆写 CTRL 文件</string>
@@ -65,7 +65,7 @@
     <string name="advanced_settings">高级设置</string>
     <string name="immediate_power_intent_handling">始终处理电源事件</string>
     <string name="immediate_power_intent_handling_desc">电源更改将立即被识别，即使在 CTRL 文件更改后也是如此。\n仅用于受支持的 CTRL 文件，如 battery_charging_enabled 或 store_mode ！</string>
-    <string name="disable_auto_recharge">禁用自动重充电(Auto rechage)</string>
+    <string name="disable_auto_recharge">禁用自动重充电</string>
     <string name="disable_auto_recharge_desc">实验性：启用此选项还会在达到限制后隐藏通知。重要提示：卸载前禁用此选项或卸载后重新启动</string>
 
     <string name="hide_toast_on_service_change">隐藏服务变更时的提醒</string>

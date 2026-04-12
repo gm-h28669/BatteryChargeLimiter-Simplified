@@ -2,8 +2,6 @@
 <resources>
     <string name="action_settings">அமைப்புகள்</string>
     <string name="source_code_title">சோர்ஸ் கோட்</string>
-    <string name="source_code" translatable="false"><a href="https://github.com/sriharshaarangi/BatteryChargeLimit">Source Code</a></string>
-    <string name="xda_thread" translatable="false"><a href="https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/">XDA Thread</a></string>
     <string name="about">தகவல்</string>
     <string name="disable_charge_now">சார்ஜிங்கை இடைநிறுத்து</string>
     <string name="enable">சார்ஜின் வரம்பை இயக்கவும்</string>
@@ -56,7 +54,7 @@
     <string name="set_control_file">கட்டுப்பாட்டு கோப்பை அமைக்கவும்</string>
     <string name="select_control_file">கட்டுப்பாட்டு கோப்பைத் தேர்ந்தெடுக்கவும்</string>
     <string name="show_temperature_fahrenheit">&#8457; இல் வெப்பநிலையைக் காட்டு</string>
-    <string name="show_temperature_in_notification">அறிவிப்பில் வெப்பநிலையைக் காட்டு</string>
+    <string name="show_battery_info_in_notification">அறிவிப்பில் பேட்டரி தகவலைக் காட்டு</string>
     <string name="enforce_charge_limit">சார்ஜ் வரம்பை அமல்படுத்தவும்</string>
     <string name="enforce_charge_limit_desc">அதிகரிக்கும் தாமதத்துடன் அதன் நிலையை மாற்றுவதன் மூலம் கட்டுப்பாட்டு கோப்பில் மாற்றங்களை அடையாளம் காண சாதனத்தை கட்டாயப்படுத்தும் முயற்சி</string>
     <string name="always_write_cf">எப்போதும் CTRL கோப்பை எழுதவும்</string>
@@ -96,8 +94,8 @@
     <string name="light">ஒளி</string>
     <string name="dark">இருள்</string>
     <string name="black">கருப்பு - AMOLED</string>
-    <string name="control_battery_charge_permission_label">பேட்டரி சார்ஜ் கட்டுப்படுத்தவும்</string>
-    <string name="control_battery_charge_permission_description">பேட்டரி சார்ஜ் கட்டுப்படுத்த</string>
+    <string name="control_battery_charge_permission_label">பேட்டரி சார்ஜைக் கட்டுப்படுத்து</string>
+    <string name="control_battery_charge_permission_description">பேட்டரி சார்ஜைக் கட்டுப்படுத்த</string>
     <string name="version">பதிப்பு</string>
     <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">உரிமம்</string>

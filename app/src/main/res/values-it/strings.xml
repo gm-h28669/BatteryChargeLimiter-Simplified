@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="disable_charge_now">Sospendi ricarica</string>
     <string name="action_settings">Impostazioni</string>
     <string name="source_code_title">Codice sorgente</string>
     <string name="about">Info su</string>
+    <string name="disable_charge_now">Sospendi ricarica</string>
     <string name="enable">Abilita Battery Charge Limit</string>
     <string name="notify">Notifica quando il limite viene raggiunto</string>
     <string name="limit">Limita la carica a %1$d%%</string>
@@ -54,7 +54,7 @@
     <string name="set_control_file">Imposta File di Controllo</string>
     <string name="select_control_file">Seleziona File di Controllo</string>
     <string name="show_temperature_fahrenheit">Mostra Temperatura in &#8457;</string>
-    <string name="show_temperature_in_notification">Mostra Temperatura nella Notifica</string>
+    <string name="show_battery_info_in_notification">Mostra informazioni batteria nella notifica</string>
     <string name="enforce_charge_limit">Forza il Limite di Carica</string>
     <string name="enforce_charge_limit_desc">Tentare di forzare il dispositivo a riconoscere le modifiche apportate al File di Controllo commutando il suo stato con un ritardo crescente</string>
     <string name="always_write_cf">Forza scrittura File di Controllo</string>
@@ -62,7 +62,9 @@
 
     <string name="advanced_settings">Impostazioni Avanzate</string>
     <string name="immediate_power_intent_handling">Gestisci sempre gli eventi di ricarica</string>
-    <string name="immediate_power_intent_handling_desc">I cambiamenti alla ricarica vengono riconosciuti immediatamente, anche dopo il cambiamento del File di Controllo.\nUsa solo per i File di Controllo supportati, come battery_charging_enabled o store_mode!</string>
+    <string name="immediate_power_intent_handling_desc">I cambiamenti alla ricarica vengono riconosciuti immediatamente, even direttamente dopo il cambiamento del File di Controllo.\nUsa solo per i File di Controllo supportati, come battery_charging_enabled o store_mode!</string>
+    <string name="disable_auto_recharge">Disabilita ricarica automatica</string>
+    <string name="disable_auto_recharge_desc">Sperimentale: l\'abilitazione di questa opzione nasconde anche la notifica dopo il raggiungimento del limite. Importante: disabilita questa opzione prima di disinstallare o riavvia dopo la disinstallazione</string>
 
     <string name="hide_toast_on_service_change">Nascondi la notifica toast quando abiliti/disabiliti il servizio</string>
 
@@ -71,10 +73,10 @@
     <string name="control_file_option_summary_on">Dati del File di Controllo utilizzato dall\'utente</string>
     <string name="control_file_option_summary_off"> File di controllo predefinito che viene utilizzato</string>
     <string name="control_file_alert_title">SOLO UTENTI AVANZATI!</string>
-    <string name="control_file_alert_desc">ATTENZIONE: Modificare questi parametri senza conoscere quello che stai facendo può cousare danni indesiderati. Riavviare il telefono tipicamente risolve un gran numero di errori, d\'altra parte, qualcosa potrebbe comunque andar storto. PROCEDI CON ATTENZIONE!</string>
+    <string name="control_file_alert_desc">ATTENZIONE: Modificare questi parametri senza conoscere quello che stai facendo può causare danni indesiderati. Riavviare il telefono tipicamente risolve un gran numero di errori, d\'altra parte, qualcosa potrebbe comunque andar storto. PROCEDI CON ATTENZIONE!</string>
     <string name="control_understand">Ho capito</string>
     <string name="control_file_heads_up_title">Informazioni File di Controllo</string>
-    <string name="control_file_heads_up_desc">Solo i File di Controllo adatti al tuo dispositivo dovrebbero risultare visibili. Un File di Controllo può essere appartenente ad un\'altro disposito, nella maggior parte dei casi questo non influisce il corretto funzionamento. Apri un problema o invia una richiesta pull su GitHub con i dati del File di Controllo del tuo dispositivo per aggiungerlo a questo elenco.</string>
+    <string name="control_file_heads_up_desc">Solo i File di Controllo adatti al tuo dispositivo dovrebbero risultare visibili. Un File di Controllo può essere appartenente ad un altro dispositivo, nella maggior parte dei casi questo non influisce sul corretto funzionamento. Apri un problema o invia una richiesta pull su GitHub con i dati del File di Controllo del tuo dispositivo per aggiungerlo a questo elenco.</string>
 
     <string name="custom_ctrl_file_data_title">Configurazione File di Controllo</string>
     <string name="custom_ctrl_file_data_setup_title">Configura il File di Controllo</string>
@@ -87,6 +89,14 @@
     <string name="custom_ctrl_file_updated_info">I dati aggiornati appariranno una volta che aggiornerai le informazioni</string>
     <string name="custom_ctrl_file_heads_up">Se riscontri qualche errore o qualche crash, prova a abilitare "Forza scrittura File di Controllo" nelle impostazioni. Non c\'è NESSUNA garanzia che questo tipo di configurazione del File di Controllo funzioni per tutti i tipi di dispositivi. Prova a regolare le impostazioni in caso di problemi o assicurati che i dati siano corretti.</string>
     <string name="custom_ctrl_file_update_data">AGGIORNA DATI DEL FILE DI CONTROLLO</string>
+
+    <string name="theme">Tema</string>
+    <string name="light">Chiaro</string>
+    <string name="dark">Scuro</string>
+    <string name="black">Nero - AMOLED</string>
+    <string name="control_battery_charge_permission_label">Controlla la carica della batteria</string>
+    <string name="control_battery_charge_permission_description">controlla la carica della batteria</string>
+    <string name="version">Versione</string>
     <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">Licenza</string>
     <string name="credits_title">Crediti</string>

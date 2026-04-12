@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="disable_charge_now">Ladevorgang pausieren</string>
     <string name="action_settings">Einstellungen</string>
     <string name="source_code_title">Quelltext</string>
     <string name="about">Über</string>
+    <string name="disable_charge_now">Ladevorgang pausieren</string>
     <string name="enable">Aktiviere Battery Charge Limit</string>
     <string name="notify">Benachrichtigen wenn Grenze erreicht</string>
     <string name="limit">Laden bis max. %1$d%%</string>
@@ -54,7 +54,7 @@
     <string name="set_control_file">Steuerungsdatei auswählen</string>
     <string name="select_control_file">Wählen Sie die Steuerungsdatei:</string>
     <string name="show_temperature_fahrenheit">Temperatur in ℉ anzeigen</string>
-    <string name="show_temperature_in_notification">Temperatur in Benachrichtigung zeigen</string>
+    <string name="show_battery_info_in_notification">Batterieinfo in Benachrichtigung zeigen</string>
     <string name="enforce_charge_limit">Limit erzwingen</string>
     <string name="enforce_charge_limit_desc">Versuchen, das Gerät zum Einhalten des Limits zu zwingen, indem die Steuerungsdatei mit exp. ansteigender Verzögerung umgeschaltet wird</string>
     <string name="always_write_cf">Steuerungsdatei immer schreiben</string>
@@ -64,6 +64,8 @@
     <string name="immediate_power_intent_handling">Power-Events immer verarbeiten</string>
     <string name="immediate_power_intent_handling_desc">Wenn aktiviert, reagiert die App sofort auf Änderungen der Stromversorgung, auch nach der Änderung der Steuerungsdatei.\n
      Nur für unterstützte Steuerdateien wie battery_charging_enabled oder store_mode!</string>
+    <string name="disable_auto_recharge"> Automatisches Wiederaufladen deaktivieren</string>
+    <string name="disable_auto_recharge_desc">Experimentell: Das Aktivieren dieser Option blendet auch die Benachrichtigung aus, nachdem das Limit erreicht wurde. Wichtig: Deaktivieren Sie diese Option vor der Deinstallation oder starten Sie das Gerät nach der Deinstallation neu</string>
 
     <string name="hide_toast_on_service_change">Verstecke Toast bei Änderung der Stromversorgung</string>
 
@@ -88,10 +90,14 @@
     <string name="custom_ctrl_file_updated_info">Aktualisierte Daten werden hier erscheinen wenn Sie die Infirmationen aktualisieren</string>
     <string name="custom_ctrl_file_heads_up">Wenn Probleme mit Anwendungsabstürzen auftreten oder dieser Dienst nicht arbeitet wie er soll, bitte versuchen, in den Einstellungen \"Steuerdatei immer schreiben\" einzuschalten. Es gibt KEINE Garantie dafür, dass diese Funktion alle Geräte und Dateien/Werte unterstützt. Wenn Probleme auftreten, versuchen Sie diese Einstellungen anzupassen und sicherzustellen, dass die Daten korrekt sind.</string>
     <string name="custom_ctrl_file_update_data">AKTUALISIERE STEUERDATEI-DATEN</string>
+
     <string name="theme">Farbschema</string>
     <string name="light">Hell</string>
     <string name="dark">Dunkel</string>
-    <string name="black">Schwarz</string>
+    <string name="black">Schwarz - AMOLED</string>
+    <string name="control_battery_charge_permission_label">Batterieladung steuern</string>
+    <string name="control_battery_charge_permission_description">Batterieladung steuern</string>
+    <string name="version">Version</string>
     <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">Lizenz</string>
     <string name="credits_title">Credits</string>

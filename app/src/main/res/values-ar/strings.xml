@@ -55,7 +55,7 @@
     <string name="set_control_file">تعيين ملف التحكم</string>
     <string name="select_control_file">حدد ملف التحكم</string>
     <string name="show_temperature_fahrenheit">عرض درجة الحرارة بـ &#8457;</string>
-    <string name="show_temperature_in_notification">عرض درجة الحرارة في الإشعارات</string>
+    <string name="show_battery_info_in_notification">عرض معلومات البطارية في الإشعارات</string>
     <string name="enforce_charge_limit">فرض حد الشحن</string>
     <string name="enforce_charge_limit_desc">محاولة إجبار الجهاز للتعرف على التغييرات في ملف التحكم عن طريق تبديل حالته مع تأخير متزايد</string>
     <string name="always_write_cf">الكتابة دائما على ملف CTRL</string>
@@ -95,6 +95,9 @@
     <string name="light">مضيئ</string>
     <string name="dark">داكن</string>
     <string name="black">أسود - أموليد</string>
+    <string name="control_battery_charge_permission_label">التحكم في شحن البطارية</string>
+    <string name="control_battery_charge_permission_description">التحكم في شحن البطارية</string>
+    <string name="version">الإصدار</string>
     <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">رخصة</string>
     <string name="credits_title">الاعتمادات</string>
@@ -102,5 +105,5 @@
         \n- The Android Open Source Project
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
-    <string name="close">قريب</string>
+    <string name="close">إغلاق</string>
 </resources>

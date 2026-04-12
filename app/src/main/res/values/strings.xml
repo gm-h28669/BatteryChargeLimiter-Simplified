@@ -2,7 +2,7 @@
 <resources>
     <string name="action_settings">Settings</string>
     <string name="source_code_title">Source Code</string>
-    <string name="fgs_special_use_subtype">Battery management and charge limiting</string>
+    <string name="fgs_special_use_subtype" translatable="false">Battery management and charge limiting</string>
     <string name="source_code" translatable="false"><a href="https://github.com/sriharshaarangi/BatteryChargeLimit">Source Code</a></string>
     <string name="xda_thread" translatable="false"><a href="https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/">XDA Thread</a></string>
     <string name="about">About</string>
@@ -58,7 +58,7 @@
     <string name="set_control_file">Set Control File</string>
     <string name="select_control_file">Select Control File</string>
     <string name="show_temperature_fahrenheit">Show Temperature in &#8457;</string>
-    <string name="show_temperature_in_notification">Show Temperature in Notification</string>
+    <string name="show_battery_info_in_notification">Show battery info in notification</string>
     <string name="enforce_charge_limit">Enforce Charge Limit</string>
     <string name="enforce_charge_limit_desc">Attempt to force the device to recognize changes to the control file by toggling its state with an increasing delay</string>
     <string name="always_write_cf">Always Write CTRL File</string>

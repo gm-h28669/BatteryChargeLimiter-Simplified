@@ -48,6 +48,7 @@
     <string name="set_control_file">কন্ট্রল ফাইল নির্ধারণ</string>
     <string name="select_control_file">কন্ট্রল ফাইল নির্বাচন</string>
     <string name="show_temperature_fahrenheit">তাপমাত্রা &#8457; দেখাবে</string>
+    <string name="show_battery_info_in_notification">বিজ্ঞপ্তিতে ব্যাটারি তথ্য দেখান</string>
     <string name="enforce_charge_limit">জোরদার চার্জ লিমিট</string>
     <string name="enforce_charge_limit_desc">জোরপূর্বক ডিভাইসকে কন্ট্রল ফাইলের পরিবর্তনগুলোকে চিনাবে।</string>
     <string name="always_write_cf">সবসময় Ctrl. ফাইল লেখা হবে</string>
@@ -57,7 +58,24 @@
     <string name="immediate_power_intent_handling">সর্বদা পাওয়ার ঘটনাবলি নিয়ন্ত্রণ</string>
     <string name="immediate_power_intent_handling_desc">যদি চালু থাকে, পাওয়ার পরিবর্তন স্বয়ংক্রিয়ভাবে ধারণ হয়ে যাবে, যদিওবা কন্ট্রল ফাইল পরিবর্তিত হয়।\n এটা ব্যবহার কর শুধুমাত্র battery_charging_enabled অথবা store_mode এর জন্য!</string>
 
+    <string name="source_code_title">সোর্স কোড</string>
+    <string name="status_ctrl_data_label">কন্ট্রোল ফাইল ডেটা</string>
+    <string name="disable_temporarily">সাময়িকভাবে বন্ধ করুন</string>
+    <string name="dismiss">খারিজ করুন</string>
+    <string name="file_data">(কন্ট্রোল ফাইল ডেটা এখানে প্রদর্শিত হবে)</string>
+    <string name="disable_auto_recharge">স্বয়ংক্রিয় রিচার্জ বন্ধ করুন</string>
+    <string name="disable_auto_recharge_desc">পরীক্ষামূলক: এই বিকল্পটি সচল করলে সীমা পৌঁছানোর পর বিজ্ঞপ্তিও লুকানো হবে। গুরুত্বপূর্ণ: আনইনস্টল করার আগে এই বিকল্পটি বন্ধ করুন অথবা আনইনস্টল করার পর রিবুট করুন।</string>
+    <string name="custom_ctrl_file_update_data">কন্ট্রোল ফাইল ডেটা আপডেট করুন</string>
+    <string name="theme">থিম</string>
+    <string name="light">হালকা (Light)</string>
+    <string name="dark">অন্ধকার (Dark)</string>
+    <string name="black">কালো - AMOLED</string>
+    <string name="control_battery_charge_permission_label">ব্যাটারি চার্জ নিয়ন্ত্রণ</string>
+    <string name="control_battery_charge_permission_description">ব্যাটারি চার্জ নিয়ন্ত্রণ করুন</string>
+    <string name="version">সংস্করণ (Version)</string>
+
     <string name="hide_toast_on_service_change">সার্ভিস পরিবর্তনের সময় টোস্ট বন্ধ</string>
+
 
     <string name="control_file_settings">কন্ট্রল ফাইল তত্ত্ব</string>
     <string name="current_ctrl_data_title">কনফিগারড ফাইল তত্ত্ব</string>

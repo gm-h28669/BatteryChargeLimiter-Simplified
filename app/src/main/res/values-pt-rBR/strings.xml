@@ -2,88 +2,100 @@
 <resources>
     <string name="disable_charge_now">Pausar carregamento</string>
     <string name="action_settings">Configurações</string>
-    <string name="source_code_title">Código Fonte</string>
+    <string name="source_code_title">Código fonte</string>
     <string name="about">Sobre</string>
     <string name="enable">Habilitar Battery Charge Limit</string>
     <string name="notify">Notificar quando o limite for atingido</string>
     <string name="limit">Limite: %1$d%%</string>
     <string name="recharge_below">Recarregar abaixo de %1$d%%</string>
     <string name="status">Estado: </string>
-    <string name="status_ctrl_data_label">Arquivo de dados de controle</string>
+    <string name="status_ctrl_data_label">Dados do arquivo de controle</string>
     <string name="experimental">EXPERIMENTAL</string>
     <string name="issues">PROBLEMAS CONHECIDOS</string>
     <string name="auto_reset_stats">Restaura automaticamente as estatísticas da bateria</string>
-    <string name="reset_stats">Restaurar Estatísticas da Bateria</string>
-    <string name="disable">Desabilitar</string>
+    <string name="reset_stats">Restaurar estatísticas da bateria</string>
+    <string name="disable">Desativar</string>
+    <string name="disable_temporarily">Desativar temporariamente</string>
+    <string name="dismiss">Fechar</string>
     <string name="open_app">Abrir App</string>
-    <string name="file_data">(O arquivo de dados de controle aparecerá aqui)</string>
+    <string name="file_data">(Os dados do arquivo de controle aparecerão aqui)</string>
 
-    <string name="previously_started">Anteriormente Iniciado</string>
+    <string name="previously_started">Iniciado anteriormente</string>
     <string name="device_not_supported">Seu dispositivo não é compatível (ainda)!</string>
     <string name="ok">OK</string>
     <string name="no_recharge">Sem recarga automática</string>    
 
     <string name="charging">CARREGANDO</string>
     <string name="discharging">DESCARREGANDO</string>
-    <string name="full">CHEIA</string>
+    <string name="full">CARREGADA</string>
     <string name="not_charging">NÃO ESTÁ CARREGANDO</string>
     <string name="unknown">DESCONHECIDO</string>
 
-    <string name="please_wait">Por favor aguarde…</string>
-    <string name="maintaining_x_to_y">Mantendo %1$d%% - %2$d%% SE conectado"</string>
+    <string name="please_wait">Por favor, aguarde…</string>
+    <string name="maintaining_x_to_y">Mantendo entre %1$d%% - %2$d%%</string>
     <string name="maintaining_description">Se desconectar, desabilita o serviço</string>
     <string name="waiting_until_x">Carregando até %1$d%%</string>
-    <string name="waiting_description">Battery will stop charging once limit is reached</string>
+    <string name="waiting_description">A bateria parará de carregar assim que o limite for atingido</string>
     <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
     <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
 
     <string name="root_denied">Foi negado acesso ROOT ao app ou o dispositivo não possui root!</string>
-    <string name="stats_reset_success">Estatísticas da Bateria foram restauradas com sucesso</string>
+    <string name="stats_reset_success">Estatísticas da bateria foram restauradas com sucesso</string>
 
-    <string name="intent_handle_activity">Atividade de Manipulador de Limite de Carga da Bateria</string>
-    <string name="intent_invalid">O objetivo fornecido era inválido.</string>
+    <string name="intent_handle_activity">Atividade de manipulação de limite de carga</string>
+    <string name="intent_invalid">A intenção fornecida era inválida.</string>
     <string name="intent_limit_invalid">O limite fornecido era inválido.</string>
-    <string name="intent_limit_accepted">O limite de carga da bateria foi mudado para %1$d%%.</string>
-    <string name="service_enabled"> Serviço Battery Limit Habilitado! </string>
-    <string name="service_disabled"> Serviço Battery Limit Desabilitado! </string>
+    <string name="intent_limit_accepted">O limite de carga da bateria foi alterado para %1$d%%.</string>
+    <string name="service_enabled">Serviço Battery Limit habilitado!</string>
+    <string name="service_disabled">Serviço Battery Limit desabilitado!</string>
 
-    <string name="main_settings">Configurações Principais</string>
-    <string name="set_control_file">Definir Arquivo de Controle</string>
-    <string name="select_control_file">Selecionar Arquivo de Controle</string>
-    <string name="show_temperature_fahrenheit">Mostrar Temperatura em &#8457;</string>
-    <string name="show_temperature_in_notification">Mostrar Notificação de Temperatura</string>
-    <string name="enforce_charge_limit">Forçar Limite de Carga</string>
-    <string name="enforce_charge_limit_desc">Tentar forçar que o dispositivo reconheça as alterações ao arquivo de controle ao habilitar este estado com um atraso crescente</string>
-    <string name="always_write_cf">Sempre Escrever arquivo de Controle</string>
+    <string name="main_settings">Configurações principais</string>
+    <string name="set_control_file">Definir arquivo de controle</string>
+    <string name="select_control_file">Selecionar arquivo de controle</string>
+    <string name="show_temperature_fahrenheit">Mostrar temperatura em &#8457;</string>
+    <string name="show_battery_info_in_notification">Mostrar informação da bateria na notificação</string>
+    <string name="enforce_charge_limit">Forçar limite de carga</string>
+    <string name="enforce_charge_limit_desc">Tentar forçar que o dispositivo reconheça as alterações no arquivo de controle ao alternar seu estado com um atraso crescente</string>
+    <string name="always_write_cf">Sempre escrever arquivo de controle</string>
     <string name="always_write_cf_desc">Sempre sobrescrever o arquivo de controle cegamente, mesmo que já contenha o novo conteúdo</string>
 
-    <string name="advanced_settings">Configurações Avançadas</string>
-    <string name="immediate_power_intent_handling">Sempre Lidar com Eventos de Energia</string>
-    <string name="immediate_power_intent_handling_desc">As alterações de energia serão reconhecidas imediatamente, mesmo diretamente após alterações no arquivo de controle.\nUse apenas para arquivos de controle suportados como battery_charging_enabled ou store_mode!</string>
+    <string name="advanced_settings">Configurações avançadas</string>
+    <string name="immediate_power_intent_handling">Sempre lidar com eventos de energia</string>
+    <string name="immediate_power_intent_handling_desc">As alterações de energia serão reconhecidas imediatamente, mesmo logo após alterações no arquivo de controle.\nUse apenas para arquivos de controle suportados como battery_charging_enabled ou store_mode!</string>
+    <string name="disable_auto_recharge">Desativar recarga automática</string>
+    <string name="disable_auto_recharge_desc">Experimental: Ativar esta opção também oculta a notificação após o limite ser atingido. Importante: Desactive esta opção antes de desinstalar ou reinicie após desinstalar</string>
 
-    <string name="hide_toast_on_service_change">Esconder Toast nas Alterações do Serviço</string>
+    <string name="hide_toast_on_service_change">Ocultar avisos nas alterações do serviço</string>
 
-    <string name="control_file_settings">Dados de Arquivo de Controle</string>
-    <string name="current_ctrl_data_title">Dados do Arquivos Configurados</string>
-    <string name="control_file_option_summary_on">Usando arquivo de controle definido pelo usuário</string>
-    <string name="control_file_option_summary_off">Usando arquivo de controle pré-definido</string>
-    <string name="control_file_alert_title">Apenas para Usuários Avançados!</string>
-    <string name="control_file_alert_desc">AVISO: Alterar configurações nesta seção sem conhecimento do que você está alterando pode causar problemas ao seu dispositivo que nunca foram vistos. Reiniciar o dispositivo normalmente arruma muitos dos problemas, entretanto, alguns podem não ser tão facilmente arrumados. PROCEDA COM CAUTELA!</string>
+    <string name="control_file_settings">Dados do arquivo de controle</string>
+    <string name="current_ctrl_data_title">Dados de arquivo configurados</string>
+    <string name="control_file_option_summary_on">Usando dados do arquivo de controle especificados pelo usuário</string>
+    <string name="control_file_option_summary_off">Usando arquivo de controle predefinido</string>
+    <string name="control_file_alert_title">Apenas para usuários avançados!</string>
+    <string name="control_file_alert_desc">AVISO: Alterar esta seção sem conhecimento pode causar problemas imprevistos ao seu dispositivo. Reiniciar o dispositivo normalmente resolve muitos problemas, no entanto, alguns podem não ser tão fáceis de corrigir. PROCEDA COM CAUTELA!</string>
     <string name="control_understand">Eu entendo</string>
-    <string name="control_file_heads_up_title">Informações do Arquivo de Controle</string>
-    <string name="control_file_heads_up_desc">Apenas arquivos de controle detectados no seu dispositivo aparecerão como disponíveis. Se um arquivo de controle for detectado, mas para outro dispositivo, deve ser seguro utilizar. Abra um issue ou mande um pull request no GitHub para o seu dispositivo com o arquivo de dados de controle para ser adicionado à essa lista.</string>
+    <string name="control_file_heads_up_title">Informações do arquivo de controle</string>
+    <string name="control_file_heads_up_desc">Apenas arquivos de controle detectados no seu dispositivo aparecerão como disponíveis. Se um arquivo de controle for detectado, mas para outro dispositivo, deve ser seguro utilizar. Abra um problema ou envie um pull request no GitHub para o seu dispositivo com o arquivo de controle para ser adicionado a esta lista.</string>
 
-    <string name="custom_ctrl_file_data_title">Arquivo de Dados de Controle Configurável</string>
-    <string name="custom_ctrl_file_data_setup_title">Configurar Dados de Controle</string>
-    <string name="custom_ctrl_file_path_title">Definir Caminho para Arquivo Desejado</string>
-    <string name="custom_ctrl_file_path_hint">/sys/folder/folder/desired_file</string>
-    <string name="custom_ctrl_file_enabled_title">Setar Valor Habilitado</string>
-    <string name="custom_ctrl_file_enabled_hint">1, enabled, desired_value</string>
-    <string name="custom_ctrl_file_disabled_title">Setar Valor Desabiltado</string>
-    <string name="custom_ctrl_file_disabled_hint">0, disabled, desired_value</string>
+    <string name="custom_ctrl_file_data_title">Dados do arquivo de controle configurável</string>
+    <string name="custom_ctrl_file_data_setup_title">Configurar dados de controle</string>
+    <string name="custom_ctrl_file_path_title">Definir caminho para o arquivo desejado</string>
+    <string name="custom_ctrl_file_path_hint">/sys/folder/folder/arquivo_desejado</string>
+    <string name="custom_ctrl_file_enabled_title">Definir valor ativado</string>
+    <string name="custom_ctrl_file_enabled_hint">1, enabled, valor_desejado</string>
+    <string name="custom_ctrl_file_disabled_title">Definir valor desativado</string>
+    <string name="custom_ctrl_file_disabled_hint">0, disabled, valor_desejado</string>
     <string name="custom_ctrl_file_updated_info">Dados atualizados aparecerão aqui assim que você atualizar a informação</string>
-    <string name="custom_ctrl_file_heads_up">Se você experimentar problemas com qubras do app ou o serviço não funcionar direito, tente habilitar Sempre Escrever Arquivo de Controle nas configurações. NÃO há garantia de que esta função de arquivo de controle configurável suportará todos os dispositivos e arquivos/valores. Tente ajustar as configurações de ocorrerem erros ou garanta que os dados estão corretos.</string>
-    <string name="custom_ctrl_file_update_data">ATUALIZAR DADOS DO ARQUIVO DE CONTROLE</string>
+    <string name="custom_ctrl_file_heads_up">Se você enfrentar problemas com falhas no app ou o serviço não funcionar corretamente, tente habilitar \"Sempre escrever arquivo de controle\" nas configurações. NÃO há garantia de que esta função suportará todos os dispositivos e arquivos/valores. Tente ajustar as configurações se ocorrerem problemas ou garanta que los datos están corretos.</string>
+    <string name="custom_ctrl_file_update_data">Atualizar dados do arquivo de controle</string>
+
+    <string name="theme">Tema</string>
+    <string name="light">Claro</string>
+    <string name="dark">Escuro</string>
+    <string name="black">Preto - AMOLED</string>
+    <string name="control_battery_charge_permission_label">Controlar carga da bateria</string>
+    <string name="control_battery_charge_permission_description">controlar carga da bateria</string>
+    <string name="version">Versão</string>
     <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">Licença</string>
     <string name="credits_title">Créditos</string>

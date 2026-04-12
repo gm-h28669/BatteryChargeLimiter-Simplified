@@ -24,6 +24,8 @@
     <string name="device_not_supported">Cihazınız desteklenmiyor (henüz)!</string>
     <string name="ok">Tamam</string>
     <string name="no_recharge">Otomatik yeniden şarj yok</string>
+    <string name="disable_auto_recharge">Otomatik yeniden şarjı devre dışı bırak</string>
+    <string name="disable_auto_recharge_desc">Deneysel: Bu seçeneğin etkinleştirilmesi, limite ulaşıldıktan sonra bildirimi de gizler. Önemli: Kaldırmadan önce bu seçeneği devre dışı bırakın veya kaldırdıktan sonra yeniden başlatın</string>
 
     <string name="charging">ŞARJ OLUYOR</string>
     <string name="discharging">BOŞALTILIYOR</string>
@@ -54,7 +56,7 @@
     <string name="set_control_file">Kontrol Dosyasını Ayarla</string>
     <string name="select_control_file">Kontrol Dosyasını Seç</string>
     <string name="show_temperature_fahrenheit">Sıcaklığı &#8457; Biçiminde Göster</string>
-    <string name="show_temperature_in_notification">Bildirimde Sıcaklığı Göster</string>
+    <string name="show_battery_info_in_notification">Bildirimde Pil Bilgisini Göster</string>
     <string name="enforce_charge_limit">Şarj Limitini Zorla</string>
     <string name="enforce_charge_limit_desc">Cihazı, durumu giderek artan bir gecikmeyle değiştirerek kontrol dosyasındaki değişiklikleri tanımak için zorlamayı dene</string>
     <string name="always_write_cf">Her Zaman CTRL Dosyasına Yaz</string>
@@ -86,7 +88,13 @@
     <string name="custom_ctrl_file_updated_info">Bilgileri güncelledikten sonra güncellenmiş veriler burada görünecektir</string>
     <string name="custom_ctrl_file_heads_up">Uygulama çökmeleriyle ilgili sorunlar yaşarsanız veya hizmet düzgün çalışmazsa, ayarlardan her zaman CTRL dosyasına yazmayı etkinleştirmeyi deneyin. Bu yapılandırılabilir kontrol dosyası işlevinin tüm cihazları ve dosyaları/değerleri destekleyeceğine dair bir garanti YOKTUR. Sorun çıkarsa ayarları düzeltmeyi deneyin veya verilerin doğruluğundan emin olun.</string>
     <string name="custom_ctrl_file_update_data">CTRL DOSYASI VERİLERİNİ GÜNCELLE</string>
+    <string name="theme">Tema</string>
+    <string name="light">Açık</string>
     <string name="dark">Koyu</string>
+    <string name="black">Siyah - AMOLED</string>
+    <string name="control_battery_charge_permission_label">Pil şarjını kontrol et</string>
+    <string name="control_battery_charge_permission_description">pil şarjını kontrol et</string>
+    <string name="version">Sürüm</string>
     <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">Lisans</string>
     <string name="credits_title">Krediler</string>

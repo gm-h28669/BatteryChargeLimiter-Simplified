@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Translation by Y0lin(XDA username: Y0lin) on 16/08/2018-->
 <resources>
-    <string name="disable_charge_now">Întrerupe încărcarea</string>
     <string name="action_settings">Setări</string>
     <string name="source_code_title">Cod sursă</string>
     <string name="about">Despre</string>
+    <string name="disable_charge_now">Întrerupe încărcarea</string>
     <string name="enable">Activează Battery Charge Limit</string>
     <string name="notify">Notificare când limita e atinsă</string>
     <string name="limit">Limitează încărcarea la %1$d%%</string>
@@ -36,7 +36,7 @@
     <string name="maintaining_x_to_y">Se menţine între %1$d%% - %2$d%%</string>
     <string name="maintaining_description">Dacă dispozitivul este deconectat, dezactivează serviciul</string>
     <string name="waiting_until_x">Se încarcă până la %1$d%%</string>
-    <string name="waiting_description">Bateria se ve opri din încărcat atunci când limita a fost atinsă</string>
+    <string name="waiting_description">Bateria se va opri din încărcat atunci când limita a fost atinsă</string>
     <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
     <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
 
@@ -55,7 +55,7 @@
     <string name="set_control_file">Setează fişierul de control</string>
     <string name="select_control_file">Selectează fişierul de control</string>
     <string name="show_temperature_fahrenheit">Arată temperatura în &#8457;</string>
-    <string name="show_temperature_in_notification">Arată temperatura în notificare</string>
+    <string name="show_battery_info_in_notification">Arată informații baterie în notificare</string>
     <string name="enforce_charge_limit">Forţează limita de încărcare</string>
     <string name="enforce_charge_limit_desc">Forţează dispozitivul să recunoască schimbarile făcute fişierului de control prin schimbarea stării cu o viteză crescătoare</string>
     <string name="always_write_cf">Modifică necondiţionat fisierul CTRL</string>
@@ -63,7 +63,9 @@
 
     <string name="advanced_settings">Setări avansate</string>
     <string name="immediate_power_intent_handling">Ai grijă mereu de schimbările de curent</string>
-    <string name="immediate_power_intent_handling_desc">Schimbările de curent vor fi recunoscute imediat, exact după ce fişierul de control se schimbă.\nSe foloseşte doar pentru fişierele de control compatibile, ca şi battery_charging_enabled sau store_mode!</string>
+    <string name="immediate_power_intent_handling_desc">Schimbările de curent vor fi recunoscute imediat, chiar și direct după ce fişierul de control se schimbă.\nSe foloseşte doar pentru fişierele de control compatibile, ca şi battery_charging_enabled sau store_mode!</string>
+    <string name="disable_auto_recharge">Dezactivează reîncărcarea automată</string>
+    <string name="disable_auto_recharge_desc">Experimental: activarea acestei opțiuni ascunde, de asemenea, notificarea după atingerea limitei. Important: dezactivați această opțiune înainte de dezinstalare sau reporniți după dezinstalare</string>
 
     <string name="hide_toast_on_service_change">Ascunde Toast în schimbările de serviciu</string>
 
@@ -88,6 +90,14 @@
     <string name="custom_ctrl_file_updated_info">Datele actualizate vor apărea aici după ce actualizezi informaţiile</string>
     <string name="custom_ctrl_file_heads_up">Dacă ai probleme cu aplicaţia sau serviciul nu functionează corect, încearcă să activezi \'Modifică necondiţionat fişierul CTRL\' în setări. Nu e garantat că fişierul configurabil de control va fi compatibil cu toate dispozitivele şi cu fişierele/valorile setate. Dacă ai probleme încearcă să ajustezi setările sau verifică dacă datele introduse sunt corecte.</string>
     <string name="custom_ctrl_file_update_data">ACTUALIZEAZĂ FIŞIERUL CTRL</string>
+
+    <string name="theme">Temă</string>
+    <string name="light">Luminos</string>
+    <string name="dark">Întunecat</string>
+    <string name="black">Negru - AMOLED</string>
+    <string name="control_battery_charge_permission_label">Controlați încărcarea bateriei</string>
+    <string name="control_battery_charge_permission_description">controlați încărcarea bateriei</string>
+    <string name="version">Versiune</string>
     <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">Licență</string>
     <string name="credits_title">Credite</string>

@@ -44,7 +44,7 @@
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"
             android:key="notification_sound"
-            android:title="@string/notify"
+            android:title="@string/sound_on_limit_reached"
             android:defaultValue="false" />
 
         <SwitchPreferenceCompat

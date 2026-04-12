@@ -5,7 +5,7 @@
     <string name="about">Over</string>
     <string name="disable_charge_now">Opladen pauzeren</string>
     <string name="enable">Activeer Oplaadlimiet</string>
-    <string name="notify">Notificatie wanneer limiet is bereikt</string>
+    <string name="sound_on_limit_reached">Geluidsmelding wanneer de oplaadlimiet is bereikt</string>
     <string name="limit">Limiteer opladen tot %1$d%%</string>
     <string name="recharge_below">Opladen onder %1$d%%</string>
     <string name="status">Status:</string>

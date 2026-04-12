@@ -5,14 +5,13 @@
     <string name="action_settings">Ajustes</string>
     <string name="about">Sobre la aplicación</string>
     <string name="enable">Activar límite de carga</string>
-    <string name="notify">Notificar cuando se alcance el límite</string>
+    <string name="sound_on_limit_reached">Alerta sonora al alcanzar el límite de carga</string>
     <string name="limit">Limitar a un %1$d%%</string>
     <string name="recharge_below">Recargar tras un %1$d%%</string>
     <string name="status">Estado: </string>
     <string name="experimental">EXPERIMENTAL</string>
     <string name="auto_reset_stats">Restaurar estadísticas automáticamente</string>
     <string name="reset_stats">Restaurar estadísticas</string>
-
     <string name="previously_started">Antes de empezar</string>
     <string name="device_not_supported">¡Dispositivo no soportado (aún)!</string>
     <string name="ok">VALE</string>

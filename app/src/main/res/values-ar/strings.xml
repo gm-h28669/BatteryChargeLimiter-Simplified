@@ -6,7 +6,7 @@
     <string name="about">حول</string>
     <string name="disable_charge_now">إيقاف الشحن مؤقتًا</string>
     <string name="enable">تمكين حد الشحن</string>
-    <string name="notify">الإشعار عند الوصول إلى الحد</string>
+    <string name="sound_on_limit_reached">تنبيه صوتي عند الوصول إلى حد الشحن</string>
     <string name="limit">الحد من الشحن إلى %1$d%%</string>
     <string name="recharge_below">إعادة الشحن أقل من %1$d%%</string>
     <string name="status">الحالة: </string>

@@ -5,7 +5,7 @@
     <string name="about">Info su</string>
     <string name="disable_charge_now">Sospendi ricarica</string>
     <string name="enable">Abilita Battery Charge Limit</string>
-    <string name="notify">Notifica quando il limite viene raggiunto</string>
+    <string name="sound_on_limit_reached">Allarme sonoro al raggiungimento del limite di carica</string>
     <string name="limit">Limita la carica a %1$d%%</string>
     <string name="recharge_below">Ricarica al di sotto del %1$d%%</string>
     <string name="status">Stato: </string>

@@ -5,7 +5,7 @@
     <string name="source_code_title">Kaynak Kodu</string>
     <string name="about">Hakkında</string>
     <string name="enable">Battery Charge Limit\'i Etkinleştir</string>
-    <string name="notify">Limit aşıldığında bildir</string>
+    <string name="sound_on_limit_reached">Şarj limitine ulaşıldığında sesli uyarı</string>
     <string name="limit">Şarj limiti: %1$d%%</string>
     <string name="recharge_below">%1$d%% altında yeniden şarj et</string>
     <string name="status">Durum: </string>

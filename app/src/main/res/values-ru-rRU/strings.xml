@@ -5,7 +5,7 @@
     <string name="source_code_title">Исходный код</string>
     <string name="about">О приложении</string>
     <string name="enable">Активировать Battery Charge Limit</string>
-    <string name="notify">Оповещать, когда лимит достигнут</string>
+    <string name="sound_on_limit_reached">Звуковой сигнал при достижении лимита зарядки</string>
     <string name="limit">Лимит зарядки до %1$d%%</string>
     <string name="recharge_below">Снова заряжать после достижения %1$d%%</string>
     <string name="status">Статус: </string>

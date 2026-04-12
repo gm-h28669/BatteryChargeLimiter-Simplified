@@ -8,7 +8,8 @@
     <string name="about">About</string>
     <string name="disable_charge_now">Pause charging</string>
     <string name="enable">Enable charge limit</string>
-    <string name="notify">Notify when limit is reached</string>
+    <string name="sound_on_limit_reached">Sound alert when charge limit is reached</string>
+    <string name="percentage" translatable="false">%1$d%%</string>
     <string name="limit">Limit charging to %1$d%%</string>
     <string name="recharge_below">Recharge below %1$d%%</string>
     <string name="status">Status: </string>

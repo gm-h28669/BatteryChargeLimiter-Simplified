@@ -3,7 +3,7 @@
     <string name="action_settings">সেটিংস</string>
     <string name="about">সম্বন্ধে</string>
     <string name="enable">ব্যাটারি চার্জ লিমিট সচল</string>
-    <string name="notify">নির্ধারিত সীমায় পৌঁছলে আমাকে অবহিত কর</string>
+    <string name="sound_on_limit_reached">চার্জিং সীমায় পৌঁছলে শব্দ করে সতর্ক করো</string>
     <string name="limit">%1$d%% সীমায় চার্জিং নির্ধারিত</string>
     <string name="recharge_below">%1$d%% এর নিচে পুনঃচার্জ</string>
     <string name="status">অবস্থা: </string>

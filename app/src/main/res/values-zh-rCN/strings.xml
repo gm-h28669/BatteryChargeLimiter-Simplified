@@ -7,7 +7,7 @@
     <string name="about">关于</string>
     <string name="disable_charge_now">暂停充电</string>
     <string name="enable">启用充电限制</string>
-    <string name="notify">达到限制时发送通知</string>
+    <string name="sound_on_limit_reached">达到充电限制时发出声音提醒</string>
     <string name="limit">充至 %1$d%% 时停止</string>
     <string name="recharge_below">低于 %1$d%% 时开始重充电</string>
     <string name="status">状态：</string>

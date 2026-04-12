@@ -5,7 +5,7 @@
     <string name="about">Über</string>
     <string name="disable_charge_now">Ladevorgang pausieren</string>
     <string name="enable">Aktiviere Battery Charge Limit</string>
-    <string name="notify">Benachrichtigen wenn Grenze erreicht</string>
+    <string name="sound_on_limit_reached">Ton abspielen, wenn Ladelimit erreicht</string>
     <string name="limit">Laden bis max. %1$d%%</string>
     <string name="recharge_below">Wiederaufladen unter %1$d%%</string>
     <string name="status">Status:</string>

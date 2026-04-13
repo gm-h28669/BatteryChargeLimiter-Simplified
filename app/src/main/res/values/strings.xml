@@ -40,8 +40,8 @@
     <string name="maintaining_description">If device becomes unplugged, disable service</string>
     <string name="waiting_until_x">Charging to %1$d%%</string>
     <string name="waiting_description">Battery will stop charging once limit is reached</string>
-    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
-    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
+    <string name="battery_info_C" translatable="false">U: %1$s V, I: %2$s mA, T: %3$s &#8451;, %4$s</string>
+    <string name="battery_info_F" translatable="false">U: %1$s V, I: %2$s mA, T: %3$s &#8457;, %4$s</string>
 
     <string name="root_denied">App is denied ROOT access or device is not rooted!</string>
     <string name="stats_reset_success">Battery Stats reset successful</string>

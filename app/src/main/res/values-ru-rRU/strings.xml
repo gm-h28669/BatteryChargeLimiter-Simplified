@@ -36,9 +36,6 @@
     <string name="maintaining_description">Если устройство отключено от сети, отключите сервис.</string>
     <string name="waiting_until_x">Зарядка до %1$d%%</string>
     <string name="waiting_description">Аккумулятор перестанет заряжаться после достижения лимита.</string>
-    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
-    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
-
     <string name="root_denied">Приложению отказано в ROOT-доступе или устройство не имеет root-прав!</string>
     <string name="stats_reset_success">Статистика аккумулятора успешно сброшена!</string>
 

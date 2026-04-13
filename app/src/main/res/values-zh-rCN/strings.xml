@@ -38,9 +38,6 @@
     <string name="maintaining_description">如果设备未连接充电器，则取消充电限制</string>
     <string name="waiting_until_x">正在充至 %1$d%%</string>
     <string name="waiting_description">一旦达到限制，电池将停止充电</string>
-    <string name="battery_info_C">电压: %1$s V, 电流: %2$s mA, 温度: %3$s &#8451;</string>
-    <string name="battery_info_F">电压: %1$s V, 电流: %2$s mA, 温度: %3$s &#8457;</string>
-
     <string name="root_denied">应用程序被拒绝 ROOT 访问或设备​​未 ROOT！</string>
     <string name="stats_reset_success">电池状态重置成功</string>
 

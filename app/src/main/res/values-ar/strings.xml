@@ -37,9 +37,6 @@
     <string name="maintaining_description">إذا تم فصل الجهاز، فقم بتعطيل الخدمة</string>
     <string name="waiting_until_x">الشحن إلى %1$d%%</string>
     <string name="waiting_description">ستتوقف البطارية عن الشحن بمجرد الوصول إلى الحد الأقصى</string>
-    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
-    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
-
     <string name="root_denied">تم رفض التطبيق من الحصول على صلاحيات ROOT أو أن جهازك لا يدعم الروت!</string>
     <string name="stats_reset_success">تم إعادة تعيين إحصائيات البطارية بنجاح</string>
 

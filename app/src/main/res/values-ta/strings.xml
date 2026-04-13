@@ -36,9 +36,6 @@
     <string name="maintaining_description">சாதனம் துண்டிக்கப்பட்டால், சேவையை முடக்கவும்</string>
     <string name="waiting_until_x">%1$d%% வரை சார்ஜ் செய்யப்படுகிறது</string>
     <string name="waiting_description">வரம்பை அடைந்ததும் பேட்டரி சார்ஜ் செய்வதை நிறுத்தும்</string>
-    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
-    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
-
     <string name="root_denied">பயன்பாட்டிற்கு ரூட் அணுகல் மறுக்கப்பட்டது அல்லது சாதனம் ரூட் செய்யப்படவில்லை!</string>
     <string name="stats_reset_success">பேட்டரி புள்ளிவிவரங்கள் மீட்டமைக்கப்பட்டது</string>
 

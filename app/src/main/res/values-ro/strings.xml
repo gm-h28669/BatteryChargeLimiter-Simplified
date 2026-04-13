@@ -25,7 +25,6 @@
     <string name="device_not_supported">Dispozitivul tău nu este compatibil (încă)!</string>
     <string name="ok">OK</string>
     <string name="no_recharge">Fără reîncarcare automată</string>
-
     <string name="charging">INCĂRCARE</string>
     <string name="discharging">DESCĂRCARE</string>
     <string name="full">PLINĂ</string>
@@ -37,9 +36,6 @@
     <string name="maintaining_description">Dacă dispozitivul este deconectat, dezactivează serviciul</string>
     <string name="waiting_until_x">Se încarcă până la %1$d%%</string>
     <string name="waiting_description">Bateria se va opri din încărcat atunci când limita a fost atinsă</string>
-    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
-    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
-
     <string name="root_denied">Aplicaţia nu are acces ROOT sau dispozitivul nu este ROOTAT!</string>
     <string name="stats_reset_success">Statisticile bateriei au fost resetate cu succes</string>
 

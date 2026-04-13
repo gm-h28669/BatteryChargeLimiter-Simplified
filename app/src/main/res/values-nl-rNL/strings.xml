@@ -36,9 +36,6 @@
     <string name="maintaining_description">Service uitschakelen zodra het apparaat losgekoppeld wordt</string>
     <string name="waiting_until_x">Aan het opladen tot %1$d%%</string>
     <string name="waiting_description">Het opladen zal gestopt worden als het limiet wordt bereikt</string>
-    <string name="battery_info_C">U: %1$s V, I: %2$s mA, T: %3$s &#8451;</string>
-    <string name="battery_info_F">U: %1$s V, I: %2$s mA, T: %3$s &#8457;</string>
-
     <string name="root_denied">App heeft geen ROOT-toegang of apparaat is niet geroot!</string>
     <string name="stats_reset_success">Reset van batterijstatistieken successvol</string>
 

@@ -30,9 +30,6 @@
     <string name="maintaining_description">চার্জার খুলে ফেললে, সার্ভিস বন্ধ কর</string>
     <string name="waiting_until_x">%1$d%% এর জন্য অপেক্ষমান</string>
     <string name="waiting_description">নির্ধারিত সীমায় পৌঁছলে ব্যাটারি চার্জ হওয়া বন্ধ করে দিবে</string>
-    <string name="battery_info_C">ইউ: %1$s ভো., আই: %2$s এমএ, তা: %3$s &#8451;</string>
-    <string name="battery_info_F">ইউ: %1$s ভো., আই: %2$s এমএ, তা: %3$s &#8457;</string>
-
     <string name="root_denied">অ্যাপকে রুট পারমিশন দেয়া হয়নি অথবা ডিভাইসটি রুটেড নয়!</string>
     <string name="stats_reset_success">ব্যাটারি তত্ত্ব সফলভাবে পুনঃস্থাপিত হয়েছে!</string>
 

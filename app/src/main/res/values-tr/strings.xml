@@ -38,9 +38,6 @@
     <string name="maintaining_description">Cihaz çıkarıldığında, hizmeti devre dışı bırak</string>
     <string name="waiting_until_x">%1$d%% seviyesine kadar şarj oluyor</string>
     <string name="waiting_description">Limite ulaşıldığında pil şarjı durduracak</string>
-    <string name="battery_info_C">U: %1$s V, I: %2$s mA, S: %3$s &#8451;</string>
-    <string name="battery_info_F">U: %1$s V, I: %2$s mA, S: %3$s &#8457;</string>
-
     <string name="root_denied">Uygulamaya ROOT izni verilmedi veya cihaz rootlanmamış!</string>
     <string name="stats_reset_success">Pil İstatistikleri Sıfırlandı</string>
 

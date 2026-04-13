@@ -217,7 +217,7 @@ object Utils {
         val batteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
         val batteryTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
         val rawAverageCurrent = getAverageCurrent(context)
-        // val powerSource = getPluggedPowerSource(context)
+        val powerSource = getPluggedPowerSource(context)
         val voltageStr = if (batteryVoltage != -1) String.format(Locale.ROOT, "%.3f", batteryVoltage.toFloat() / 1000f) else NOT_AVAILABLE
         val currentStr = if (rawAverageCurrent != Int.MIN_VALUE && rawAverageCurrent != 0) (rawAverageCurrent / 1000).toString() else NOT_AVAILABLE
         val temperatureStr = if (batteryTemperature != -1) {
@@ -229,7 +229,8 @@ object Utils {
             if (useFahrenheit) R.string.battery_info_F else R.string.battery_info_C,
             voltageStr,
             currentStr,
-            temperatureStr
+            temperatureStr,
+            powerSource
         )
     }
 

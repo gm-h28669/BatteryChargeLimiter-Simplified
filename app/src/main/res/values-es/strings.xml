@@ -26,9 +26,6 @@
     <string name="please_wait">Espere, por favor</string>
     <string name="maintaining_x_to_y">Manteniendo %1$d%% - %2$d%% SI está conectado"</string>
     <string name="waiting_until_x">Esperando hasta %1$d%%</string>
-    <string name="battery_info_C">V: %1$s v, I: %2$s mA, T: %3$s &#8451;</string>
-    <string name="battery_info_F">V: %1$s v, I: %2$s mA, T: %3$s &#8457;</string>
-
     <string name="root_denied">Aplicación o dispositivo sin acceso root.</string>
     <string name="stats_reset_success">Estadísticas de batería restaurados</string>
 

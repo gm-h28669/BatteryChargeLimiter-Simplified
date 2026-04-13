@@ -3,8 +3,6 @@ package io.github.muntashirakon.bcl.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.topjohnwu.superuser.Shell
-import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.Utils
 
 /**

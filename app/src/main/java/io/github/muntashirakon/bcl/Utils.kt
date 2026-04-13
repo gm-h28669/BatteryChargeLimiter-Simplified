@@ -149,6 +149,18 @@ object Utils {
         startServiceIfLimitEnabled(context)
     }
 
+    fun getPluggedPowerSource(context: Context): String {
+        val intent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        val plugged = intent?.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) ?: -1
+        return when (plugged) {
+            BatteryManager.BATTERY_PLUGGED_AC -> "AC"
+            BatteryManager.BATTERY_PLUGGED_USB -> "USB"
+            BatteryManager.BATTERY_PLUGGED_WIRELESS -> "Wireless"
+            0 -> "Unplugged"
+            else -> "Unknown ($plugged)"
+        }
+    }
+
     fun isDevicePluggedIn(context: Context): Boolean {
         val batteryIntent = context.applicationContext.registerReceiver(
             null,
@@ -173,7 +185,7 @@ object Utils {
     // returns averaged current in uA
     // for current measurement the files seem to be more reliable and more likely to contain correct readings (in uA)
     // therefore prioritize files (if they exist) and try to query BatteryManager only if file based approach fails
-    fun getAverageCurrent(batteryManager: BatteryManager): Int {
+    fun getAverageCurrent(context: Context): Int {
         val currentAvgFiles = arrayOf(
             "/sys/class/power_supply/battery/batt_current_ua_avg",
             "/sys/class/power_supply/battery/current_avg"
@@ -195,6 +207,7 @@ object Utils {
         }
         if (rawAverageCurrent == Int.MIN_VALUE) {
             // fallback
+            val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
             rawAverageCurrent = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
         }
         return rawAverageCurrent
@@ -203,9 +216,8 @@ object Utils {
     fun getBatteryInfo(context: Context, intent: Intent, useFahrenheit: Boolean): String {
         val batteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
         val batteryTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
-        val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-        val rawAverageCurrent = getAverageCurrent(batteryManager)
-
+        val rawAverageCurrent = getAverageCurrent(context)
+        // val powerSource = getPluggedPowerSource(context)
         val voltageStr = if (batteryVoltage != -1) String.format(Locale.ROOT, "%.3f", batteryVoltage.toFloat() / 1000f) else NOT_AVAILABLE
         val currentStr = if (rawAverageCurrent != Int.MIN_VALUE && rawAverageCurrent != 0) (rawAverageCurrent / 1000).toString() else NOT_AVAILABLE
         val temperatureStr = if (batteryTemperature != -1) {

@@ -1,24 +1,40 @@
-# ADB Battery Testing Reference
+# ADB Battery Control Limiter Testing
 
 Use these commands to test the app's behavior in an emulator or on a device without physical power cycling.
 
 **IMPORTANT:** Always run `adb shell dumpsys battery reset` when you are done testing to return the device to its actual state.
 
-## Basic State Simulation
-| Action | Command |
-| :--- | :--- |
-| **Reset Overrides** | `adb shell dumpsys battery reset` |
-| **Full Plug In** | `adb shell dumpsys battery set ac 1 && adb shell dumpsys battery set status 2` |
-| **Full Unplug** | `adb shell dumpsys battery set ac 0 && adb shell dumpsys battery set usb 0 && adb shell dumpsys battery set status 3` |
-| **Set Battery Level** | `adb shell dumpsys battery set level <0-100>` |
+# ADB Basic Commands
 
-## Battery Status Override
-| Status | Command |
-| :--- | :--- |
-| **Charging** | `adb shell dumpsys battery set status 2` |
-| **Discharging** | `adb shell dumpsys battery set status 3` |
-| **Not Charging** | `adb shell dumpsys battery set status 4` |
-| **Full** | `adb shell dumpsys battery set status 5` |
+| Purpose | Command |
+|---|---|
+| List devices | `adb devices` |
+| Target specific device/emulator | `adb -s <serial> <command>` |
+| Target only emulator | `adb -e <command>` |
+| Target only physical device | `adb -d <command>` |
+| Clear Logcat | `adb -s <serial> logcat -c` |
+
+**Replace `<serial>` with the device/emulator id (e.g., `emulator-5554`)**
+
+## Battery Status Overrides
+| Status | Command                                              |
+| :--- |:-----------------------------------------------------|
+| **Charging** | `adb -s <serial> shell dumpsys battery set status 2` |
+| **Discharging** | `adb -s <serial> shell dumpsys battery set status 3` |
+| **Not Charging** | `adb -s <serial> shell dumpsys battery set status 4` |
+| **Full** | `adb -s <serial> shell dumpsys battery set status 5` |
+
+
+# ADB Battery Commands (mostly for use with emulator)
+| Purpose                         | Command                                                                                                                                                         |
+|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Plug in power source (emulator) | `adb -s <serial> shell dumpsys battery set ac 1`<br>`adb -s <serial> shell dumpsys battery set usb 1`<br>`adb -s <serial> shell dumpsys battery set wireless 1` |
+| Unplug power source (emulator)  | `adb -s <serial> shell dumpsys battery set ac 0`<br>`adb -s <serial> shell dumpsys battery set usb 0`<br>`adb -s <serial> shell dumpsys battery set wireless 0` |
+| Set battery level               | `adb -s <serial> shell dumpsys battery set capacity <0-100>`                                                                                                    |
+| Reset battery to default values | `adb -s <serial> shell dumpsys battery reset`                                                                                                                   |
+| Quick check battery status      | `adb -s <serial> shell dumpsys battery \| grep status`                                                                                                          |
+| Full Plug In to AC              | `adb -s <serial> shell dumpsys battery set ac 1 && adb shell dumpsys battery set status 2`                                                                      |
+| Full Unplug from AC             | `adb -s <serial> shell dumpsys battery set ac 0 && adb shell dumpsys battery set status 3`                               |
 
 ## Testing "Physical Unplug" (Wireless ADB)
 To test behavior when the cable is physically removed without losing your debug session:

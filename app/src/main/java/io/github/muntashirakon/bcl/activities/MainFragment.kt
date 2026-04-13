@@ -17,7 +17,6 @@ import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import io.github.muntashirakon.bcl.*
 import io.github.muntashirakon.bcl.settings.PrefsFragment
-import java.lang.ref.WeakReference
 
 class MainFragment: Fragment() {
     private val minSlider by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<Slider>(R.id.min_slider)  }
@@ -27,10 +26,10 @@ class MainFragment: Fragment() {
     private val settings by lazy(LazyThreadSafetyMode.NONE) { activity?.getSharedPreferences(Constants.SETTINGS, 0) }
     private val statusText by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.status) }
     private val batteryInfo by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.battery_info) }
+    private val batteryLevelText by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.battery_level) }
     private val enableSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.enable_switch) }
     private val disableChargeSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.disable_charge_switch) }
     private val statusCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.status_card) }
-    private val controlsCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.controls_card) }
     private var preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
     private var prefs: SharedPreferences? = null
     private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -177,34 +176,45 @@ class MainFragment: Fragment() {
                 when (currentStatus) {
                     BatteryManager.BATTERY_STATUS_CHARGING -> {
                         statusText?.setText(R.string.charging)
-                        statusText?.setTextColor(ContextCompat.getColor(context, R.color.darkGreen))
+                        val green = ContextCompat.getColor(context, R.color.darkGreen)
+                        statusText?.setTextColor(green)
+                        batteryLevelText?.setTextColor(green)
                         val chargingColor = ContextCompat.getColor(context, R.color.charging_bg)
                         statusCard?.setCardBackgroundColor(chargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_DISCHARGING -> {
                         statusText?.setText(R.string.discharging)
-                        statusText?.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                        val orange = ContextCompat.getColor(context, R.color.orange)
+                        statusText?.setTextColor(orange)
+                        batteryLevelText?.setTextColor(orange)
                         val dischargingColor = ContextCompat.getColor(context, R.color.discharging_bg)
                         statusCard?.setCardBackgroundColor(dischargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_FULL -> {
                         statusText?.setText(R.string.full)
-                        statusText?.setTextColor(ContextCompat.getColor(context, R.color.darkGreen))
+                        val green = ContextCompat.getColor(context, R.color.darkGreen)
+                        statusText?.setTextColor(green)
+                        batteryLevelText?.setTextColor(green)
                         val chargingColor = ContextCompat.getColor(context, R.color.charging_bg)
                         statusCard?.setCardBackgroundColor(chargingColor)
                     }
                     BatteryManager.BATTERY_STATUS_NOT_CHARGING -> {
                         statusText?.setText(R.string.not_charging)
-                        statusText?.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                        val orange = ContextCompat.getColor(context, R.color.orange)
+                        statusText?.setTextColor(orange)
+                        batteryLevelText?.setTextColor(orange)
                         val dischargingColor = ContextCompat.getColor(context, R.color.discharging_bg)
                         statusCard?.setCardBackgroundColor(dischargingColor)
                     }
                     else -> {
                         statusText?.setText(R.string.unknown)
-                        statusText?.setTextColor(ContextCompat.getColor(context, R.color.red))
+                        val red = ContextCompat.getColor(context, R.color.red)
+                        statusText?.setTextColor(red)
+                        batteryLevelText?.setTextColor(red)
                     }
                 }
             }
+            batteryLevelText?.text = getString(R.string.percentage, Utils.getBatteryLevel(intent))
             updateBatteryInfo(intent)
         }
     }
@@ -255,6 +265,10 @@ class MainFragment: Fragment() {
     }
 
     private fun updateUi() {
+        val intent = requireContext().registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        if (intent != null) {
+            batteryLevelText?.text = getString(R.string.percentage, Utils.getBatteryLevel(intent))
+        }
         enableSwitch?.isChecked = settings?.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false) == true
         disableChargeSwitch?.isChecked = settings?.getBoolean(Constants.DISABLE_CHARGE_NOW, false) == true
         val max = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC

@@ -4,6 +4,28 @@ A fork of **Battery Charge Limit** whose development has been stalled for some t
 
 **NOTE:** This is app currently requires root to function. While it is not possible to control charging without root, an alarm-based solution might be implemented for no-root users in the future.
 
+## What's changed in release 1.4.0
+### Features
+- **Dynamic UI**: Added real-time battery level indicators on the main screen with state-aware coloring (Green for charging/full, Orange for discharging).
+- **Power Source Tracking**: Now displays the specific power source (AC, USB, Wireless) in the battery info dashboard.
+- **Internationalization**: Improved clarity for notification settings and synchronized translations across all 12 supported languages.
+- **Battery Health**: Updated default limits to 40% (Min) and 50% (Max) to maximize longevity for devices permanently connected to power.
+- **Testing**: Added comprehensive ADB commands and instructions for simulating battery events in emulators.
+
+### Optimizations
+- **Performance & Stability**: Refactored battery info retrieval to be fully asynchronous, offloading blocking shell commands to a background executor to prevent UI stutters and ANRs.
+- **Enhanced Battery Info**: Now prioritizes direct `sysfs` paths for correct current (mA) reporting.
+- **Improved Responsiveness**: Added a 1-second debounce to sliders to prevent UI lag and excessive disk writes during adjustment.
+- **Hardware Optimization**: Refactored charger file control logic to avoid redundant writes and unnecessary mount operations, improving efficiency and error handling.
+
+### Bug Fixes
+- **Fix**: Fixed notification sound issues on Android 8.0+ by implementing direct playback for ongoing service notifications.
+- **Fix**: Resolved the "Pulse to 1" bug by forcing the charger OFF when plugging in while already above the limit.
+
+### Refactoring
+- **Maintenance**: Improved build stability with updated lint baselines and refined emulator detection logic.
+- **Cleanup**: Removed unnecessary imports and obsolete notification sound management functions.
+
 ## What's changed in release 1.3.1
 - **Localized About Dialog**: Added and synchronized translations for the "About" dialog across all 12 languages.
 - **Fix**: Corrected the battery info format string across all languages to match the updated 3-parameter format used in the English version.

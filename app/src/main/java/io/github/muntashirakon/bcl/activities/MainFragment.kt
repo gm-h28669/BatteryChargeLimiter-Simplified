@@ -285,12 +285,26 @@ class MainFragment: Fragment() {
 
     private fun setStatusCTRLFileData() {
         val statusCTRLData = view?.findViewById<TextView>(R.id.status_ctrl_data)
-        statusCTRLData?.text = String.format(
-            "%s, %s, %s",
-            Utils.getCtrlFileData(requireContext()),
-            Utils.getCtrlEnabledData(requireContext()),
-            Utils.getCtrlDisabledData(requireContext())
-        )
+        val context = requireContext()
+        val settings = Utils.getSettings(context)
+        val preferences = Utils.getPrefs(context)
+
+        val isSet = if (preferences.getBoolean("custom_ctrl_file_data", false)) {
+            settings.contains(Constants.SAVED_PATH_DATA)
+        } else {
+            settings.contains(Constants.FILE_KEY)
+        }
+
+        if (isSet) {
+            statusCTRLData?.text = String.format(
+                "%s, %s, %s",
+                Utils.getCtrlFileData(context),
+                Utils.getCtrlEnabledData(context),
+                Utils.getCtrlDisabledData(context)
+            )
+        } else {
+            statusCTRLData?.setText(R.string.file_data)
+        }
     }
 
     private fun updateUi() {

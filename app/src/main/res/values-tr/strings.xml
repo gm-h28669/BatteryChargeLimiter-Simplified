@@ -18,7 +18,7 @@
     <string name="disable_temporarily">Geçici olarak devre dışı bırak</string>
     <string name="dismiss">Devre dışı bırak</string>
     <string name="open_app">Uygulamayı Aç</string>
-    <string name="file_data">(CTRL dosyası verileri burada görünecek)</string>
+    <string name="file_data">Kontrol dosyası seçilmedi. Lütfen Ayarlar\'dan bir tane seçin.</string>
 
     <string name="previously_started">Daha Önce Başladı</string>
     <string name="device_not_supported">Cihazınız desteklenmiyor (henüz)!</string>

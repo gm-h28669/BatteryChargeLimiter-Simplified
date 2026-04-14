@@ -18,7 +18,7 @@
     <string name="disable_temporarily">Desativar temporariamente</string>
     <string name="dismiss">Fechar</string>
     <string name="open_app">Abrir App</string>
-    <string name="file_data">(Os dados do arquivo de controle aparecerão aqui)</string>
+    <string name="file_data">Arquivo de controle não selecionado. Por favor, selecione um nas Configurações.</string>
 
     <string name="previously_started">Iniciado anteriormente</string>
     <string name="device_not_supported">Seu dispositivo não é compatível (ainda)!</string>

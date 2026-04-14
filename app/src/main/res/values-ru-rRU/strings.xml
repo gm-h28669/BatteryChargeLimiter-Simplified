@@ -18,7 +18,7 @@
     <string name="disable_temporarily">Отключить временно</string>
     <string name="dismiss">Закрыть</string>
     <string name="open_app">Открыть приложение</string>
-    <string name="file_data">(Данные управляющего файла появятся здесь)</string>
+    <string name="file_data">Управляющий файл не выбран. Пожалуйста, выберите один в Настройках.</string>
 
     <string name="previously_started">Ранее запущено</string>
     <string name="device_not_supported">Ваше устройство не поддерживается (пока)!</string>

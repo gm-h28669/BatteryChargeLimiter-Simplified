@@ -59,7 +59,7 @@
     <string name="status_ctrl_data_label">কন্ট্রোল ফাইল ডেটা</string>
     <string name="disable_temporarily">সাময়িকভাবে বন্ধ করুন</string>
     <string name="dismiss">খারিজ করুন</string>
-    <string name="file_data">(কন্ট্রোল ফাইল ডেটা এখানে প্রদর্শিত হবে)</string>
+    <string name="file_data">কন্ট্রোল ফাইল নির্বাচন করা হয়নি। অনুগ্রহ করে সেটিংস থেকে একটি নির্বাচন করুন।</string>
     <string name="disable_auto_recharge">স্বয়ংক্রিয় রিচার্জ বন্ধ করুন</string>
     <string name="disable_auto_recharge_desc">পরীক্ষামূলক: এই বিকল্পটি সচল করলে সীমা পৌঁছানোর পর বিজ্ঞপ্তিও লুকানো হবে। গুরুত্বপূর্ণ: আনইনস্টল করার আগে এই বিকল্পটি বন্ধ করুন অথবা আনইনস্টল করার পর রিবুট করুন।</string>
     <string name="custom_ctrl_file_update_data">কন্ট্রোল ফাইল ডেটা আপডেট করুন</string>

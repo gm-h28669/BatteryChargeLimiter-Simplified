@@ -18,7 +18,7 @@
     <string name="disable_temporarily">Tijdelijk uitschakelen</string>
     <string name="dismiss">Annuleer</string>
     <string name="open_app">Applicatie Openen</string>
-    <string name="file_data">(Gegevens van het besturingsbestand verschijnen hier)</string>
+    <string name="file_data">Besturingsbestand niet geselecteerd. Selecteer er een in de Instellingen.</string>
 
     <string name="previously_started">Eerder Gestart</string>
     <string name="device_not_supported">Uw apparaat wordt (nog) niet understeund.</string>

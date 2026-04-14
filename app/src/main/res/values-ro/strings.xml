@@ -19,7 +19,7 @@
     <string name="disable_temporarily">Dezactivează temporar</string>
     <string name="dismiss">Revocare</string>
     <string name="open_app">Deschide aplicaţia</string>
-    <string name="file_data">(Fişierul CTRL va apărea aici)</string>
+    <string name="file_data">Fișierul de control nu este selectat. Vă rugăm să selectați unul în Setări.</string>
 
     <string name="previously_started">Începută anterior</string>
     <string name="device_not_supported">Dispozitivul tău nu este compatibil (încă)!</string>

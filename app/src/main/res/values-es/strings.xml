@@ -58,7 +58,7 @@
     <string name="disable_temporarily">Desactivar temporalmente</string>
     <string name="dismiss">Descartar</string>
     <string name="open_app">Abrir aplicación</string>
-    <string name="file_data">(Los datos del archivo CTRL aparecerán aquí)</string>
+    <string name="file_data">Archivo de control no seleccionado. Por favor, selecciona uno en Ajustes.</string>
 
     <string name="maintaining_description">Si el dispositivo se desconecta, desactivar el servicio</string>
     <string name="waiting_description">La batería dejará de cargarse una vez alcanzado el límite</string>

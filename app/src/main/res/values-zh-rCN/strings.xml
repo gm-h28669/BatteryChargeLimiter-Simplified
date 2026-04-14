@@ -20,7 +20,7 @@
     <string name="disable_temporarily">暂时禁用</string>
     <string name="dismiss">忽略</string>
     <string name="open_app">打开应用</string>
-    <string name="file_data">(CTRL 文件的数据将会显现于此处)</string>
+    <string name="file_data">未选择控制文件。请在“设置”中选择一个。</string>
 
     <string name="previously_started">Previously Started</string>
     <string name="device_not_supported">您的设备（尚）不受支持！</string>

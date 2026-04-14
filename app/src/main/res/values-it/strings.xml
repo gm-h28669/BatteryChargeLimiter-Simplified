@@ -18,7 +18,7 @@
     <string name="disable_temporarily">Disabilita temporaneamente</string>
     <string name="dismiss">Annulla</string>
     <string name="open_app">Apri App</string>
-    <string name="file_data">(Il File di Controllo appare qui)</string>
+    <string name="file_data">File di controllo non selezionato. Selezionane uno nelle Impostazioni.</string>
 
     <string name="previously_started">Avviato Precedentemente</string>
     <string name="device_not_supported">Il tuo dispositivo non è supportato (per il momento)!</string>

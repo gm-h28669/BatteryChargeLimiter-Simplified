@@ -18,7 +18,7 @@
     <string name="disable_temporarily">Temporär deaktivieren</string>
     <string name="dismiss">Verwerfen</string>
     <string name="open_app">Anwendung öffnen</string>
-    <string name="file_data">(Steuerdatei-Daten werden hier erscheinen)</string>
+    <string name="file_data">Steuerdatei nicht ausgewählt. Bitte wählen Sie eine in den Einstellungen aus.</string>
 
     <string name="previously_started">Previously Started</string>
     <string name="device_not_supported">Dein Gerät wird (noch) nicht unterstützt!</string>

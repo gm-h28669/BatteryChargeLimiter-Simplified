@@ -18,7 +18,7 @@
     <string name="disable_temporarily">தற்காலிகமாக முடக்கு</string>
     <string name="dismiss">நிராகரி</string>
     <string name="open_app">பயன்பாட்டைத் திறக்கவும்</string>
-    <string name="file_data">(CTRL கோப்பு தரவு இங்கே தோன்றும்)</string>
+    <string name="file_data">கட்டுப்பாட்டு கோப்பு தேர்ந்தெடுக்கப்படவில்லை. அமைப்புகளில் ஒன்றைத் தேர்ந்தெடுக்கவும்.</string>
 
     <string name="previously_started">முன்பு தொடங்கப்பட்டது</string>
     <string name="device_not_supported">உங்கள் சாதனம் ஆதரிக்கப்படவில்லை (இன்னும்)!</string>

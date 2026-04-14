@@ -19,7 +19,7 @@
     <string name="disable_temporarily">التعطيل مؤقتا</string>
     <string name="dismiss">رفض</string>
     <string name="open_app">افتح التطبيق</string>
-    <string name="file_data">(ستظهر بيانات ملف CTRL هنا)</string>
+    <string name="file_data">لم يتم اختيار ملف التحكم. يرجى اختيار واحد في الإعدادات.</string>
 
     <string name="previously_started">تم البدأ مسبقا</string>
     <string name="device_not_supported">جهازك غير مدعوم (حتى الآن)!</string>

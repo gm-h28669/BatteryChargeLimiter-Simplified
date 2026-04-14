@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
@@ -23,7 +24,6 @@ import io.github.muntashirakon.bcl.activities.MainActivity
 import io.github.muntashirakon.bcl.receivers.BatteryReceiver
 import io.github.muntashirakon.bcl.receivers.ControlBatteryChargeReceiver
 import io.github.muntashirakon.bcl.settings.PrefsFragment
-
 
 /**
  * Created by harsha on 30/1/17.
@@ -56,16 +56,16 @@ class ForegroundService : Service() {
     }
 
     override fun onCreate() {
+        Log.d(TAG, "Service created")
         isRunning = true
 
         settings.edit().putBoolean(NOTIFICATION_LIVE, true).apply()
 
         val channel = NotificationChannelCompat.Builder(
             Constants.FOREGROUND_SERVICE_NOTIFICATION_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_LOW
-        )
-            .setName("Charge Limit Status")
-            .build()
+            NotificationManagerCompat.IMPORTANCE_DEFAULT
+        ).setName(getString(R.string.app_name))
+         .build()
         notificationManager.createNotificationChannel(channel)
 
         val notification = mNotifyBuilder
@@ -75,6 +75,7 @@ class ForegroundService : Service() {
             .setContentInfo(getString(R.string.please_wait))
             .setSmallIcon(R.drawable.ic_notif_charge)
             .setColor(ContextCompat.getColor(this, R.color.colorPrimary))
+            .setOngoing(true)
             .build()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
@@ -94,6 +95,7 @@ class ForegroundService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d(TAG, "Service start command received")
         ignoreAutoReset = false
         return super.onStartCommand(intent, flags, startId)
     }
@@ -137,15 +139,17 @@ class ForegroundService : Service() {
     }
 
     fun setNotificationSound() {
-        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        mNotifyBuilder.setSound(soundUri)
-    }
-
-    fun removeNotificationSound() {
-        mNotifyBuilder.setSound(null)
+        try {
+            val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val r = RingtoneManager.getRingtone(applicationContext, soundUri)
+            r.play()
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to play notification sound", e)
+        }
     }
 
     override fun onDestroy() {
+        Log.d(TAG, "Service removed")
         if (autoResetActive && !ignoreAutoReset && prefs.getBoolean(PrefsFragment.KEY_AUTO_RESET_STATS, false)) {
             Utils.resetBatteryStats(this)
         }
@@ -168,11 +172,9 @@ class ForegroundService : Service() {
     }
 
     companion object {
-        /**
-         * Returns whether the service is running right now
-         *
-         * @return Whether service is running
-         */
+        val TAG = ForegroundService::class.java.simpleName
+
+        // returns whether the service is running right now
         var isRunning = false
         private var ignoreAutoReset = false
 

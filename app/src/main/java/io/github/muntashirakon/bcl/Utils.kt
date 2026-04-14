@@ -43,10 +43,14 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
+enum class ChargeMode {
+    INITIAL,
+    ON,
+    OFF
+}
+
 object Utils {
     private val TAG = Utils::class.java.simpleName
-    const val CHARGE_ON = 0
-    const val CHARGE_OFF = 1
     private const val NOT_AVAILABLE = "---"
 
     // remember pending state change
@@ -75,12 +79,14 @@ object Utils {
 
     val executor: ExecutorService = Executors.newSingleThreadExecutor()
 
-    fun changeState(context: Context, chargeMode: Int) {
+    fun changeState(context: Context, chargeMode: ChargeMode) {
+        if (chargeMode == ChargeMode.INITIAL) return // Should not happen in changeState
+
         val preferences = getPrefs(context)
         val alwaysWrite = preferences.getBoolean(PrefsFragment.KEY_ALWAYS_WRITE_CF, false)
 
         val file = getCtrlFileData(context)
-        val newState = if (chargeMode == CHARGE_ON) {
+        val newState = if (chargeMode == ChargeMode.ON) {
             getCtrlEnabledData(context)
         } else {
             getCtrlDisabledData(context)
@@ -92,18 +98,40 @@ object Utils {
         } else {
             cfInitialized = true
             switchCommands = arrayOf(
-                "mount -o rw,remount $file", "chmod u+w $file",
+                "if [ ! -w $file ]; then mount -o rw,remount $file 2>/dev/null; chmod u+w $file; fi",
                 "echo \"$newState\" > $file"
             )
         }
 
+        // Set cooldown to ignore stale battery intents while the hardware and kernel transition states
+        setChangePending()
+
         if (alwaysWrite) {
-            Shell.cmd(switchCommands.joinToString(separator = " && ")).submit()
+            Shell.cmd(switchCommands.joinToString(separator = " && ")).submit {
+                if (it.isSuccess) {
+                    Log.d(TAG, "Set value in $file to $newState")
+                }
+                else {
+                    Log.e(TAG, "Failed to write value $newState to $file (exit=${it.code}). Hint: If running on emulator, use: adb shell dumpsys battery set status ...")
+                }
+            }
         } else {
             Shell.cmd("cat $file").submit {
-                if (it.out.size == 0 || it.out[0] != newState) {
-                    setChangePending()
-                    Shell.cmd(switchCommands.joinToString(separator = " && ")).submit()
+                if (it.isSuccess) {
+                    Log.d(TAG, "Read value in $file")
+                    // Only compare and write if the read was successful
+                    if (it.out.isEmpty() || it.out[0] != newState) {
+                        Shell.cmd(switchCommands.joinToString(separator = " && ")).submit { result ->
+                            if (result.isSuccess) {
+                                Log.d(TAG, "Set value in $file to $newState")
+                            }
+                            else {
+                                Log.e(TAG, "Failed to to write value $newState to $file (exit=${it.code}). Hint: If running on emulator, use: adb shell dumpsys battery set status ...")
+                            }
+                        }
+                    }
+                } else {
+                    Log.e(TAG, "Failed to read value from $file (exit=${it.code}). Hint: If running on emulator: file may not exist")
                 }
             }
         }
@@ -149,7 +177,7 @@ object Utils {
         startServiceIfLimitEnabled(context)
     }
 
-    fun getPluggedPowerSource(context: Context): String {
+    fun getPowerSource(context: Context): String {
         val intent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         val plugged = intent?.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) ?: -1
         return when (plugged) {
@@ -217,7 +245,7 @@ object Utils {
         val batteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
         val batteryTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
         val rawAverageCurrent = getAverageCurrent(context)
-        val powerSource = getPluggedPowerSource(context)
+        val powerSource = getPowerSource(context)
         val voltageStr = if (batteryVoltage != -1) String.format(Locale.ROOT, "%.3f", batteryVoltage.toFloat() / 1000f) else NOT_AVAILABLE
         val currentStr = if (rawAverageCurrent != Int.MIN_VALUE && rawAverageCurrent != 0) (rawAverageCurrent / 1000).toString() else NOT_AVAILABLE
         val temperatureStr = if (batteryTemperature != -1) {
@@ -246,28 +274,14 @@ object Utils {
 
     //    @SuppressLint("PrivateApi")
     fun resetBatteryStats(context: Context) {
-//        try {
-//            // new technique for PureNexus-powered devices
-//            val helperClass = Class.forName("com.android.internal.os.BatteryStatsHelper")
-//            val constructor = helperClass.getConstructor(Context::class.java,
-//                    Boolean::class.javaPrimitiveType, Boolean::class.javaPrimitiveType)
-//            val instance = constructor.newInstance(context, false, false)
-//            val createMethod = helperClass.getMethod("create", Bundle::class.javaPrimitiveType)
-//            createMethod.invoke(instance, null)
-//            val resetMethod = helperClass.getMethod("resetStatistics")
-//            resetMethod.invoke(instance)
-//            Toast.makeText(context, R.string.stats_reset_success, Toast.LENGTH_SHORT).show()
-//        } catch (e: Exception) {
-//            Log.i("New reset method failed", e.message, e)
-        // On Exception, fall back to conventional method
         Shell.cmd("dumpsys batterystats --reset").submit {
             if (it.isSuccess) {
+                Log.d(TAG, "Reset battery statistics")
                 Toast.makeText(context, R.string.stats_reset_success, Toast.LENGTH_SHORT).show()
             } else {
-                Log.e(TAG, "Statistics reset failed")
+                Log.e(TAG, "Reset of battery statistics failed")
             }
         }
-//        }
     }
 
     fun setLimit(limit: Int, settings: SharedPreferences) {
@@ -280,6 +294,7 @@ object Utils {
     }
 
     fun handleLimitChange(context: Context, newLimit: Any?) {
+        Log.d(TAG, "User has changed limit: $newLimit")
         try {
             if (newLimit == null) {
                 throw NumberFormatException("null")
@@ -315,11 +330,27 @@ object Utils {
     }
 
     fun startServiceIfLimitEnabled(context: Context) {
-        if (!getSettings(context).getBoolean(CHARGE_LIMIT_ENABLED, false)) {
+        val settings = getSettings(context)
+        if (!settings.getBoolean(CHARGE_LIMIT_ENABLED, false)) {
             return
         }
-        if (getPrefs(context).getBoolean(PrefsFragment.KEY_DISABLE_AUTO_RECHARGE, false)) {
-            changeState(context, CHARGE_ON)
+
+        // Proactively assess the state and set a cooldown timer to avoid race conditions
+        // with the transitional "Charging" status reported by the system on plug-in.
+        val batteryIntent = context.applicationContext.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        if (batteryIntent != null) {
+            val level = getBatteryLevel(batteryIntent)
+            val limit = settings.getInt(LIMIT, 80)
+            if (level < limit) {
+                Log.d(TAG, "Start charging, since target not reached: Level=$level Target=$limit")
+                changeState(context, ChargeMode.ON)
+            } else {
+                // If we are already over the limit, force the OFF state immediately.
+                // This calls setChangePending(), which tells BatteryReceiver to ignore
+                // the initial (and possibly "Charging") intent from the system.
+                Log.d(TAG, "Stop charging, since target reached or passed: Level=$level Target=$limit")
+                changeState(context, ChargeMode.OFF)
+            }
         }
         Handler(Looper.getMainLooper()).postDelayed({
             ContextCompat.startForegroundService(context, Intent(context, ForegroundService::class.java))
@@ -339,13 +370,14 @@ object Utils {
     }
 
     fun stopService(context: Context, ignoreAutoReset: Boolean = true) {
+        Log.d(TAG, "Stopping service")
         val wasServiceRunning = ForegroundService.isRunning
         if (ignoreAutoReset) {
             ForegroundService.ignoreAutoReset()
         }
         context.stopService(Intent(context, ForegroundService::class.java))
         if (!getPrefs(context).getBoolean(PrefsFragment.KEY_DISABLE_AUTO_RECHARGE, false)) {
-            changeState(context, CHARGE_ON)
+            changeState(context, ChargeMode.ON)
         }
         // display service disabled Toast message if not disabled in settings
         if (wasServiceRunning && !getPrefs(context).getBoolean("hide_toast_on_service_changes", false)) {
@@ -468,5 +500,17 @@ object Utils {
             Shell.getShell().isRoot
         else
             true
+    }
+
+    fun getBatteryStatusText(batteryStatus: Int): String {
+        val batteryStatusText = when (batteryStatus) {
+            BatteryManager.BATTERY_STATUS_UNKNOWN -> "Unknown"
+            BatteryManager.BATTERY_STATUS_CHARGING -> "Charging"
+            BatteryManager.BATTERY_STATUS_DISCHARGING -> "Discharging"
+            BatteryManager.BATTERY_STATUS_NOT_CHARGING -> "Not charging"
+            BatteryManager.BATTERY_STATUS_FULL -> "Full"
+            else -> "Unknown"
+        }
+        return batteryStatusText
     }
 }

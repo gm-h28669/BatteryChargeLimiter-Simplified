@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.preference.PreferenceManager
+import io.github.muntashirakon.bcl.ChargeMode
 import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.Constants.CHARGING_CHANGE_TOLERANCE_MS
 import io.github.muntashirakon.bcl.Constants.LIMIT
@@ -20,7 +21,6 @@ import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 
-
 /**
  * Created by Michael on 01.04.2017.
  *
@@ -28,9 +28,16 @@ import io.github.muntashirakon.bcl.settings.PrefsFragment
  */
 class BatteryReceiver(private val service: ForegroundService) : BroadcastReceiver() {
 
+    enum class ReceiverState {
+        INITIAL,
+        INITIAL_CHARGING,
+        STOPPED_AT_LIMIT,
+        MAINTENANCE_CHARGING
+    }
+
     private var chargedToLimit = false
     private var useFahrenheit = false
-    private var lastState = -1
+    private var lastState = ReceiverState.INITIAL
     private var limitPercentage: Int = 0
     private var rechargePercentage: Int = 0
     private val prefs = Utils.getPrefs(service.baseContext)
@@ -39,6 +46,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
     private var useNotificationSound = prefs.getBoolean(PrefsFragment.KEY_NOTIFICATION_SOUND, false)
 
     init {
+        Log.d(TAG, "${TAG} Started")
         preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
             when (key) {
                 PrefsFragment.KEY_TEMP_FAHRENHEIT -> {
@@ -66,8 +74,9 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
     }
 
     private fun reset(settings: SharedPreferences) {
+        Log.d(TAG, "Reset to initial values")
         chargedToLimit = false
-        lastState = -1
+        lastState = ReceiverState.INITIAL
         backOffTime = CHARGING_CHANGE_TOLERANCE_MS
         limitPercentage = settings.getInt(LIMIT, Constants.DEFAULT_LIMIT_PC)
         rechargePercentage = settings.getInt(MIN, Constants.DEFAULT_MIN_PC)
@@ -81,10 +90,13 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
      * @param newState the new state
      * @return whether the state has changed
      */
-    private fun switchState(newState: Int): Boolean {
-        val oldState = lastState
-        lastState = newState
-        return oldState != newState
+    private fun switchState(newState: ReceiverState): Boolean {
+        val stateHasChanged = lastState != newState
+        if (stateHasChanged) {
+            Log.d(TAG, "State changed from ${lastState.name} to ${newState.name}")
+            lastState = newState
+        }
+        return stateHasChanged
     }
 
     /**
@@ -97,6 +109,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         handler.postDelayed({
             // continue only if the state didn't change in the meantime
             if (triggerState == lastState && !Utils.isDevicePluggedIn(service)) {
+                Log.d(TAG, "Stopping service, since power supply not plugged in")
                 Utils.stopService(service, false)
             }
         }, POWER_CHANGE_TOLERANCE_MS)
@@ -109,32 +122,35 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         }
 
         val batteryLevel = Utils.getBatteryLevel(intent)
-        val currentStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+        val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+        val pluggedIn = if (Utils.isDevicePluggedIn(context)) { "Yes" } else { "No"}
+        Log.d(TAG, "State: $lastState.name Battery: Level=$batteryLevel Status=${Utils.getBatteryStatusText(batteryStatus)} PluggedIn=$pluggedIn Source=${Utils.getPowerSource(context)}")
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val showTempInNotif = preferences.getBoolean("temp_in_notif", false)
+        val showBatteryInfoInNotif = preferences.getBoolean("temp_in_notif", false)
 
-        if (!showTempInNotif) {
-            service.setNotificationContentText(service.getString(R.string.waiting_description))
-        } else {
+        if (showBatteryInfoInNotif) {
             Utils.getBatteryInfoAsync(service, intent, useFahrenheit) { info ->
                 service.setNotificationContentText(info)
                 service.updateNotification()
             }
+        } else {
+            service.setNotificationContentText(service.getString(R.string.waiting_description))
         }
         // when the service was "freshly started", charge until limit
         if (!chargedToLimit && batteryLevel < limitPercentage) {
-            if (switchState(CHARGE_FULL)) {
-                Log.d("Charging State", "CHARGE_FULL " + this.hashCode())
-                Utils.changeState(service, Utils.CHARGE_ON)
+            if (switchState(ReceiverState.INITIAL_CHARGING)) {
+                Log.d(TAG, "Started initial charging. New State: ${ReceiverState.INITIAL_CHARGING.name} Level=$batteryLevel")
+                Utils.changeState(service, ChargeMode.ON)
                 service.setNotificationTitle(service.getString(R.string.waiting_until_x, limitPercentage))
                 service.setNotificationIcon(NOTIF_CHARGE)
                 service.setNotificationActionText(service.getString(R.string.disable_temporarily))
                 stopIfUnplugged()
             }
         } else if (batteryLevel >= limitPercentage) {
-            if (switchState(CHARGE_STOP)) {
-                Log.d("Charging State", "CHARGE_STOP " + this.hashCode())
+            if (switchState(ReceiverState.STOPPED_AT_LIMIT)) {
+                Log.d(TAG, "Initial charging completed. New State: ${ReceiverState.STOPPED_AT_LIMIT.name} Level=$batteryLevel")
+
                 // play sound only the first time when the limit was reached
                 if (useNotificationSound && !chargedToLimit) {
                     service.setNotificationSound()
@@ -143,7 +159,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
                 chargedToLimit = true
                 // active auto reset on service shutdown
                 service.enableAutoReset()
-                Utils.changeState(service, Utils.CHARGE_OFF)
+                Utils.changeState(service, ChargeMode.OFF)
 
                 if (preferences.getBoolean(PrefsFragment.KEY_DISABLE_AUTO_RECHARGE, false)) {
                     Utils.stopService(service, false)
@@ -155,30 +171,37 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
                 )
                 service.setNotificationIcon(NOTIF_MAINTAIN)
                 service.setNotificationActionText(service.getString(R.string.dismiss))
-            } else if (currentStatus == BatteryManager.BATTERY_STATUS_CHARGING
-                && prefs.getBoolean(PrefsFragment.KEY_ENFORCE_CHARGE_LIMIT, true)
-            ) {
-                //Double the back off time with every unsuccessful round up to MAX_BACK_OFF_TIME
+            } else if (batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING
+                && prefs.getBoolean(PrefsFragment.KEY_ENFORCE_CHARGE_LIMIT, true)) {
+
+                // If we are slightly above the limit, don't "cycle" (pulse ON) the state. Just try to force it OFF again
+                // silently. This prevents the "Pulse to 1" bug when plugging in while already above the limit.
+                if (batteryLevel > limitPercentage + 1) {
+                    Log.d(TAG, "Charging and slightly above upper limit. Stop charging: State=${lastState.name} Level=$batteryLevel")
+                    Utils.changeState(service, ChargeMode.OFF)
+                    backOffTime = CHARGING_CHANGE_TOLERANCE_MS
+                    return
+                }
+
+                // Double the back off time with every unsuccessful round up to MAX_BACK_OFF_TIME
                 backOffTime = (backOffTime * 2).coerceAtMost(MAX_BACK_OFF_TIME)
-                Log.d(
-                    "Charging State",
-                    "Fixing state w. CHARGE_ON/CHARGE_OFF " + this.hashCode() + " (Delay: $backOffTime)"
-                )
+                Log.d(TAG, "Currently charging and significantly above upper limit. Pulse charge on/off: State=${lastState.name} Level=$batteryLevel Delay: $backOffTime")
+
                 // if the device did not stop charging, try to "cycle" the state to fix this
-                Utils.changeState(service, Utils.CHARGE_ON)
+                Utils.changeState(service, ChargeMode.ON)
                 // schedule the charging stop command to be executed after CHARGING_CHANGE_TOLERANCE_MS
                 val service = this.service
-                handler.postDelayed({ Utils.changeState(service, Utils.CHARGE_OFF) }, backOffTime)
+                handler.postDelayed({ Utils.changeState(service, ChargeMode.OFF) }, backOffTime)
             } else {
                 backOffTime = CHARGING_CHANGE_TOLERANCE_MS
             }
         } else if (batteryLevel < rechargePercentage) {
-            if (switchState(CHARGE_REFRESH)) {
-                Log.d("Charging State", "CHARGE_REFRESH " + this.hashCode())
+            if (switchState(ReceiverState.MAINTENANCE_CHARGING)) {
+                Log.d(TAG, "Staring maintenance charging. New State: ${lastState.name} Level=$batteryLevel")
                 service.setNotificationIcon(NOTIF_CHARGE)
                 service.setNotificationTitle(service.getString(R.string.waiting_until_x, limitPercentage))
                 service.setNotificationActionText(service.getString(R.string.disable_temporarily))
-                Utils.changeState(service, Utils.CHARGE_ON)
+                Utils.changeState(service, ChargeMode.ON)
                 stopIfUnplugged()
             }
         }
@@ -186,10 +209,10 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         // update battery status information and rebuild notification
         // service.setNotificationContentText(Utils.getBatteryInfo(service, intent, useFahrenheit))
         service.updateNotification()
-        service.removeNotificationSound()
     }
 
     fun detach(context: Context) {
+        Log.d(TAG, "${TAG} Receiver detached")
         // unregister the listener that listens for relevant change events
         prefs.unregisterOnSharedPreferenceChangeListener(this.preferenceChangeListener)
         Utils.getSettings(context)
@@ -200,12 +223,8 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
     }
 
     companion object {
-        private const val CHARGE_FULL = 0
-        private const val CHARGE_STOP = 1
-        private const val CHARGE_REFRESH = 2
-
+        private val TAG = BatteryReceiver::class.java.simpleName
         private val handler = Handler(Looper.getMainLooper())
         internal var backOffTime = CHARGING_CHANGE_TOLERANCE_MS
     }
-
 }

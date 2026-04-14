@@ -7,7 +7,6 @@ import android.os.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -36,6 +35,34 @@ class MainFragment: Fragment() {
         if (granted) {
             Utils.startServiceIfLimitEnabled(requireContext())
         } else requireActivity().finishAndRemoveTask()
+    }
+
+    // Debounce mechanism to prevent frequent service updates and disk writes while sliders are being dragged.
+    private val serviceUpdateHandler = Handler(Looper.getMainLooper())
+    private val serviceUpdateRunnable = Runnable {
+        if (isAdded) {
+            val max = maxSlider?.value?.toInt() ?: Constants.DEFAULT_LIMIT_PC
+            val min = minSlider?.value?.toInt() ?: Constants.DEFAULT_MIN_PC
+
+            // Save the settled values to disk once
+            settings?.edit()?.apply {
+                putInt(Constants.LIMIT, max)
+                putInt(Constants.MIN, min)
+                apply()
+            }
+
+            // Notify the service to re-evaluate hardware state
+            Utils.startServiceIfLimitEnabled(requireContext())
+        }
+    }
+
+    /**
+     * Schedules a service update to run after a 1000ms delay.
+     * If called again before the delay expires, the previous request is canceled and the timer resets.
+     */
+    private fun triggerDebouncedServiceUpdate() {
+        serviceUpdateHandler.removeCallbacks(serviceUpdateRunnable)
+        serviceUpdateHandler.postDelayed(serviceUpdateRunnable, 1000)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -74,36 +101,37 @@ class MainFragment: Fragment() {
         maxSlider?.addOnChangeListener { _, value, fromUser ->
             if (!fromUser) return@addOnChangeListener
             val max = value.toInt()
-            Utils.setLimit(max, settings!!)
             maxText?.text = getString(R.string.limit, max)
             
-            // Sync UI for min slider if it was pushed down by Utils.setLimit
-            val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC) ?: Constants.DEFAULT_MIN_PC
-            if (minSlider?.value?.toInt() != min) {
-                minSlider?.value = min.toFloat()
-                updateMinText(min)
+            // UI-only sync for min slider (validation)
+            val min = minSlider?.value?.toInt() ?: Constants.DEFAULT_MIN_PC
+            if (min >= max) {
+                val newMin = (max - 1).coerceAtLeast(0)
+                minSlider?.value = newMin.toFloat()
+                updateMinText(newMin)
             }
 
-            if (!ForegroundService.isRunning) {
-                Utils.startServiceIfLimitEnabled(requireContext())
-            }
+            // Trigger debounced write and service update
+            triggerDebouncedServiceUpdate()
         }
 
         minSlider?.addOnChangeListener { _, value, fromUser ->
             if (!fromUser) return@addOnChangeListener
             val min = value.toInt()
-            val max = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC
+            val max = maxSlider?.value?.toInt() ?: Constants.DEFAULT_LIMIT_PC
             
             if (min >= max) {
                 val newMax = min + 1
-                settings?.edit()?.putInt(Constants.LIMIT, newMax)?.apply()
                 maxSlider?.value = newMax.toFloat()
                 maxText?.text = getString(R.string.limit, newMax)
             }
             
-            settings?.edit()?.putInt(Constants.MIN, min)?.apply()
             updateMinText(min)
+
+            // Trigger debounced write and service update
+            triggerDebouncedServiceUpdate()
         }
+
         resetBatteryStatsButton.setOnClickListener { Utils.resetBatteryStats(requireContext()) }
 //        autoResetSwitch.setOnCheckedChangeListener { _, isChecked ->
 //            settings.edit().putBoolean(AUTO_RESET_STATS, isChecked).apply() }
@@ -133,6 +161,7 @@ class MainFragment: Fragment() {
     }
 
     override fun onDestroy() {
+        serviceUpdateHandler.removeCallbacks(serviceUpdateRunnable)
         prefs?.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
         super.onDestroy()
     }
@@ -153,11 +182,11 @@ class MainFragment: Fragment() {
             }
             R.id.disable_charge_switch -> {
                 if (isChecked) {
-                    Utils.changeState(requireContext(), Utils.CHARGE_OFF)
+                    Utils.changeState(requireContext(), ChargeMode.OFF)
                     settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, true)?.apply()
                     disableSwitches(listOf(enableSwitch))
                 } else {
-                    Utils.changeState(requireContext(), Utils.CHARGE_ON)
+                    Utils.changeState(requireContext(), ChargeMode.ON)
                     settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, false)?.apply()
                     enableSwitches(listOf(enableSwitch))
                 }
@@ -170,10 +199,10 @@ class MainFragment: Fragment() {
         private var previousStatus = BatteryManager.BATTERY_STATUS_UNKNOWN
 
         override fun onReceive(context: Context, intent: Intent) {
-            val currentStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
-            if (currentStatus != previousStatus) {
-                previousStatus = currentStatus
-                when (currentStatus) {
+            val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+            if (batteryStatus != previousStatus) {
+                previousStatus = batteryStatus
+                when (batteryStatus) {
                     BatteryManager.BATTERY_STATUS_CHARGING -> {
                         statusText?.setText(R.string.charging)
                         val green = ContextCompat.getColor(context, R.color.darkGreen)
@@ -228,12 +257,12 @@ class MainFragment: Fragment() {
         }
     }
 
-    private fun hideKeybord() {
-        val inputManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (inputManager.isAcceptingText) {
-            inputManager.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
-        }
-    }
+//    private fun hideKeybord() {
+//        val inputManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        if (inputManager.isAcceptingText) {
+//            inputManager.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
+//        }
+//    }
 
     private fun disableSwitches(switches: List<SwitchMaterial?>) {
         for (switch in switches) {

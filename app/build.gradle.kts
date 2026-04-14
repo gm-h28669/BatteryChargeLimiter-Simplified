@@ -9,7 +9,7 @@ android {
         applicationId = "io.github.muntashirakon.bcl"
         minSdk = 21
         targetSdk = 34
-        versionCode = 31
+        versionCode = 32
         versionName = "1.4.0"
     }
 
@@ -64,11 +64,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
 
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-        }
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
 

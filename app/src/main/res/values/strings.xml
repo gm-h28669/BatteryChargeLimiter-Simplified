@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_settings">Settings</string>
-    <string name="source_code_title">Source Code</string>
+    <string name="source_code_title">Source code</string>
     <string name="fgs_special_use_subtype" translatable="false">Battery management and charge limiting</string>
     <string name="source_code" translatable="false"><a href="https://github.com/sriharshaarangi/BatteryChargeLimit">Source Code</a></string>
-    <string name="xda_thread" translatable="false"><a href="https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/">XDA Thread</a></string>
+    <string name="xda_thread" translatable="false"><a href="https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/">XDA thread</a></string>
     <string name="about">About</string>
     <string name="disable_charge_now">Pause charging</string>
     <string name="enable">Enable charge limit</string>
@@ -17,24 +17,20 @@
     <string name="experimental">EXPERIMENTAL</string>
     <string name="issues">KNOWN ISSUES</string>
     <string name="auto_reset_stats">Automatically reset battery stats</string>
-    <string name="reset_stats">Reset Battery Stats</string>
+    <string name="reset_stats">Reset battery stats</string>
     <string name="disable">Disable</string>
     <string name="disable_temporarily">Disable temporarily</string>
     <string name="dismiss">Dismiss</string>
-    <string name="open_app">Open App</string>
+    <string name="open_app">Open app</string>
     <string name="file_data">Control file not selected. Please select one in Settings.</string>
-
-    <string name="previously_started">Previously Started</string>
     <string name="device_not_supported">Your device is not supported (yet)!</string>
     <string name="ok">OK</string>
     <string name="no_recharge">No automatic recharge</string>
-
     <string name="charging">CHARGING</string>
     <string name="discharging">DISCHARGING</string>
     <string name="full">FULL</string>
     <string name="not_charging">NOT CHARGING</string>
     <string name="unknown">UNKNOWN</string>
-
     <string name="please_wait">Please wait…</string>
     <string name="maintaining_x_to_y">Maintaining from %1$d%% - %2$d%%</string>
     <string name="maintaining_description">If device becomes unplugged, disable service</string>
@@ -42,59 +38,51 @@
     <string name="waiting_description">Battery will stop charging once limit is reached</string>
     <string name="battery_info_C" translatable="false">U: %1$s V, I: %2$s mA, T: %3$s &#8451;, %4$s</string>
     <string name="battery_info_F" translatable="false">U: %1$s V, I: %2$s mA, T: %3$s &#8457;, %4$s</string>
-
     <string name="root_denied">App is denied ROOT access or device is not rooted!</string>
-    <string name="stats_reset_success">Battery Stats reset successful</string>
-
-    <string name="intent_handle_activity">Battery Charge Limit Handling Activity</string>
+    <string name="stats_reset_success">Battery stats reset successful</string>
+    <string name="intent_handle_activity">Battery charge limit handling activity</string>
     <string name="intent_invalid">The supplied intent was invalid.</string>
     <string name="intent_limit_invalid">The supplied limit was invalid.</string>
     <string name="intent_limit_accepted">The battery charging limit was changed to %1$d%%.</string>
     <string name="mime_battery_limit" translatable="false">text/x-battery-limit</string>
-
-    <string name="service_enabled"> Battery Limit Service Enabled! </string>
-    <string name="service_disabled"> Battery Limit Service Disabled! </string>
-
-    <string name="main_settings">Main Settings</string>
-    <string name="set_control_file">Set Control File</string>
-    <string name="select_control_file">Select Control File</string>
-    <string name="show_temperature_fahrenheit">Show Temperature in &#8457;</string>
+    <string name="service_enabled"> Battery limit service enabled! </string>
+    <string name="service_disabled"> Battery limit service disabled! </string>
+    <string name="main_settings">Main settings</string>
+    <string name="set_control_file">Set control file</string>
+    <string name="select_control_file">Select control file</string>
+    <string name="show_temperature_fahrenheit">Show temperature in &#8457;</string>
     <string name="show_battery_info_in_notification">Show battery info in notification</string>
-    <string name="enforce_charge_limit">Enforce Charge Limit</string>
+    <string name="enforce_charge_limit">Enforce charge limit</string>
     <string name="enforce_charge_limit_desc">Attempt to force the device to recognize changes to the control file by toggling its state with an increasing delay</string>
-    <string name="always_write_cf">Always Write CTRL File</string>
+    <string name="always_write_cf">Always write CTRL file</string>
     <string name="always_write_cf_desc">Always overwrite the control file blindly, even if it already contains the new content</string>
-
-    <string name="advanced_settings">Advanced Settings</string>
-    <string name="immediate_power_intent_handling">Always Handle Power Events</string>
+    <string name="advanced_settings">Advanced settings</string>
+    <string name="immediate_power_intent_handling">Always handle power events</string>
     <string name="immediate_power_intent_handling_desc">Power changes will be recognized immediately, even directly after control file changes.\nUse only for supported control files like battery_charging_enabled or store_mode!</string>
     <string name="disable_auto_recharge"> Disable auto recharge</string>
     <string name="disable_auto_recharge_desc">Experimental: Enabling this option also hides notification after limit reached. Important: Disable this option before uninstalling or reboot after uninstalling</string>
-
-    <string name="hide_toast_on_service_change">Hide Toast on Service Changes</string>
-
-    <string name="control_file_settings">Control File Data</string>
-    <string name="current_ctrl_data_title">Configured File Data</string>
-    <string name="control_file_option_summary_on">User specified CTRL file data being utilized</string>
-    <string name="control_file_option_summary_off">Pre-defined CTRL file being utilized</string>
+    <string name="hide_toast_on_service_change">Hide toast on service changes</string>
+    <string name="control_file_settings">Control file data</string>
+    <string name="current_ctrl_data_title">Configured file data</string>
+    <string name="control_file_option_summary_on">Use user specified control file</string>
+    <string name="control_file_option_summary_off">Use control file from list of pre-configured control files</string>
     <string name="control_file_alert_title">Advanced Users Only!</string>
     <string name="control_file_alert_desc">WARNING: Tampering with this section without knowledge of what you are changing may cause problems to your device that are unforeseen. Rebooting the device usually fixes a lot of issues, however, some may not be as easily fixed. PROCEED WITH CAUTION!</string>
     <string name="control_understand">I understand</string>
-    <string name="control_file_heads_up_title">Control File Information</string>
+    <string name="control_file_heads_up_title">Control file information</string>
     <string name="control_file_heads_up_desc">Only control files detected on your device will show up as available. If a control file is detected, but for another device, it should be safe to use. Open an issue or send a pull request on GitHub for your device with the control file data to be added to this list.</string>
-
-    <string name="custom_ctrl_file_data_title">Configurable CTRL File Data</string>
-    <string name="custom_ctrl_file_data_setup_title">Configure Control Data</string>
-    <string name="custom_ctrl_file_path_title">Set Path to Desired File</string>
+    <string name="custom_ctrl_file_data_title">Configurable CTRL file data</string>
+    <string name="custom_ctrl_file_data_setup_title">Configure control data</string>
+    <string name="custom_ctrl_file_path_title">Set path to desired file</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/desired_file</string>
-    <string name="custom_ctrl_file_enabled_title">Set Enabled Value</string>
+    <string name="custom_ctrl_file_enabled_title">Set enabled value</string>
     <string name="custom_ctrl_file_enabled_hint">1, enabled, desired_value</string>
-    <string name="custom_ctrl_file_disabled_title">Set Disabled Value</string>
+    <string name="custom_ctrl_file_disabled_title">Set disabled value</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, desired_value</string>
     <string name="custom_ctrl_file_updated_info">Updated data will appear here once you update the information</string>
+    <string name="custom_ctrl_file_info_format">Path Data: %1$s\nEnable Value: %2$s\nDisabled Value: %3$s</string>
     <string name="custom_ctrl_file_heads_up">If you experience issues with app crashes or the service not working properly, try enabling Always Write CTRL File in settings. There is NO guarantee that this configurable control file function will support all devices and files/values. Try adjusting the settings if issues occur or ensure the data is correct.</string>
-    <string name="custom_ctrl_file_update_data">Update CTRL File Data</string>
-
+    <string name="custom_ctrl_file_update_data">Update CTRL file data</string>
     <string name="theme">Theme</string>
     <string name="light">Light</string>
     <string name="dark">Dark</string>

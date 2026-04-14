@@ -20,18 +20,14 @@
     <string name="dismiss">رفض</string>
     <string name="open_app">افتح التطبيق</string>
     <string name="file_data">لم يتم اختيار ملف التحكم. يرجى اختيار واحد في الإعدادات.</string>
-
-    <string name="previously_started">تم البدأ مسبقا</string>
     <string name="device_not_supported">جهازك غير مدعوم (حتى الآن)!</string>
     <string name="ok">حسنا</string>
     <string name="no_recharge">لا إعادة شحن تلقائية</string>
-
     <string name="charging">جاري الشحن</string>
     <string name="discharging">جاري التفريغ</string>
     <string name="full">ممتلئ</string>
     <string name="not_charging">لا يقوم بالشحن</string>
     <string name="unknown">غير معروف</string>
-
     <string name="please_wait">يرجى الانتظار…</string>
     <string name="maintaining_x_to_y">الحفاظ من %1$d%% - %2$d%%</string>
     <string name="maintaining_description">إذا تم فصل الجهاز، فقم بتعطيل الخدمة</string>
@@ -39,15 +35,12 @@
     <string name="waiting_description">ستتوقف البطارية عن الشحن بمجرد الوصول إلى الحد الأقصى</string>
     <string name="root_denied">تم رفض التطبيق من الحصول على صلاحيات ROOT أو أن جهازك لا يدعم الروت!</string>
     <string name="stats_reset_success">تم إعادة تعيين إحصائيات البطارية بنجاح</string>
-
     <string name="intent_handle_activity">نشاط معالجة حد شحن البطارية</string>
     <string name="intent_invalid">الهدف الذي تم تزويده غير صالح.</string>
     <string name="intent_limit_invalid">الحد الذي تم توفيره غير صالح.</string>
     <string name="intent_limit_accepted">تم تغيير حد شحن البطارية إلى %1$d%%.</string>
-    
     <string name="service_enabled"> تم تفعيل خدمة حد البطارية! </string>
     <string name="service_disabled"> تم تعطيل خدمة حد البطارية! </string>
-
     <string name="main_settings">الإعدادات الرئيسية</string>
     <string name="set_control_file">تعيين ملف التحكم</string>
     <string name="select_control_file">حدد ملف التحكم</string>
@@ -57,25 +50,21 @@
     <string name="enforce_charge_limit_desc">محاولة إجبار الجهاز للتعرف على التغييرات في ملف التحكم عن طريق تبديل حالته مع تأخير متزايد</string>
     <string name="always_write_cf">الكتابة دائما على ملف CTRL</string>
     <string name="always_write_cf_desc">قم دائمًا بالكتابة فوق ملف التحكم بشكل أعمى، حتى إذا كان يحتوي بالفعل على المحتوى الجديد</string>
-
     <string name="advanced_settings">إعدادات متقدمة</string>
     <string name="immediate_power_intent_handling">التعامل مع أحداث الطاقة دائما</string>
     <string name="immediate_power_intent_handling_desc">سيتم التعرف على تغييرات الطاقة فورًا، حتى بعد تغييرات ملف التحكم مباشرةً.\n استخدم فقط لملفات التحكم المدعومة مثل battery_charging_enabled أو store_mode!</string>
     <string name="disable_auto_recharge"> تعطيل إعادة الشحن التلقائي</string>
     <string name="disable_auto_recharge_desc">تجريبي: تمكين هذا الخيار يخفي أيضا الإشعارات بعد الوصول الى الحد. هام: قم بتعطيل هذا الخيار قبل إلغاء التثبيت أو قم بإعادة التشغيل بعد إلغاء التثبيت</string>
-
     <string name="hide_toast_on_service_change">إخفاء الإشعارات عن تغييرات الخدمة</string>
-
     <string name="control_file_settings">بيانات ملف التحكم</string>
     <string name="current_ctrl_data_title">إعداد ملف البيانات</string>
-    <string name="control_file_option_summary_on">المستخدم يحدد بيانات ملف CTRL التي يجري استخدامها</string>
-    <string name="control_file_option_summary_off">ملف CTRL المحدد مسبقًا قيد الاستخدام</string>
+    <string name="control_file_option_summary_on">استخدم ملف التحكم المحدد من قبل المستخدم</string>
+    <string name="control_file_option_summary_off">استخدم ملف التحكم من قائمة ملفات التحكم المكونة مسبقًا</string>
     <string name="control_file_alert_title">المستخدمين المتقدمين فقط!</string>
     <string name="control_file_alert_desc">تحذير: قد يؤدي العبث بهذا الجزء بدون معرفة ما تقوم بتغييره إلى حدوث مشاكل غير متوقعة في جهازك. إعادة تشغيل الجهاز يؤدي عادةً إلى إصلاح الكثير من المشكلات، ومع ذلك، بعض المشاكل قد لا يتم إصلاحها  بسهولة. تابع بحذر!</string>
     <string name="control_understand">انا اتفهم</string>
     <string name="control_file_heads_up_title">معلومات ملف التحكم</string>
     <string name="control_file_heads_up_desc">ستظهر فقط ملفات التحكم التي تم اكتشافها على جهازك عند توفرها. إذا تم اكتشاف ملف تحكم، ولكنه لجهاز آخر، يجب أن يكون آمنًا للاستخدام. افتح قضية أو أرسل طلب سحب على الجيتهوب من أجل جهازك مع بيانات ملف التحكم ليتم إضافته الى هذه القائمة.</string>
-
     <string name="custom_ctrl_file_data_title">بيانات ملف CTRL قابل للإعداد</string>
     <string name="custom_ctrl_file_data_setup_title">إعداد بيانات التحكم</string>
     <string name="custom_ctrl_file_path_title">تعيين المسار إلى الملف المرغوب</string>
@@ -85,9 +74,9 @@
     <string name="custom_ctrl_file_disabled_title">تعيين قيمة التعطيل</string>
     <string name="custom_ctrl_file_disabled_hint">0، تعطيل، القيمة_المرغوبة</string>
     <string name="custom_ctrl_file_updated_info">سوف تظهر البيانات المحدثة هنا بمجرد أن تقوم بتحديث المعلومات</string>
+    <string name="custom_ctrl_file_info_format">مسار البيانات: %1$s\nقيمة التمكين: %2$s\nقيمة التعطيل: %3$s</string>
     <string name="custom_ctrl_file_heads_up">إذا كنت تواجه مشكلات مع تعطل التطبيق أو أن الخدمة لا تعمل بشكل صحيح، حاول تمكين خاصية الكتابة دائما على ملف CTRL في الإعدادات. ليس هناك ما يضمن أن وظيفة ملف التحكم القابلة للتكوين ستدعم جميع الأجهزة والملفات/القيم. حاول ضبط الإعدادات في حالة حدوث مشكلات أو قم بالتأكد من صحة البيانات.</string>
     <string name="custom_ctrl_file_update_data">تحديث بيانات ملف CTRL</string>
-
     <string name="theme">مظهر</string>
     <string name="light">مضيئ</string>
     <string name="dark">داكن</string>

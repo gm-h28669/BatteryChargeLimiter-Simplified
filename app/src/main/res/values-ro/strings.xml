@@ -5,7 +5,7 @@
     <string name="source_code_title">Cod sursă</string>
     <string name="about">Despre</string>
     <string name="disable_charge_now">Întrerupe încărcarea</string>
-    <string name="enable">Activează Battery Charge Limit</string>
+    <string name="enable">Activează limita de încărcare</string>
     <string name="sound_on_limit_reached">Alertă sonoră la atingerea limitei de încărcare</string>
     <string name="limit">Limitează încărcarea la %1$d%%</string>
     <string name="recharge_below">Reîncarcă sub %1$d%%</string>
@@ -20,8 +20,6 @@
     <string name="dismiss">Revocare</string>
     <string name="open_app">Deschide aplicaţia</string>
     <string name="file_data">Fișierul de control nu este selectat. Vă rugăm să selectați unul în Setări.</string>
-
-    <string name="previously_started">Începută anterior</string>
     <string name="device_not_supported">Dispozitivul tău nu este compatibil (încă)!</string>
     <string name="ok">OK</string>
     <string name="no_recharge">Fără reîncarcare automată</string>
@@ -30,7 +28,6 @@
     <string name="full">PLINĂ</string>
     <string name="not_charging">NU SE ÎNCARCĂ</string>
     <string name="unknown">NECUNOSCUT</string>
-
     <string name="please_wait">Te rog aşteaptă…</string>
     <string name="maintaining_x_to_y">Se menţine între %1$d%% - %2$d%%</string>
     <string name="maintaining_description">Dacă dispozitivul este deconectat, dezactivează serviciul</string>
@@ -38,15 +35,12 @@
     <string name="waiting_description">Bateria se va opri din încărcat atunci când limita a fost atinsă</string>
     <string name="root_denied">Aplicaţia nu are acces ROOT sau dispozitivul nu este ROOTAT!</string>
     <string name="stats_reset_success">Statisticile bateriei au fost resetate cu succes</string>
-
     <string name="intent_handle_activity">Battery Charge Limit are grija de activitate</string>
     <string name="intent_invalid">Valoarea aleasă a fost invalidă.</string>
     <string name="intent_limit_invalid">Limita aleasă a fost invalidă.</string>
     <string name="intent_limit_accepted">Limita de încărcare a bateriei a fost schimbată la %1$d%%.</string>
-
     <string name="service_enabled"> Serviciul Battery Limit este activat! </string>
     <string name="service_disabled"> Serviciul Battery Limit este dezactivat! </string>
-
     <string name="main_settings">Setări generale</string>
     <string name="set_control_file">Setează fişierul de control</string>
     <string name="select_control_file">Selectează fişierul de control</string>
@@ -56,25 +50,21 @@
     <string name="enforce_charge_limit_desc">Forţează dispozitivul să recunoască schimbarile făcute fişierului de control prin schimbarea stării cu o viteză crescătoare</string>
     <string name="always_write_cf">Modifică necondiţionat fisierul CTRL</string>
     <string name="always_write_cf_desc">Suprascrie fişierul de control indiferent dacă continutul cel nou este deja prezent</string>
-
     <string name="advanced_settings">Setări avansate</string>
     <string name="immediate_power_intent_handling">Ai grijă mereu de schimbările de curent</string>
     <string name="immediate_power_intent_handling_desc">Schimbările de curent vor fi recunoscute imediat, chiar și direct după ce fişierul de control se schimbă.\nSe foloseşte doar pentru fişierele de control compatibile, ca şi battery_charging_enabled sau store_mode!</string>
     <string name="disable_auto_recharge">Dezactivează reîncărcarea automată</string>
     <string name="disable_auto_recharge_desc">Experimental: activarea acestei opțiuni ascunde, de asemenea, notificarea după atingerea limitei. Important: dezactivați această opțiune înainte de dezinstalare sau reporniți după dezinstalare</string>
-
     <string name="hide_toast_on_service_change">Ascunde Toast în schimbările de serviciu</string>
-
     <string name="control_file_settings">Fişierul de control</string>
     <string name="current_ctrl_data_title">Fişier configurat</string>
-    <string name="control_file_option_summary_on">Se foloseşte fişierul CTRL specificat de utilizator</string>
-    <string name="control_file_option_summary_off">Se foloseşte fişierul CTRL predefinit</string>
+    <string name="control_file_option_summary_on">Utilizați fișierul de control specificat de utilizator</string>
+    <string name="control_file_option_summary_off">Utilizați fișierul de control din lista de fișiere de control preconfigurate</string>
     <string name="control_file_alert_title">Doar pentru utilizatorii avansaţi!</string>
     <string name="control_file_alert_desc">ATENŢIE: Modificarea acestei secţiuni poate cauza probleme neprevăzute. Prin repornirea dispozitivului se repară, de obicei, unele probleme, dar unele pot fi foarte greu de reparat. ATENŢIE MARE!</string>
     <string name="control_understand">Am înţeles</string>
     <string name="control_file_heads_up_title">Informaţii despre fişierul de control</string>
     <string name="control_file_heads_up_desc">Doar fişierele de control detectate în dispozitiv vor fi valabile. Dacă un fişier de control de pe un alt dispozitiv este detectat, poate fi folosit în siguranţă. Acceseaza GitHub si trimite fisierul tau de control ca sa fie adaugat pe lista.</string>
-
     <string name="custom_ctrl_file_data_title">Fişier CTRL configurabil</string>
     <string name="custom_ctrl_file_data_setup_title">Configurează fişierul de control</string>
     <string name="custom_ctrl_file_path_title">Setează calea către fişierul dorit</string>
@@ -84,9 +74,9 @@
     <string name="custom_ctrl_file_disabled_title">Setează valorile de dezactivare</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, valoarea_dorita</string>
     <string name="custom_ctrl_file_updated_info">Datele actualizate vor apărea aici după ce actualizezi informaţiile</string>
+    <string name="custom_ctrl_file_info_format">Calea: %1$s\nValoare Activare: %2$s\nValoare Dezactivare: %3$s</string>
     <string name="custom_ctrl_file_heads_up">Dacă ai probleme cu aplicaţia sau serviciul nu functionează corect, încearcă să activezi \'Modifică necondiţionat fişierul CTRL\' în setări. Nu e garantat că fişierul configurabil de control va fi compatibil cu toate dispozitivele şi cu fişierele/valorile setate. Dacă ai probleme încearcă să ajustezi setările sau verifică dacă datele introduse sunt corecte.</string>
     <string name="custom_ctrl_file_update_data">ACTUALIZEAZĂ FIŞIERUL CTRL</string>
-
     <string name="theme">Temă</string>
     <string name="light">Luminos</string>
     <string name="dark">Întunecat</string>

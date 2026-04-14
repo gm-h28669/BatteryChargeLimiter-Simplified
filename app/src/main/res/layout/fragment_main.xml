@@ -38,21 +38,11 @@
                     android:gravity="center_vertical">
 
                     <TextView
-                        android:id="@+id/status_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="@string/status"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textStyle="bold" />
-
-                    <TextView
                         android:id="@+id/status"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        android:textAppearance="?attr/textAppearanceHeadlineSmall"
                         android:textStyle="bold"
                         tools:text="@string/charging" />
 
@@ -96,6 +86,7 @@
                     android:id="@+id/enable_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:minHeight="56dp"
                     android:paddingHorizontal="16dp"
                     android:text="@string/enable"

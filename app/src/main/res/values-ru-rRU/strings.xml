@@ -4,7 +4,7 @@
     <string name="action_settings">Настройки</string>
     <string name="source_code_title">Исходный код</string>
     <string name="about">О приложении</string>
-    <string name="enable">Активировать Battery Charge Limit</string>
+    <string name="enable">Включить ограничение зарядки</string>
     <string name="sound_on_limit_reached">Звуковой сигнал при достижении лимита зарядки</string>
     <string name="limit">Лимит зарядки до %1$d%%</string>
     <string name="recharge_below">Снова заряжать после достижения %1$d%%</string>
@@ -19,18 +19,14 @@
     <string name="dismiss">Закрыть</string>
     <string name="open_app">Открыть приложение</string>
     <string name="file_data">Управляющий файл не выбран. Пожалуйста, выберите один в Настройках.</string>
-
-    <string name="previously_started">Ранее запущено</string>
     <string name="device_not_supported">Ваше устройство не поддерживается (пока)!</string>
     <string name="ok">ОК</string>
     <string name="no_recharge">Без автоматической подзарядки</string>
-
     <string name="charging">ЗАРЯДКА</string>
     <string name="discharging">РАЗРЯДКА</string>
     <string name="full">ЗАРЯЖЕН</string>
     <string name="not_charging">НЕ ЗАРЯЖАЕТСЯ</string>
     <string name="unknown">НЕИЗВЕСТНО</string>
-
     <string name="please_wait">Пожалуйста, подождите…</string>
     <string name="maintaining_x_to_y">Поддержание заряда с %1$d%% до %2$d%%</string>
     <string name="maintaining_description">Если устройство отключено от сети, отключите сервис.</string>
@@ -38,15 +34,12 @@
     <string name="waiting_description">Аккумулятор перестанет заряжаться после достижения лимита.</string>
     <string name="root_denied">Приложению отказано в ROOT-доступе или устройство не имеет root-прав!</string>
     <string name="stats_reset_success">Статистика аккумулятора успешно сброшена!</string>
-
     <string name="intent_handle_activity">Действие по обработке лимита заряда</string>
     <string name="intent_invalid">Переданное намерение недействительно.</string>
     <string name="intent_limit_invalid">Установленный Вами лимит недействителен.</string>
     <string name="intent_limit_accepted">Лимит заряда аккумулятора изменен на %1$d%%.</string>
-
     <string name="service_enabled">Сервис Battery Limit включен!</string>
     <string name="service_disabled">Сервис Battery Limit отключен!</string>
-
     <string name="main_settings">Основные настройки</string>
     <string name="set_control_file">Задать управляющий файл</string>
     <string name="select_control_file">Выберите управляющий файл</string>
@@ -56,25 +49,21 @@
     <string name="enforce_charge_limit_desc">Попытка заставить устройство распознавать изменения в управляющем файле, переключая его состояние с увеличением задержки.</string>
     <string name="always_write_cf">Всегда писать управляющий файл</string>
     <string name="always_write_cf_desc">Всегда перезаписывать управляющий файл, даже если он уже содержит новый контент.</string>
-
     <string name="advanced_settings">Расширенные настройки</string>
     <string name="immediate_power_intent_handling">Всегда обрабатывать события питания</string>
     <string name="immediate_power_intent_handling_desc">Изменения питания будут распознаны немедленно, даже сразу после изменения управляющего файла. Используйте только для поддерживаемых управляющих файлов, таких как battery_charging_enabled или store_mode!</string>
     <string name="disable_auto_recharge">Отключить автоподзарядку</string>
     <string name="disable_auto_recharge_desc">Экспериментально: включение этой опции также скрывает уведомление после достижения лимита. Важно: отключите эту опцию перед удалением или перезагрузитесь после удаления.</string>
-
     <string name="hide_toast_on_service_change">Скрыть уведомления при изменении сервиса</string>
-
     <string name="control_file_settings">Данные управляющего файла</string>
     <string name="current_ctrl_data_title">Настроенные данные файла</string>
-    <string name="control_file_option_summary_on">Используются данные управляющего файла, указанные пользователем</string>
-    <string name="control_file_option_summary_off">Используется предопределенный файл управления</string>
+    <string name="control_file_option_summary_on">Использовать указанный пользователем файл управления</string>
+    <string name="control_file_option_summary_off">Использовать файл управления из списка предварительно настроенных файлов</string>
     <string name="control_file_alert_title">Только для опытных пользователей!</string>
     <string name="control_file_alert_desc">ПРЕДУПРЕЖДЕНИЕ: Изменение этого раздела без понимания того, что вы меняете, может привести к непредвиденным проблемам с вашим устройством. Перезагрузка устройства обычно решает многие проблемы, однако некоторые могут быть не так легко исправимы. ДЕЙСТВУЙТЕ С ОСТОРОЖНОСТЬЮ!</string>
     <string name="control_understand">Я понимаю</string>
     <string name="control_file_heads_up_title">Информация об управляющем файле</string>
     <string name="control_file_heads_up_desc">Отображаются только те файлы управления, которые были обнаружены на Вашем устройстве. Если управляющий файл обнаружен, но предназначен для другого устройства, его использование должно быть безопасным. Откройте issue или отправьте pull-запрос на GitHub для вашего устройства с данными управляющего файла, чтобы добавить его в этот список.</string>
-
     <string name="custom_ctrl_file_data_title">Настраиваемые данные управляющего файла</string>
     <string name="custom_ctrl_file_data_setup_title">Настроить данные управления</string>
     <string name="custom_ctrl_file_path_title">Установить путь к нужному файлу</string>
@@ -84,9 +73,9 @@
     <string name="custom_ctrl_file_disabled_title">Установить значение для отключения</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, желаемое_значение</string>
     <string name="custom_ctrl_file_updated_info">Обновленные данные появятся здесь после обновления информации</string>
+    <string name="custom_ctrl_file_info_format">Путь: %1$s\nЗначение (Вкл): %2$s\nЗначение (Выкл): %3$s</string>
     <string name="custom_ctrl_file_heads_up">Если вы столкнулись с падениями приложения или некорректной работой сервиса, попробуйте включить \"Всегда писать управляющий файл\" в настройках. Нет никакой гарантии, что эта функция будет поддерживать все устройства и файлы/значения. Попробуйте изменить настройки при возникновении проблем или убедитесь в правильности данных.</string>
     <string name="custom_ctrl_file_update_data">Обновить данные управляющего файла</string>
-
     <string name="theme">Тема</string>
     <string name="light">Светлая</string>
     <string name="dark">Темная</string>
@@ -94,7 +83,6 @@
     <string name="control_battery_charge_permission_label">Управление зарядом батареи</string>
     <string name="control_battery_charge_permission_description">управление зарядом батареи</string>
     <string name="version">Версия</string>
-
     <string name="app_author">© 2026 <a href="https://github.com/gm-h28669/BatteryChargeLimiter-Simplified">The Open Source Community</a></string>
     <string name="license_title">Лицензия</string>
     <string name="credits_title">Благодарности</string>

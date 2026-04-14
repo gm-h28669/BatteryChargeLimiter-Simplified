@@ -34,6 +34,10 @@ class ControlBatteryChargeReceiver : BroadcastReceiver() {
                 Log.d(TAG, "Event received: Toggle service on/off")
                 val settings = Utils.getSettings(context)
                 if (Utils.isRooted()) {
+                    if (!Utils.isCtrlFileSet(context)) {
+                        Toast.makeText(context, R.string.file_data, Toast.LENGTH_SHORT).show()
+                        return
+                    }
                     val enable = !settings.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false)
                     settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, enable).apply()
                     if (enable) {

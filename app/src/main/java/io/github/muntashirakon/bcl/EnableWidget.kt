@@ -27,6 +27,11 @@ class EnableWidget : AppWidgetProvider() {
         if (intent.action == INTENT_TOGGLE_ACTION) {
             val settings = Utils.getSettings(context)
             if (Utils.isRooted()) {
+                if (!Utils.isCtrlFileSet(context)) {
+                    Toast.makeText(context, R.string.file_data, Toast.LENGTH_SHORT).show()
+                    updateWidget(context, false)
+                    return
+                }
                 val enable = !settings.getBoolean(CHARGE_LIMIT_ENABLED, false)
                 settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, enable).apply()
                 if (enable) {

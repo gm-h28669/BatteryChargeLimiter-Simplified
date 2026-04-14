@@ -43,6 +43,7 @@ class ForegroundService : Service() {
     }
     private val mNotifyBuilder by lazy(LazyThreadSafetyMode.NONE) {
         NotificationCompat.Builder(this, Constants.FOREGROUND_SERVICE_NOTIFICATION_CHANNEL_ID)
+            .setOnlyAlertOnce(true)
     }
     private var notifyID = 1
     private var autoResetActive = false
@@ -63,13 +64,13 @@ class ForegroundService : Service() {
 
         val channel = NotificationChannelCompat.Builder(
             Constants.FOREGROUND_SERVICE_NOTIFICATION_CHANNEL_ID,
-            NotificationManagerCompat.IMPORTANCE_DEFAULT
+            NotificationManagerCompat.IMPORTANCE_LOW
         ).setName(getString(R.string.app_name))
          .build()
         notificationManager.createNotificationChannel(channel)
 
         val notification = mNotifyBuilder
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
             .setCategory(NotificationCompat.CATEGORY_SYSTEM)
             .setContentTitle(getString(R.string.please_wait))
             .setContentInfo(getString(R.string.please_wait))

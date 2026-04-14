@@ -100,6 +100,7 @@ class PrefsFragment : PreferenceFragmentCompat() {
 
     companion object {
         const val KEY_CONTROL_FILE = "control_file"
+        const val KEY_CUSTOM_CTRL_FILE_DATA = "custom_ctrl_file_data"
         const val KEY_TEMP_FAHRENHEIT = "temp_fahrenheit"
         const val KEY_IMMEDIATE_POWER_INTENT_HANDLING = "immediate_power_intent_handling"
         const val KEY_NOTIFICATION_SOUND = "notification_sound"

@@ -9,9 +9,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import io.github.muntashirakon.bcl.Constants
-import io.github.muntashirakon.bcl.Constants.DEFAULT_DISABLED
-import io.github.muntashirakon.bcl.Constants.DEFAULT_ENABLED
-import io.github.muntashirakon.bcl.Constants.DEFAULT_FILE
 import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
 
@@ -34,14 +31,20 @@ class CustomCtrlFileDataActivity : AppCompatActivity() {
         val editDisabledData = findViewById<EditText>(R.id.edit_path_disabled)
         val btnUpdateData = findViewById<Button>(R.id.btn_update_custom)
         val settings = this.getSharedPreferences(Constants.SETTINGS, 0)
-        val savedPathData = settings.getString(Constants.SAVED_PATH_DATA, DEFAULT_FILE)
-        val savedEnabledData = settings.getString(Constants.SAVED_ENABLED_DATA, DEFAULT_ENABLED)
-        val savedDisabledData = settings.getString(Constants.SAVED_DISABLED_DATA, DEFAULT_DISABLED)
+        val savedPathData = settings.getString(Constants.SAVED_PATH_DATA, null)
+        val savedEnabledData = settings.getString(Constants.SAVED_ENABLED_DATA, null)
+        val savedDisabledData = settings.getString(Constants.SAVED_DISABLED_DATA, null)
         val updatedDataText = findViewById<TextView>(R.id.custom_data_updated)
 
-        updatedDataText.hint =
-            "Path Data: $savedPathData\nEnable Value: $savedEnabledData\nDisabled Value: $savedDisabledData"
-
+        if (savedPathData != null && savedEnabledData != null && savedDisabledData != null) {
+            updatedDataText.text = getString(R.string.custom_ctrl_file_info_format, savedPathData, savedEnabledData, savedDisabledData)
+            editPathData.setText(savedPathData)
+            editEnabledData.setText(savedEnabledData)
+            editDisabledData.setText(savedDisabledData)
+            customPathData = savedPathData
+            customEnabledData = savedEnabledData
+            customDisabledData = savedDisabledData
+        }
 
         editPathData.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -86,12 +89,16 @@ class CustomCtrlFileDataActivity : AppCompatActivity() {
         })
 
         btnUpdateData.setOnClickListener {
+            if (customPathData.isNullOrBlank() || customEnabledData.isNullOrBlank() || customDisabledData.isNullOrBlank()) {
+                return@setOnClickListener
+            }
             Utils.stopService(this)
-            settings.edit().putString(Constants.SAVED_PATH_DATA, customPathData).apply()
-            settings.edit().putString(Constants.SAVED_ENABLED_DATA, customEnabledData).apply()
-            settings.edit().putString(Constants.SAVED_DISABLED_DATA, customDisabledData).apply()
-            updatedDataText.hint =
-                "Path Data: $customPathData\nEnable Value: $customEnabledData\nDisabled Value: $customDisabledData"
+            settings.edit()
+                .putString(Constants.SAVED_PATH_DATA, customPathData)
+                .putString(Constants.SAVED_ENABLED_DATA, customEnabledData)
+                .putString(Constants.SAVED_DISABLED_DATA, customDisabledData)
+                .apply()
+            updatedDataText.text = getString(R.string.custom_ctrl_file_info_format, customPathData, customEnabledData, customDisabledData)
             Utils.startServiceIfLimitEnabled(this)
         }
     }

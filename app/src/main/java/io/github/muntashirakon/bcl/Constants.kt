@@ -40,7 +40,7 @@ object Constants {
     const val INTENT_TOGGLE_ACTION = BuildConfig.APPLICATION_ID + ".action.TOGGLE"
     const val INTENT_DISABLE_ACTION = BuildConfig.APPLICATION_ID + ".action.DISABLE"
     const val INTENT_CHANGE_LIMIT_ACTION = BuildConfig.APPLICATION_ID + ".action.CHANGE_LIMIT"
-    const val FOREGROUND_SERVICE_NOTIFICATION_CHANNEL_ID = BuildConfig.APPLICATION_ID + ".action.FOREGROUND_SERVICE"
+    const val FOREGROUND_SERVICE_NOTIFICATION_CHANNEL_ID = BuildConfig.APPLICATION_ID + ".action.FOREGROUND_SERVICE_V2"
 
     const val SAVED_PATH_DATA = "saved_ctrl_path_data"
     const val SAVED_ENABLED_DATA = "saved_ctrl_enabled_data"
@@ -49,4 +49,6 @@ object Constants {
     const val LIGHT = "light"
     const val DARK = "dark"
     const val BLACK = "black"
+
+    const val PREVIOUSLY_STARTED = "Previously Started"
 }

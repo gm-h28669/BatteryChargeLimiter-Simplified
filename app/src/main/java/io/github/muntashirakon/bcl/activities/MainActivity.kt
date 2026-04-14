@@ -16,7 +16,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.topjohnwu.superuser.Shell
 import io.github.muntashirakon.bcl.BuildConfig
-import io.github.muntashirakon.bcl.Constants.SETTINGS_VERSION
+import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
 import io.github.muntashirakon.bcl.settings.CtrlFileHelper
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateSettingsVersion() {
-        val settingsVersion = prefs.getInt(SETTINGS_VERSION, 0)
+        val settingsVersion = prefs.getInt(Constants.SETTINGS_VERSION, 0)
         var versionCode = 0L
         try {
             versionCode = PackageInfoCompat.getLongVersionCode(packageManager.getPackageInfo(packageName, 0))
@@ -92,16 +92,16 @@ class MainActivity : AppCompatActivity() {
 
         if (settingsVersion < versionCode) {
             // update the settings version
-            prefs.edit().putInt(SETTINGS_VERSION, versionCode.toInt()).apply()
+            prefs.edit().putInt(Constants.SETTINGS_VERSION, versionCode.toInt()).apply()
         }
     }
 
     private fun whitelistIfFirstStart() {
-        if (!prefs.getBoolean(getString(R.string.previously_started), false)) {
+        if (!prefs.getBoolean(Constants.PREVIOUSLY_STARTED, false)) {
             // whitelist App for Doze Mode
             Shell.cmd("dumpsys deviceidle whitelist +${BuildConfig.APPLICATION_ID}").submit {
                 if (it.isSuccess) {
-                    prefs.edit().putBoolean(getString(R.string.previously_started), true).apply()
+                    prefs.edit().putBoolean(Constants.PREVIOUSLY_STARTED, true).apply()
                 }
             }
         }

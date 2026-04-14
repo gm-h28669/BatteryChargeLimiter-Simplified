@@ -82,6 +82,11 @@ object Utils {
     fun changeState(context: Context, chargeMode: ChargeMode) {
         if (chargeMode == ChargeMode.INITIAL) return // Should not happen in changeState
 
+        if (!isCtrlFileSet(context)) {
+            Log.e(TAG, "Attempted to change state without control file set")
+            return
+        }
+
         val preferences = getPrefs(context)
         val alwaysWrite = preferences.getBoolean(PrefsFragment.KEY_ALWAYS_WRITE_CF, false)
 
@@ -317,8 +322,12 @@ object Utils {
                     Toast.LENGTH_SHORT
                 ).show()
                 if (!settings.getBoolean(NOTIFICATION_LIVE, false)) {
-                    settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, true).apply()
-                    startServiceIfLimitEnabled(context)
+                    if (isCtrlFileSet(context)) {
+                        settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, true).apply()
+                        startServiceIfLimitEnabled(context)
+                    } else {
+                        Toast.makeText(context, R.string.file_data, Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else {
                 throw NumberFormatException("Battery limit out of range!")
@@ -332,6 +341,12 @@ object Utils {
     fun startServiceIfLimitEnabled(context: Context) {
         val settings = getSettings(context)
         if (!settings.getBoolean(CHARGE_LIMIT_ENABLED, false)) {
+            return
+        }
+
+        if (!isCtrlFileSet(context)) {
+            settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, false).apply()
+            EnableWidget.updateWidget(context, false)
             return
         }
 
@@ -382,6 +397,17 @@ object Utils {
         // display service disabled Toast message if not disabled in settings
         if (wasServiceRunning && !getPrefs(context).getBoolean("hide_toast_on_service_changes", false)) {
             Toast.makeText(context, R.string.service_disabled, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun isCtrlFileSet(context: Context): Boolean {
+        val settings = getSettings(context)
+        val preferences = getPrefs(context)
+
+        return if (preferences.getBoolean("custom_ctrl_file_data", false)) {
+            settings.contains(Constants.SAVED_PATH_DATA)
+        } else {
+            settings.contains(Constants.FILE_KEY)
         }
     }
 

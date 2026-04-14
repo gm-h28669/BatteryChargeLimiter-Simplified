@@ -81,6 +81,11 @@ class MainFragment: Fragment() {
                         IntentFilter(Intent.ACTION_BATTERY_CHANGED)
                     )!!
                 )
+                PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA,
+                PrefsFragment.KEY_CONTROL_FILE -> {
+                    updateUi()
+                    setStatusCTRLFileData()
+                }
             }
         }
         prefs?.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
@@ -170,6 +175,11 @@ class MainFragment: Fragment() {
     private val switchListener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
         when (buttonView.id) {
             R.id.enable_switch -> {
+                if (isChecked && !Utils.isCtrlFileSet(requireContext())) {
+                    buttonView.isChecked = false
+                    Toast.makeText(requireContext(), R.string.file_data, Toast.LENGTH_SHORT).show()
+                    return@OnCheckedChangeListener
+                }
                 settings?.edit()?.putBoolean(Constants.CHARGE_LIMIT_ENABLED, isChecked)?.apply()
                 if (isChecked) {
                     Utils.startServiceIfLimitEnabled(requireContext())
@@ -188,7 +198,9 @@ class MainFragment: Fragment() {
                 } else {
                     Utils.changeState(requireContext(), ChargeMode.ON)
                     settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, false)?.apply()
-                    enableSwitches(listOf(enableSwitch))
+                    if (Utils.isCtrlFileSet(requireContext())) {
+                        enableSwitches(listOf(enableSwitch))
+                    }
                 }
             }
         }
@@ -312,7 +324,9 @@ class MainFragment: Fragment() {
         if (intent != null) {
             batteryLevelText?.text = getString(R.string.percentage, Utils.getBatteryLevel(intent))
         }
-        enableSwitch?.isChecked = settings?.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false) == true
+        val isCtrlFileSet = Utils.isCtrlFileSet(requireContext())
+        enableSwitch?.isEnabled = isCtrlFileSet
+        enableSwitch?.isChecked = isCtrlFileSet && settings?.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false) == true
         disableChargeSwitch?.isChecked = settings?.getBoolean(Constants.DISABLE_CHARGE_NOW, false) == true
         val max = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC
         val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC) ?: Constants.DEFAULT_MIN_PC

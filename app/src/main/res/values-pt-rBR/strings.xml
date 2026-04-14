@@ -64,8 +64,9 @@
     <string name="control_understand">Eu entendo</string>
     <string name="control_file_heads_up_title">Informações do arquivo de controle</string>
     <string name="control_file_heads_up_desc">Apenas arquivos de controle detectados no seu dispositivo aparecerão como disponíveis. Se um arquivo de controle for detectado, mas para outro dispositivo, deve ser seguro utilizar. Abra um problema ou envie um pull request no GitHub para o seu dispositivo com o arquivo de controle para ser adicionado a esta lista.</string>
-    <string name="custom_ctrl_file_data_title">Dados do arquivo de controle configurável</string>
+    <string name="custom_ctrl_file_data_title">Usar arquivo de controle personalizado</string>
     <string name="custom_ctrl_file_data_setup_title">Configurar dados de controle</string>
+    <string name="custom_ctrl_file_data_setup_summary">Definir caminho personalizado e valores ON/OFF</string>
     <string name="custom_ctrl_file_path_title">Definir caminho para o arquivo desejado</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/arquivo_desejado</string>
     <string name="custom_ctrl_file_enabled_title">Definir valor ativado</string>
@@ -73,7 +74,6 @@
     <string name="custom_ctrl_file_disabled_title">Definir valor desativado</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, valor_desejado</string>
     <string name="custom_ctrl_file_updated_info">Dados atualizados aparecerão aqui assim que você atualizar a informação</string>
-    <string name="custom_ctrl_file_info_format">Caminho: %1$s\nValor Ativado: %2$s\nValor Desativado: %3$s</string>
     <string name="custom_ctrl_file_heads_up">Se você enfrentar problemas com falhas no app ou o serviço não funcionar corretamente, tente habilitar \"Sempre escrever arquivo de controle\" nas configurações. NÃO há garantia de que esta função suportará todos os dispositivos e arquivos/valores. Tente ajustar as configurações se ocorrerem problemas ou garanta que los datos están corretos.</string>
     <string name="custom_ctrl_file_update_data">Atualizar dados do arquivo de controle</string>
     <string name="theme">Tema</string>

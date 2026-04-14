@@ -24,7 +24,7 @@
             app:iconSpaceReserved="false"
             android:key="custom_ctrl_file_setup"
             android:title="@string/custom_ctrl_file_data_setup_title"
-            android:enabled="false"
+            android:summary="@string/custom_ctrl_file_data_setup_summary"
             android:defaultValue="false" />
 
     </PreferenceCategory>
@@ -36,10 +36,11 @@
         <ListPreference
             app:iconSpaceReserved="false"
             android:key="theme"
-            android:title="Theme"
+            android:title="@string/theme"
             android:entryValues="@array/themeKeys"
             android:entries="@array/themeValues"
-            android:summary="%1$s" />
+            android:defaultValue="light"
+            app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"

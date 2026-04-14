@@ -18,27 +18,15 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
-import java.util.Locale
 import androidx.preference.PreferenceManager
 import com.google.android.material.internal.ViewUtils.doOnApplyWindowInsets
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.topjohnwu.superuser.Shell
-import io.github.muntashirakon.bcl.Constants.CHARGE_LIMIT_ENABLED
-import io.github.muntashirakon.bcl.Constants.CHARGE_OFF_KEY
-import io.github.muntashirakon.bcl.Constants.CHARGE_ON_KEY
-import io.github.muntashirakon.bcl.Constants.CHARGING_CHANGE_TOLERANCE_MS
-import io.github.muntashirakon.bcl.Constants.DEFAULT_DISABLED
-import io.github.muntashirakon.bcl.Constants.DEFAULT_ENABLED
-import io.github.muntashirakon.bcl.Constants.DEFAULT_FILE
-import io.github.muntashirakon.bcl.Constants.FILE_KEY
-import io.github.muntashirakon.bcl.Constants.LIMIT
-import io.github.muntashirakon.bcl.Constants.MIN
-import io.github.muntashirakon.bcl.Constants.NOTIFICATION_LIVE
-import io.github.muntashirakon.bcl.Constants.SETTINGS
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 import java.io.InputStreamReader
 import java.nio.charset.Charset
+import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -175,9 +163,9 @@ object Utils {
         getPrefs(context)
             .edit().putString(PrefsFragment.KEY_CONTROL_FILE, cf.file).apply()
         getSettings(context)
-            .edit().putString(FILE_KEY, cf.file)
-            .putString(CHARGE_ON_KEY, cf.chargeOn)
-            .putString(CHARGE_OFF_KEY, cf.chargeOff).apply()
+            .edit().putString(Constants.FILE_KEY, cf.file)
+            .putString(Constants.CHARGE_ON_KEY, cf.chargeOn)
+            .putString(Constants.CHARGE_OFF_KEY, cf.chargeOff).apply()
         //Respawn the service if necessary
         startServiceIfLimitEnabled(context)
     }
@@ -290,10 +278,10 @@ object Utils {
     }
 
     fun setLimit(limit: Int, settings: SharedPreferences) {
-        val min = settings.getInt(MIN, Constants.DEFAULT_MIN_PC)
-        val edit = settings.edit().putInt(LIMIT, limit)
+        val min = settings.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC)
+        val edit = settings.edit().putInt(Constants.LIMIT, limit)
         if (min >= limit) {
-            edit.putInt(MIN, (limit - 1).coerceAtLeast(0))
+            edit.putInt(Constants.MIN, (limit - 1).coerceAtLeast(0))
         }
         edit.apply()
     }
@@ -312,7 +300,7 @@ object Utils {
             if (limit == Constants.MAX_ALLOWED_LIMIT_PC) {
                 val settings = getSettings(context)
                 stopService(context)
-                settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, false).apply()
+                settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, false).apply()
             } else if (limit in Constants.MIN_ALLOWED_LIMIT_PC until Constants.MAX_ALLOWED_LIMIT_PC) {
                 val settings = getSettings(context)
                 // set the new limit
@@ -321,9 +309,9 @@ object Utils {
                     context, context.getString(R.string.intent_limit_accepted, limit),
                     Toast.LENGTH_SHORT
                 ).show()
-                if (!settings.getBoolean(NOTIFICATION_LIVE, false)) {
+                if (!settings.getBoolean(Constants.NOTIFICATION_LIVE, false)) {
                     if (isCtrlFileSet(context)) {
-                        settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, true).apply()
+                        settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, true).apply()
                         startServiceIfLimitEnabled(context)
                     } else {
                         Toast.makeText(context, R.string.file_data, Toast.LENGTH_SHORT).show()
@@ -340,12 +328,12 @@ object Utils {
 
     fun startServiceIfLimitEnabled(context: Context) {
         val settings = getSettings(context)
-        if (!settings.getBoolean(CHARGE_LIMIT_ENABLED, false)) {
+        if (!settings.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false)) {
             return
         }
 
         if (!isCtrlFileSet(context)) {
-            settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, false).apply()
+            settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, false).apply()
             EnableWidget.updateWidget(context, false)
             return
         }
@@ -355,7 +343,7 @@ object Utils {
         val batteryIntent = context.applicationContext.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         if (batteryIntent != null) {
             val level = getBatteryLevel(batteryIntent)
-            val limit = settings.getInt(LIMIT, 80)
+            val limit = settings.getInt(Constants.LIMIT, 80)
             if (level < limit) {
                 Log.d(TAG, "Start charging, since target not reached: Level=$level Target=$limit")
                 changeState(context, ChargeMode.ON)
@@ -373,7 +361,7 @@ object Utils {
             if (!getPrefs(context).getBoolean("hide_toast_on_service_changes", false)) {
                 Toast.makeText(context, R.string.service_enabled, Toast.LENGTH_SHORT).show()
             }
-        }, CHARGING_CHANGE_TOLERANCE_MS)
+        }, Constants.CHARGING_CHANGE_TOLERANCE_MS)
     }
 
     fun getPrefs(context: Context): SharedPreferences {
@@ -381,7 +369,7 @@ object Utils {
     }
 
     fun getSettings(context: Context): SharedPreferences {
-        return context.getSharedPreferences(SETTINGS, 0)
+        return context.getSharedPreferences(Constants.SETTINGS, 0)
     }
 
     fun stopService(context: Context, ignoreAutoReset: Boolean = true) {
@@ -417,10 +405,10 @@ object Utils {
 
         return if (preferences.getBoolean("custom_ctrl_file_data", false)) {
             // Custom Data Enabled
-            settings.getString(Constants.SAVED_PATH_DATA, DEFAULT_FILE)!!
+            settings.getString(Constants.SAVED_PATH_DATA, Constants.DEFAULT_FILE)!!
         } else {
             // Custom Data Disabled
-            settings.getString(FILE_KEY, DEFAULT_FILE)!!
+            settings.getString(Constants.FILE_KEY, Constants.DEFAULT_FILE)!!
         }
     }
 
@@ -430,10 +418,10 @@ object Utils {
 
         return if (preferences.getBoolean("custom_ctrl_file_data", false)) {
             // Custom Data Enabled
-            settings.getString(Constants.SAVED_ENABLED_DATA, DEFAULT_ENABLED)!!
+            settings.getString(Constants.SAVED_ENABLED_DATA, Constants.DEFAULT_ENABLED)!!
         } else {
             // Custom Data Disabled
-            settings.getString(CHARGE_ON_KEY, DEFAULT_ENABLED)!!
+            settings.getString(Constants.CHARGE_ON_KEY, Constants.DEFAULT_ENABLED)!!
         }
     }
 
@@ -443,10 +431,10 @@ object Utils {
 
         return if (preferences.getBoolean("custom_ctrl_file_data", false)) {
             // Custom Data Enabled
-            settings.getString(Constants.SAVED_DISABLED_DATA, DEFAULT_DISABLED)!!
+            settings.getString(Constants.SAVED_DISABLED_DATA, Constants.DEFAULT_DISABLED)!!
         } else {
             // Custom Data Disabled
-            settings.getString(CHARGE_OFF_KEY, DEFAULT_DISABLED)!!
+            settings.getString(Constants.CHARGE_OFF_KEY, Constants.DEFAULT_DISABLED)!!
         }
     }
 

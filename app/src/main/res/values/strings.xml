@@ -71,8 +71,9 @@
     <string name="control_understand">I understand</string>
     <string name="control_file_heads_up_title">Control file information</string>
     <string name="control_file_heads_up_desc">Only control files detected on your device will show up as available. If a control file is detected, but for another device, it should be safe to use. Open an issue or send a pull request on GitHub for your device with the control file data to be added to this list.</string>
-    <string name="custom_ctrl_file_data_title">Configurable CTRL file data</string>
+    <string name="custom_ctrl_file_data_title">Use custom control file</string>
     <string name="custom_ctrl_file_data_setup_title">Configure control data</string>
+    <string name="custom_ctrl_file_data_setup_summary">Set custom path and ON/OFF values</string>
     <string name="custom_ctrl_file_path_title">Set path to desired file</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/desired_file</string>
     <string name="custom_ctrl_file_enabled_title">Set enabled value</string>
@@ -80,7 +81,7 @@
     <string name="custom_ctrl_file_disabled_title">Set disabled value</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, desired_value</string>
     <string name="custom_ctrl_file_updated_info">Updated data will appear here once you update the information</string>
-    <string name="custom_ctrl_file_info_format">Path Data: %1$s\nEnable Value: %2$s\nDisabled Value: %3$s</string>
+    <string name="custom_ctrl_file_info_format" translatable="false">%1$s, %2$s, %3$s</string>
     <string name="custom_ctrl_file_heads_up">If you experience issues with app crashes or the service not working properly, try enabling Always Write CTRL File in settings. There is NO guarantee that this configurable control file function will support all devices and files/values. Try adjusting the settings if issues occur or ensure the data is correct.</string>
     <string name="custom_ctrl_file_update_data">Update CTRL file data</string>
     <string name="theme">Theme</string>

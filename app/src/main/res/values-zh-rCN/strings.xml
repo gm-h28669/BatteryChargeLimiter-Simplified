@@ -66,8 +66,9 @@
     <string name="control_understand">清楚明白</string>
     <string name="control_file_heads_up_title">CTRL 文件信息</string>
     <string name="control_file_heads_up_desc">只有在你的设备上检测到的 CTRL 文件才会显示为可用。如果检测到一个 CTRL 文件，但为其他设备的，它应该也可以安全使用。在 GitHub 上给你的设备开个 issue 或发个 PR，将 CTRL 文件的数据添加到这个列表中。（译注：文件在仓库的 /app/src/main/res/rawcontrol_files.json）</string>
-    <string name="custom_ctrl_file_data_title">可配置的 CTRL 文件数据</string>
+    <string name="custom_ctrl_file_data_title">使用自定义控制文件</string>
     <string name="custom_ctrl_file_data_setup_title">配置 CTRL 文件数据</string>
+    <string name="custom_ctrl_file_data_setup_summary">设置自定义路径和开/关值</string>
     <string name="custom_ctrl_file_path_title">设置所需文件的路径</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/desired_file</string>
     <string name="custom_ctrl_file_enabled_title">设置启用值</string>
@@ -75,7 +76,6 @@
     <string name="custom_ctrl_file_disabled_title">设置禁用值</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, desired_value</string>
     <string name="custom_ctrl_file_updated_info">更新信息后，更新的数据将显示在此处</string>
-    <string name="custom_ctrl_file_info_format">路径数据：%1$s\n启用值：%2$s\n禁用值：%3$s</string>
     <string name="custom_ctrl_file_heads_up">如果您遇到应用程序崩溃或服务无法正常运行的问题，请尝试在设置中启用始终写入 CTRL 文件。无法保证此可配置 CTRL 文件功能将支持所有设备和文件/值。如果出现问题，请尝试调整设置或确保数据正确。</string>
     <string name="custom_ctrl_file_update_data">更新 CTRL 文件数据</string>
     <string name="theme">主题</string>

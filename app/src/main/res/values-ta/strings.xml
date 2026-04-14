@@ -64,8 +64,9 @@
     <string name="control_understand">எனக்கு புரிகிறது</string>
     <string name="control_file_heads_up_title">கட்டுப்பாட்டு கோப்பு தகவல்</string>
     <string name="control_file_heads_up_desc">உங்கள் சாதனத்தில் கண்டறியப்பட்ட கட்டுப்பாட்டு கோப்புகள் மட்டுமே கிடைக்கும்படி காண்பிக்கப்படும். ஒரு கட்டுப்பாட்டு கோப்பு கண்டறியப்பட்டால், ஆனால் மற்றொரு சாதனத்திற்கு, அதைப் பயன்படுத்துவது பாதுகாப்பானதாக இருக்க வேண்டும். இந்தப் பட்டியலில் சேர்க்கப்பட வேண்டிய கட்டுப்பாட்டுக் கோப்புத் தரவுடன் உங்கள் சாதனத்திற்கான சிக்கலைத் திறக்கவும் அல்லது GitHub இல் இழுக்கும் கோரிக்கையை அனுப்பவும்.</string>
-    <string name="custom_ctrl_file_data_title">கட்டமைக்கக்கூடிய CTRL கோப்பு தரவு</string>
+    <string name="custom_ctrl_file_data_title">தனிப்பயன் கட்டுப்பாட்டு கோப்பைப் பயன்படுத்தவும்</string>
     <string name="custom_ctrl_file_data_setup_title">கட்டுப்பாட்டு தரவை உள்ளமைக்கவும்</string>
+    <string name="custom_ctrl_file_data_setup_summary">தனிப்பயன் பாதை மற்றும் ஆன்/ஆஃப் மதிப்புகளை அமைக்கவும்</string>
     <string name="custom_ctrl_file_path_title">விரும்பிய கோப்பிற்கு பாதையை அமைக்கவும்</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/desired_file</string>
     <string name="custom_ctrl_file_enabled_title">செயல்படுத்தப்பட்ட மதிப்பை அமைக்கவும்</string>
@@ -73,7 +74,6 @@
     <string name="custom_ctrl_file_disabled_title">முடக்கப்பட்ட மதிப்பை அமைக்கவும்</string>
     <string name="custom_ctrl_file_disabled_hint">0, முடக்கப்பட்டது, desired_value</string>
     <string name="custom_ctrl_file_updated_info">நீங்கள் தகவலைப் புதுப்பித்தவுடன் புதுப்பிக்கப்பட்ட தரவு இங்கே தோன்றும்</string>
-    <string name="custom_ctrl_file_info_format">பாதை தரவு: %1$s\nசெயல்படுத்தப்பட்ட மதிப்பு: %2$s\nமுடக்கப்பட்ட மதிப்பு: %3$s</string>
     <string name="custom_ctrl_file_heads_up">ஆப் செயலிழந்தால் அல்லது சேவை சரியாக வேலை செய்யாமல் இருந்தால், அமைப்புகளில் எப்போதும் எழுது CTRL கோப்பை இயக்க முயற்சிக்கவும். இந்த உள்ளமைக்கக்கூடிய கட்டுப்பாட்டு கோப்பு செயல்பாடு அனைத்து சாதனங்கள் மற்றும் கோப்புகள்/மதிப்புகளை ஆதரிக்கும் என்பதற்கு எந்த உத்தரவாதமும் இல்லை. சிக்கல்கள் ஏற்பட்டால் அமைப்புகளைச் சரிசெய்ய முயற்சிக்கவும் அல்லது தரவு சரியானது என்பதை உறுதிப்படுத்தவும்.</string>
     <string name="custom_ctrl_file_update_data">CTRL கோப்புத் தரவைப் புதுப்பிக்கவும்</string>
     <string name="theme">தீம்</string>

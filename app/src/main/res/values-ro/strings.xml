@@ -65,8 +65,9 @@
     <string name="control_understand">Am înţeles</string>
     <string name="control_file_heads_up_title">Informaţii despre fişierul de control</string>
     <string name="control_file_heads_up_desc">Doar fişierele de control detectate în dispozitiv vor fi valabile. Dacă un fişier de control de pe un alt dispozitiv este detectat, poate fi folosit în siguranţă. Acceseaza GitHub si trimite fisierul tau de control ca sa fie adaugat pe lista.</string>
-    <string name="custom_ctrl_file_data_title">Fişier CTRL configurabil</string>
+    <string name="custom_ctrl_file_data_title">Utilizați fișierul de control personalizat</string>
     <string name="custom_ctrl_file_data_setup_title">Configurează fişierul de control</string>
+    <string name="custom_ctrl_file_data_setup_summary">Setați calea personalizată și valorile ON/OFF</string>
     <string name="custom_ctrl_file_path_title">Setează calea către fişierul dorit</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/fisier_dorit</string>
     <string name="custom_ctrl_file_enabled_title">Setează valorile de activare</string>
@@ -74,7 +75,6 @@
     <string name="custom_ctrl_file_disabled_title">Setează valorile de dezactivare</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, valoarea_dorita</string>
     <string name="custom_ctrl_file_updated_info">Datele actualizate vor apărea aici după ce actualizezi informaţiile</string>
-    <string name="custom_ctrl_file_info_format">Calea: %1$s\nValoare Activare: %2$s\nValoare Dezactivare: %3$s</string>
     <string name="custom_ctrl_file_heads_up">Dacă ai probleme cu aplicaţia sau serviciul nu functionează corect, încearcă să activezi \'Modifică necondiţionat fişierul CTRL\' în setări. Nu e garantat că fişierul configurabil de control va fi compatibil cu toate dispozitivele şi cu fişierele/valorile setate. Dacă ai probleme încearcă să ajustezi setările sau verifică dacă datele introduse sunt corecte.</string>
     <string name="custom_ctrl_file_update_data">ACTUALIZEAZĂ FIŞIERUL CTRL</string>
     <string name="theme">Temă</string>

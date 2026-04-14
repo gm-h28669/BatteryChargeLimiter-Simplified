@@ -64,8 +64,9 @@
     <string name="control_understand">Anladım</string>
     <string name="control_file_heads_up_title">Kontrol Dosyası Bilgileri</string>
     <string name="control_file_heads_up_desc">Sadece cihazınızda tespit edilen kontrol dosyaları mevcut olarak görünecektir. Bir kontrol dosyası tespit edilirse, ancak başka bir cihaz için kullanılması güvenli olmalıdır. Bu listeye eklenecek kontrol dosyası verileriyle bir sorun açın veya cihazınız için GitHub\'da bir çekme isteği gönderin.</string>
-    <string name="custom_ctrl_file_data_title">Yapılandırılabilir CTRL Dosyası Verileri</string>
+    <string name="custom_ctrl_file_data_title">Özel kontrol dosyasını kullan</string>
     <string name="custom_ctrl_file_data_setup_title">Kontrol Verilerini Yapılandır</string>
+    <string name="custom_ctrl_file_data_setup_summary">Özel yol ve AÇIK/KAPALI değerlerini ayarla</string>
     <string name="custom_ctrl_file_path_title">İstenilen Dosya İçin Yol Ayarla</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/desired_file</string>
     <string name="custom_ctrl_file_enabled_title">Etkin Değeri Ayarla</string>
@@ -73,7 +74,6 @@
     <string name="custom_ctrl_file_disabled_title">Devre Dışı Değeri Ayarla</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, desired_value</string>
     <string name="custom_ctrl_file_updated_info">Bilgileri güncelledikten sonra güncellenmiş veriler burada görünecektir</string>
-    <string name="custom_ctrl_file_info_format">Dosya Yolu: %1$s\nEtkin Değeri: %2$s\nDevre Dışı Değeri: %3$s</string>
     <string name="custom_ctrl_file_heads_up">Uygulama çökmeleriyle ilgili sorunlar yaşarsanız veya hizmet düzgün çalışmazsa, ayarlardan her zaman CTRL dosyasına yazmayı etkinleştirmeyi deneyin. Bu yapılandırılabilir kontrol dosyası işlevinin tüm cihazları ve dosyaları/değerleri destekleyeceğine dair bir garanti YOKTUR. Sorun çıkarsa ayarları düzeltmeyi deneyin veya verilerin doğruluğundan emin olun.</string>
     <string name="custom_ctrl_file_update_data">CTRL DOSYASI VERİLERİNİ GÜNCELLE</string>
     <string name="theme">Tema</string>

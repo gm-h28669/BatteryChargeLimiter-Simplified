@@ -65,8 +65,9 @@
     <string name="control_understand">انا اتفهم</string>
     <string name="control_file_heads_up_title">معلومات ملف التحكم</string>
     <string name="control_file_heads_up_desc">ستظهر فقط ملفات التحكم التي تم اكتشافها على جهازك عند توفرها. إذا تم اكتشاف ملف تحكم، ولكنه لجهاز آخر، يجب أن يكون آمنًا للاستخدام. افتح قضية أو أرسل طلب سحب على الجيتهوب من أجل جهازك مع بيانات ملف التحكم ليتم إضافته الى هذه القائمة.</string>
-    <string name="custom_ctrl_file_data_title">بيانات ملف CTRL قابل للإعداد</string>
+    <string name="custom_ctrl_file_data_title">استخدام ملف تحكم مخصص</string>
     <string name="custom_ctrl_file_data_setup_title">إعداد بيانات التحكم</string>
+    <string name="custom_ctrl_file_data_setup_summary">تعيين مسار مخصص وقيم التشغيل/الإيقاف</string>
     <string name="custom_ctrl_file_path_title">تعيين المسار إلى الملف المرغوب</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/desired_file</string>
     <string name="custom_ctrl_file_enabled_title">تعيين قيمة التفعيل</string>
@@ -74,7 +75,6 @@
     <string name="custom_ctrl_file_disabled_title">تعيين قيمة التعطيل</string>
     <string name="custom_ctrl_file_disabled_hint">0، تعطيل، القيمة_المرغوبة</string>
     <string name="custom_ctrl_file_updated_info">سوف تظهر البيانات المحدثة هنا بمجرد أن تقوم بتحديث المعلومات</string>
-    <string name="custom_ctrl_file_info_format">مسار البيانات: %1$s\nقيمة التمكين: %2$s\nقيمة التعطيل: %3$s</string>
     <string name="custom_ctrl_file_heads_up">إذا كنت تواجه مشكلات مع تعطل التطبيق أو أن الخدمة لا تعمل بشكل صحيح، حاول تمكين خاصية الكتابة دائما على ملف CTRL في الإعدادات. ليس هناك ما يضمن أن وظيفة ملف التحكم القابلة للتكوين ستدعم جميع الأجهزة والملفات/القيم. حاول ضبط الإعدادات في حالة حدوث مشكلات أو قم بالتأكد من صحة البيانات.</string>
     <string name="custom_ctrl_file_update_data">تحديث بيانات ملف CTRL</string>
     <string name="theme">مظهر</string>

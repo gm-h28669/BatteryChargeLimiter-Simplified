@@ -64,8 +64,9 @@
     <string name="control_understand">Я понимаю</string>
     <string name="control_file_heads_up_title">Информация об управляющем файле</string>
     <string name="control_file_heads_up_desc">Отображаются только те файлы управления, которые были обнаружены на Вашем устройстве. Если управляющий файл обнаружен, но предназначен для другого устройства, его использование должно быть безопасным. Откройте issue или отправьте pull-запрос на GitHub для вашего устройства с данными управляющего файла, чтобы добавить его в этот список.</string>
-    <string name="custom_ctrl_file_data_title">Настраиваемые данные управляющего файла</string>
+    <string name="custom_ctrl_file_data_title">Использовать собственный управляющий файл</string>
     <string name="custom_ctrl_file_data_setup_title">Настроить данные управления</string>
+    <string name="custom_ctrl_file_data_setup_summary">Установить настраиваемый путь и значения ВКЛ/ВЫКЛ</string>
     <string name="custom_ctrl_file_path_title">Установить путь к нужному файлу</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/желаемый_файл</string>
     <string name="custom_ctrl_file_enabled_title">Установить значение для включения</string>
@@ -73,7 +74,6 @@
     <string name="custom_ctrl_file_disabled_title">Установить значение для отключения</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, желаемое_значение</string>
     <string name="custom_ctrl_file_updated_info">Обновленные данные появятся здесь после обновления информации</string>
-    <string name="custom_ctrl_file_info_format">Путь: %1$s\nЗначение (Вкл): %2$s\nЗначение (Выкл): %3$s</string>
     <string name="custom_ctrl_file_heads_up">Если вы столкнулись с падениями приложения или некорректной работой сервиса, попробуйте включить \"Всегда писать управляющий файл\" в настройках. Нет никакой гарантии, что эта функция будет поддерживать все устройства и файлы/значения. Попробуйте изменить настройки при возникновении проблем или убедитесь в правильности данных.</string>
     <string name="custom_ctrl_file_update_data">Обновить данные управляющего файла</string>
     <string name="theme">Тема</string>

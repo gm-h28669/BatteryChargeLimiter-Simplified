@@ -64,8 +64,9 @@
     <string name="control_understand">Ho capito</string>
     <string name="control_file_heads_up_title">Informazioni File di Controllo</string>
     <string name="control_file_heads_up_desc">Solo i File di Controllo adatti al tuo dispositivo dovrebbero risultare visibili. Un File di Controllo può essere appartenente ad un altro dispositivo, nella maggior parte dei casi questo non influisce sul corretto funzionamento. Apri un problema o invia una richiesta pull su GitHub con i dati del File di Controllo del tuo dispositivo per aggiungerlo a questo elenco.</string>
-    <string name="custom_ctrl_file_data_title">Configurazione File di Controllo</string>
+    <string name="custom_ctrl_file_data_title">Usa file di controllo personalizzato</string>
     <string name="custom_ctrl_file_data_setup_title">Configura il File di Controllo</string>
+    <string name="custom_ctrl_file_data_setup_summary">Imposta percorso personalizzato e valori ON/OFF</string>
     <string name="custom_ctrl_file_path_title">Imposta percorso del File di Controllo</string>
     <string name="custom_ctrl_file_path_hint">/sys/folder/folder/desired_file</string>
     <string name="custom_ctrl_file_enabled_title">Abilita</string>
@@ -73,7 +74,6 @@
     <string name="custom_ctrl_file_disabled_title">Disabilita</string>
     <string name="custom_ctrl_file_disabled_hint">0, disabled, desired_value</string>
     <string name="custom_ctrl_file_updated_info">I dati aggiornati appariranno una volta che aggiornerai le informazioni</string>
-    <string name="custom_ctrl_file_info_format">Percorso dati: %1$s\nValore abilitato: %2$s\nValore disabilitato: %3$s</string>
     <string name="custom_ctrl_file_heads_up">Se riscontri qualche errore o qualche crash, prova a abilitare "Forza scrittura File di Controllo" nelle impostazioni. Non c\'è NESSUNA garanzia che questo tipo di configurazione del File di Controllo funzioni per tutti i tipi di dispositivi. Prova a regolare le impostazioni in caso di problemi o assicurati che i dati siano corretti.</string>
     <string name="custom_ctrl_file_update_data">AGGIORNA DATI DEL FILE DI CONTROLLO</string>
     <string name="theme">Tema</string>

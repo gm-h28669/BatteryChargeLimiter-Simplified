@@ -16,7 +16,7 @@ import io.github.muntashirakon.bcl.Utils
 
 class ControlFileDialogFragmentCompat : PreferenceDialogFragmentCompat() {
     private var ctrlFiles = emptyList<ControlFile>()
-    private var default = ""
+    private var default: String? = ""
 
     override fun onCreateDialogView(context: Context): View {
         super.onCreateDialogView(context)
@@ -59,7 +59,8 @@ class ControlFileDialogFragmentCompat : PreferenceDialogFragmentCompat() {
                 h.label!!.setOnClickListener { v ->
                     if (v.isEnabled) {
                         Utils.setCtrlFile(context, v.tag as ControlFile)
-                        this@ControlFileDialogFragmentCompat.dialog!!.dismiss()
+                        (preference as ControlFilePreference).callNotifyChanged()
+                        this@ControlFileDialogFragmentCompat.dismiss()
                     }
                 }
                 h.details = convertView.findViewById(R.id.cf_details) as TextView

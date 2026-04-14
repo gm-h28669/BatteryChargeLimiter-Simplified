@@ -8,7 +8,7 @@ import androidx.preference.DialogPreference
 @Keep
 class ControlFilePreference(context: Context, attrs: AttributeSet?) : DialogPreference(context, attrs) {
 
-    private lateinit var controlFile: String
+    private var controlFile: String? = null
 
     init {
         positiveButtonText = null
@@ -18,7 +18,12 @@ class ControlFilePreference(context: Context, attrs: AttributeSet?) : DialogPref
         controlFile = getPersistedString(null)
     }
 
-    fun getCurrentControlFile(): String {
+    fun getCurrentControlFile(): String? {
         return controlFile
+    }
+
+    fun callNotifyChanged() {
+        onSetInitialValue(null)
+        notifyChanged()
     }
 }

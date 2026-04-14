@@ -19,7 +19,6 @@ import io.github.muntashirakon.bcl.BuildConfig
 import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
-import io.github.muntashirakon.bcl.settings.CtrlFileHelper
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 import io.github.muntashirakon.bcl.settings.SettingsActivity
 import java.util.*
@@ -62,21 +61,8 @@ class MainActivity : AppCompatActivity() {
     private fun checkForControlFiles() {
         prefs.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
         if (!prefs.contains(PrefsFragment.KEY_CONTROL_FILE)) {
-            CtrlFileHelper.validateFiles(this) {
-                var found = false
-                for (cf in Utils.getCtrlFiles(this@MainActivity)) {
-                    if (cf.isValid) {
-                        Utils.setCtrlFile(this@MainActivity, cf)
-                        found = true
-                        break
-                    }
-                }
-                if (!found) {
-                    MaterialAlertDialogBuilder(this@MainActivity)
-                        .setMessage(R.string.device_not_supported)
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.ok) { _, _ -> finish() }.show()
-                }
+            Utils.executor.submit {
+                Utils.validateCtrlFiles(this)
             }
         }
     }

@@ -64,8 +64,9 @@
     <string name="control_understand">Ik begrijp het</string>
     <string name="control_file_heads_up_title">Informatie over het besturingsbestand</string>
     <string name="control_file_heads_up_desc">Alleen besturingsbestanden die aanwezig zijn op uw apparaat verschijnen hier. Een gevonden besturingsbestand zou veilig moeten zijn, zelfs als het voor een ander apparaat bedoeld is. Open een issue of verstuur een pull request op GitHub voor uw apparaat met het besturingsbestand wat aan deze lijst toegevoegd moet worden.</string>
-    <string name="custom_ctrl_file_data_title">Configureerbare besturingsbestandsgegevens</string>
+    <string name="custom_ctrl_file_data_title">Aangepast besturingsbestand gebruiken</string>
     <string name="custom_ctrl_file_data_setup_title">Stel besturingsbestandsgegevens in</string>
+    <string name="custom_ctrl_file_data_setup_summary">Aangepast pad en AAN/UIT-waarden instellen</string>
     <string name="custom_ctrl_file_path_title">Stel pad naar gewenst bestand in</string>
     <string name="custom_ctrl_file_path_hint">/sys/map/map/gewenst_bestand</string>
     <string name="custom_ctrl_file_enabled_title">Stel ingeschakelde waarde in</string>
@@ -73,7 +74,6 @@
     <string name="custom_ctrl_file_disabled_title">Stel uitgeschakelde waarde in</string>
     <string name="custom_ctrl_file_disabled_hint">0, uitgeschakeld, gewenste_waarde</string>
     <string name="custom_ctrl_file_updated_info">Geactualiseerde gegevens zullen hier verschijnen</string>
-    <string name="custom_ctrl_file_info_format">Bestandspad: %1$s\nIngeschakelde waarde: %2$s\nUitgeschakelde waarde: %3$s</string>
     <string name="custom_ctrl_file_heads_up">Als u problemen ervaart met crashes of een niet-werkende service, probeer \"Schrijf altijd naar het besturingsbestand\" in te schakelen in de instellingen. Er is GEEN garantie dat deze oplossing op alle apparaten zal werken. Probeer de instellingen aan te passen als er problemen optreden of zorg ervoor dat de gegevens correct zijn.</string>
     <string name="custom_ctrl_file_update_data">ACTUALISEER BESTURINGSBESTANDSGEGEVENS</string>
     <string name="theme">Thema</string>

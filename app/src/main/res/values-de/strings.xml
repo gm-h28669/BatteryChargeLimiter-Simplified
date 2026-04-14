@@ -65,8 +65,9 @@
     <string name="control_understand">Ich verstehe</string>
     <string name="control_file_heads_up_title">Details Steuerungsdatei</string>
     <string name="control_file_heads_up_desc">Nur Steuerungsdateien, die auf dem Gerät gefunden wurden, werden als verfügbar angezeigt. Wenn eine Steuerdatei entdeckt wurde, die zu einem anderen Gerät gehört, könnte sie nutzbar sein. Öffnen Sie ein Issue oder einen Pull Request bei Github mit Informationen zur gefundenen Steuerdatei, wenn sie der offiziellen Liste hinzugefügt werden soll.</string>
-    <string name="custom_ctrl_file_data_title">Konfigurierbare Steuerungsdatei</string>
+    <string name="custom_ctrl_file_data_title">Benutzerdefinierte Steuerungsdatei verwenden</string>
     <string name="custom_ctrl_file_data_setup_title">Konfiguriere Steuerungsdatei</string>
+    <string name="custom_ctrl_file_data_setup_summary">Benutzerdefinierten Pfad und AN/AUS-Werte festlegen</string>
     <string name="custom_ctrl_file_path_title">Setze den Pfad zur gewünschten Steuerungsdatei</string>
     <string name="custom_ctrl_file_path_hint">/sys/verzeichnis/verzeichnis/gewünschte_datei</string>
     <string name="custom_ctrl_file_enabled_title">Wert für Zustand \"Laden\"</string>
@@ -74,7 +75,6 @@
     <string name="custom_ctrl_file_disabled_title">Wert für Zustand \"Entladen\"</string>
     <string name="custom_ctrl_file_disabled_hint">0, Laden aus, gewünschter Wert</string>
     <string name="custom_ctrl_file_updated_info">Aktualisierte Daten werden hier erscheinen, wenn Sie die Informationen aktualisieren</string>
-    <string name="custom_ctrl_file_info_format">Pfaddaten: %1$s\nAktivierter Wert: %2$s\nDeaktivierter Wert: %3$s</string>
     <string name="custom_ctrl_file_heads_up">Wenn Probleme mit Anwendungsabstürzen auftreten oder dieser Dienst nicht arbeitet wie er soll, versuchen Sie, in den Einstellungen \"Steuerdatei immer schreiben\" einzuschalten. Es gibt KEINE Garantie dafür, dass diese Funktion alle Geräte und Dateien/Werte unterstützt. Wenn Probleme auftreten, versuchen Sie diese Einstellungen anzupassen und sicherzustellen, dass die Daten korrekt sind.</string>
     <string name="custom_ctrl_file_update_data">Aktualisiere Details der Steuerungsdatei</string>
     <string name="theme">Farbschema</string>

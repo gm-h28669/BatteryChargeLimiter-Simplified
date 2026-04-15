@@ -14,26 +14,26 @@ A fork of **Battery Charge Limit** whose development has been stalled for some t
 
 ### Features
 - **Main UX**: Updated the main dashboard to clearly show when no control file is selected.
-- **Main UX**: Added logic to prevent enabling the charge limit if no control file is currently selected. Without correctly
-- **Settings UX**: Refactored the "Control file data" section for better clarity. Replaced "Configurable CTRL file data" with a clear "Use custom control file" toggle.
-- **Settings UX**: Implemented real-time summary updates in Settings. The selected control file path or custom configuration is now displayed immediately upon selection.
-- **Settings UX**: Standardized interactive summaries for "Theme", "Control File", and "Configure Control Data" to improve UX discoverability.
-- **Settings UX** Consistent look&feel by applying sentence case style, i.e. only first word is uppercase.
-selected control file the app will not work.
-- **Notifications**: Modernized the notification channel for better compatibility with Android 13+ alert policies.
+- **Main UX**: Added logic to prevent enabling the charge limit if no control file is currently selected.
+- **Settings UX**: Refactored the "Control file data" section for better clarity. Replaced text "Configurable CTRL file data" with a "Use custom control file".
+- **Settings UX**: The selected control file path or custom configuration is now displayed immediately upon selection.
+- **Settings UX**: Added summaries for "Theme", "Control File", and "Configure Control Data" to improve UX.
+- **Settings UX** Consistent look & feel by applying sentence case style, i.e. only first word is uppercase.
+- **Notifications**: Modernized the notification channel for better compatibility with Android 13+.
 - **Notifications**: Notification sounds are now restricted to three key events: reaching the upper charge limit, connecting power and disconnecting power.
 - **Robustness**: Added logic to prevent enabling the charge limit if no control file is currently selected.
-- **Localization**: Improved German language translations and localized new settings summaries across 12 languages.
+- **Localization**: Improved German language translations and localized new settings summaries.
 
 ### Optimizations
 - **Performance**: Improved `SharedPreferences` performance by batching writes into single `apply()` calls.
-- **Performance**: Optimized startup by moving control file validation to a background thread to prevent UI hangs (ANRs).
- 
+- **Performance**: Optimized startup by moving control file validation to a background thread to prevent UI hangs.
+
 ### Bug Fixes
-- **Fix**: Resolved "pre-filled" default value in the custom control file configuration
+- **Fix**: Resolved "pre-filled" default value in the custom control file configuration. User must select a control file or define a custom one.
 
 ### Maintenance
 - **Documentation**: Added section in this README file that explains [Pulse Mechanism](#intelligent-charging-control-pulse-mechanism)
+
 
 
 ## What's changed in release 1.4.0

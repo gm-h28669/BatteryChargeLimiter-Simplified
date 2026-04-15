@@ -66,6 +66,36 @@ android {
     }
 }
 
+androidComponents {
+    // rename apk files to follow the convention: battery-charge-limiter-$variantName.$versionName.apk
+    onVariants { variant ->
+        val variantName = variant.name
+        val versionName = android.defaultConfig.versionName
+        val assembleTaskName = "assemble${variantName.replaceFirstChar { it.uppercaseChar() }}"
+
+        val renameTask =
+            project.tasks.register("copyAndRenameApk${variantName.replaceFirstChar { it.uppercaseChar() }}") {
+                dependsOn(assembleTaskName)
+                doLast {
+                    val apkDir = layout.buildDirectory.get().asFile.resolve("outputs/apk")
+                    project.fileTree(apkDir).matching {
+                        include("**/$variantName/*.apk")
+                        exclude("**/battery-charge-limiter-*.apk")
+                    }.files.forEach { apk ->
+                        val dest = apk.parentFile.resolve("battery-charge-limiter-$variantName.$versionName.apk")
+                        apk.copyTo(dest, overwrite = true)
+                        println("Created APK file: $dest")
+                    }
+                }
+            }
+
+        // Hook into the assemble task so this runs automatically
+        project.tasks.matching { it.name == assembleTaskName }.configureEach {
+            finalizedBy(renameTask)
+        }
+    }
+}
+
 kotlin {
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)

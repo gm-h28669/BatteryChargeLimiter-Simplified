@@ -25,7 +25,6 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    private var preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
     private lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +58,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkForControlFiles() {
-        prefs.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
         if (!prefs.contains(PrefsFragment.KEY_CONTROL_FILE)) {
             Utils.executor.submit {
                 Utils.validateCtrlFiles(this)
@@ -108,11 +106,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        Utils.getPrefs(baseContext)
-            .unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
-        // technically not necessary, but it prevents inlining of this required field
-        // see end of https://developer.android.com/guide/topics/ui/settings.html#Listening
-        preferenceChangeListener = null
         super.onDestroy()
     }
 

@@ -301,7 +301,7 @@ class MainFragment: Fragment() {
         val settings = Utils.getSettings(context)
         val preferences = Utils.getPrefs(context)
 
-        val isSet = if (preferences.getBoolean("custom_ctrl_file_data", false)) {
+        val isSet = if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
             settings.contains(Constants.SAVED_PATH_DATA)
         } else {
             settings.contains(Constants.FILE_KEY)

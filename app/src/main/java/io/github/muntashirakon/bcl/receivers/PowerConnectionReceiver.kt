@@ -26,12 +26,16 @@ class PowerConnectionReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val action = intent.action
+        Log.d(TAG, "onReceive: action=$action")
+
+        val isConnected = action == Intent.ACTION_POWER_CONNECTED || action == "${context.packageName}.ACTION_TEST_CONNECTED"
+        val isDisconnected = action == Intent.ACTION_POWER_DISCONNECTED || action == "${context.packageName}.ACTION_TEST_DISCONNECTED"
 
         //Ignore new events after power change or during state fixing
         if (!Utils.getPrefs(context).getBoolean(PrefsFragment.KEY_IMMEDIATE_POWER_INTENT_HANDLING, false)
             && Utils.isChangePending((BatteryReceiver.backOffTime * 2).coerceAtLeast(POWER_CHANGE_TOLERANCE_MS))) {
 
-            if (action == Intent.ACTION_POWER_CONNECTED) {
+            if (isConnected) {
                 //Ignore connected event only if service is running
                 if (ForegroundService.isRunning
                     || Utils.getPrefs(context).getBoolean(PrefsFragment.KEY_DISABLE_AUTO_RECHARGE, false)
@@ -39,16 +43,16 @@ class PowerConnectionReceiver : BroadcastReceiver() {
                     Log.d(TAG, "Charging on transition in progress: ignore event")
                     return
                 }
-            } else if (action == Intent.ACTION_POWER_DISCONNECTED) {
+            } else if (isDisconnected) {
                 Log.d(TAG, "Charging off transition in progress: ignore event")
                 return
             }
         }
 
-        if (action == Intent.ACTION_POWER_CONNECTED) {
+        if (isConnected) {
             Log.d(TAG, "Power supply was plugged in. Start service if limit checking enabled")
             Utils.startServiceIfLimitEnabled(context)
-        } else if (action == Intent.ACTION_POWER_DISCONNECTED) {
+        } else if (isDisconnected) {
             Log.d(TAG, "Power supply was unplugged. Stop service")
             Utils.stopService(context, false)
         }

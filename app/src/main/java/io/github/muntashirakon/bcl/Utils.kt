@@ -119,7 +119,7 @@ object Utils {
                                 Log.d(TAG, "Set value in $file to $newState")
                             }
                             else {
-                                Log.e(TAG, "Failed to to write value $newState to $file (exit=${it.code}). Hint: If running on emulator, use: adb shell dumpsys battery set status ...")
+                                Log.e(TAG, "Failed to write value $newState to $file (exit=${result.code}). Hint: If running on emulator, use: adb shell dumpsys battery set status ...")
                             }
                         }
                     }
@@ -392,7 +392,7 @@ object Utils {
         val settings = getSettings(context)
         val preferences = getPrefs(context)
 
-        return if (preferences.getBoolean("custom_ctrl_file_data", false)) {
+        return if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
             settings.contains(Constants.SAVED_PATH_DATA)
         } else {
             settings.contains(Constants.FILE_KEY)
@@ -403,7 +403,7 @@ object Utils {
         val settings = getSettings(context)
         val preferences = getPrefs(context)
 
-        return if (preferences.getBoolean("custom_ctrl_file_data", false)) {
+        return if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
             // Custom Data Enabled
             settings.getString(Constants.SAVED_PATH_DATA, Constants.DEFAULT_FILE)!!
         } else {
@@ -416,7 +416,7 @@ object Utils {
         val settings = getSettings(context)
         val preferences = getPrefs(context)
 
-        return if (preferences.getBoolean("custom_ctrl_file_data", false)) {
+        return if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
             // Custom Data Enabled
             settings.getString(Constants.SAVED_ENABLED_DATA, Constants.DEFAULT_ENABLED)!!
         } else {
@@ -429,7 +429,7 @@ object Utils {
         val settings = getSettings(context)
         val preferences = getPrefs(context)
 
-        return if (preferences.getBoolean("custom_ctrl_file_data", false)) {
+        return if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
             // Custom Data Enabled
             settings.getString(Constants.SAVED_DISABLED_DATA, Constants.DEFAULT_DISABLED)!!
         } else {

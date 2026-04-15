@@ -10,10 +10,11 @@ import android.widget.Toast
 import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
+import androidx.core.content.edit
 
 class ControlBatteryChargeReceiver : BroadcastReceiver() {
     companion object {
-        val TAG = ControlBatteryChargeReceiver::class.java.simpleName
+        val TAG : String = ControlBatteryChargeReceiver::class.java.simpleName
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -22,7 +23,7 @@ class ControlBatteryChargeReceiver : BroadcastReceiver() {
         when (intent.action) {
             Constants.INTENT_CHANGE_LIMIT_ACTION -> {
                 Log.d(TAG, "Event received: Charge limit has changed")
-                Utils.handleLimitChange(context, intent.extras?.get(Intent.EXTRA_TEXT))
+                Utils.handleLimitChange(context, intent.extras?.getString(Intent.EXTRA_TEXT))
             }
 
             Constants.INTENT_DISABLE_ACTION -> {
@@ -39,7 +40,7 @@ class ControlBatteryChargeReceiver : BroadcastReceiver() {
                         return
                     }
                     val enable = !settings.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false)
-                    settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, enable).apply()
+                    settings.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, enable) }
                     if (enable) {
                         Utils.startServiceIfLimitEnabled(context)
                     } else {

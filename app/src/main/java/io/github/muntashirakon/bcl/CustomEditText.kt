@@ -8,17 +8,17 @@ import com.google.android.material.textfield.TextInputEditText
 class CustomEditText : TextInputEditText {
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, attribute_set: AttributeSet) : super(context, attribute_set)
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
 
-    constructor(context: Context, attribute_set: AttributeSet, def_style_attribute: Int) : super(
+    constructor(context: Context, attributeSet: AttributeSet, defStyleAttribute: Int) : super(
         context,
-        attribute_set,
-        def_style_attribute
+        attributeSet,
+        defStyleAttribute
     )
 
-    override fun onKeyPreIme(key_code: Int, event: KeyEvent): Boolean {
+    override fun onKeyPreIme(keyCode: Int, event: KeyEvent): Boolean {
         if (event.keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP)
             this.clearFocus()
-        return super.onKeyPreIme(key_code, event)
+        return super.onKeyPreIme(keyCode, event)
     }
 }

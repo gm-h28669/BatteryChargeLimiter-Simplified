@@ -106,6 +106,7 @@ dependencies {
     implementation(libs.google.material)
     implementation(libs.androidx.splashscreen)
     implementation(libs.androidx.preference)
+    implementation(libs.androidx.ktx)
     implementation(libs.libsu.core)
     implementation(libs.google.gson)
     implementation(libs.kotlin.stdlib)

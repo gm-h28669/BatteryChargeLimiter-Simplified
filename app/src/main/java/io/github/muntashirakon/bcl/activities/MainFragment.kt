@@ -16,6 +16,7 @@ import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import io.github.muntashirakon.bcl.*
 import io.github.muntashirakon.bcl.settings.PrefsFragment
+import androidx.core.content.edit
 
 class MainFragment: Fragment() {
     private val minSlider by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<Slider>(R.id.min_slider)  }
@@ -180,7 +181,7 @@ class MainFragment: Fragment() {
                     Toast.makeText(requireContext(), R.string.file_data, Toast.LENGTH_SHORT).show()
                     return@OnCheckedChangeListener
                 }
-                settings?.edit()?.putBoolean(Constants.CHARGE_LIMIT_ENABLED, isChecked)?.apply()
+                settings?.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, isChecked) }
                 if (isChecked) {
                     Utils.startServiceIfLimitEnabled(requireContext())
                     disableSwitches(listOf(disableChargeSwitch))
@@ -193,11 +194,11 @@ class MainFragment: Fragment() {
             R.id.disable_charge_switch -> {
                 if (isChecked) {
                     Utils.changeState(requireContext(), ChargeMode.OFF)
-                    settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, true)?.apply()
+                    settings?.edit { putBoolean(Constants.DISABLE_CHARGE_NOW, true) }
                     disableSwitches(listOf(enableSwitch))
                 } else {
                     Utils.changeState(requireContext(), ChargeMode.ON)
-                    settings?.edit()?.putBoolean(Constants.DISABLE_CHARGE_NOW, false)?.apply()
+                    settings?.edit { putBoolean(Constants.DISABLE_CHARGE_NOW, false) }
                     if (Utils.isCtrlFileSet(requireContext())) {
                         enableSwitches(listOf(enableSwitch))
                     }
@@ -268,13 +269,6 @@ class MainFragment: Fragment() {
             batteryInfo?.text = info
         }
     }
-
-//    private fun hideKeybord() {
-//        val inputManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        if (inputManager.isAcceptingText) {
-//            inputManager.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
-//        }
-//    }
 
     private fun disableSwitches(switches: List<SwitchMaterial?>) {
         for (switch in switches) {

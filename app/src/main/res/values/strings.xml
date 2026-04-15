@@ -3,8 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="source_code_title">Source code</string>
     <string name="fgs_special_use_subtype" translatable="false">Battery management and charge limiting</string>
-    <string name="source_code" translatable="false"><a href="https://github.com/sriharshaarangi/BatteryChargeLimit">Source Code</a></string>
-    <string name="xda_thread" translatable="false"><a href="https://forum.xda-developers.com/android/apps-games/root-battery-charge-limit-t3557002/">XDA thread</a></string>
     <string name="about">About</string>
     <string name="disable_charge_now">Pause charging</string>
     <string name="enable">Enable charge limit</string>
@@ -12,18 +10,15 @@
     <string name="percentage" translatable="false">%1$d%%</string>
     <string name="limit">Limit charging to %1$d%%</string>
     <string name="recharge_below">Recharge below %1$d%%</string>
-    <string name="status">Status: </string>
     <string name="status_ctrl_data_label">Control file data</string>
     <string name="experimental">EXPERIMENTAL</string>
     <string name="issues">KNOWN ISSUES</string>
     <string name="auto_reset_stats">Automatically reset battery stats</string>
     <string name="reset_stats">Reset battery stats</string>
-    <string name="disable">Disable</string>
     <string name="disable_temporarily">Disable temporarily</string>
     <string name="dismiss">Dismiss</string>
     <string name="open_app">Open app</string>
     <string name="file_data">Control file not selected. Please select one in Settings.</string>
-    <string name="device_not_supported">Your device is not supported (yet)!</string>
     <string name="ok">OK</string>
     <string name="no_recharge">No automatic recharge</string>
     <string name="charging">CHARGING</string>
@@ -32,8 +27,8 @@
     <string name="not_charging">NOT CHARGING</string>
     <string name="unknown">UNKNOWN</string>
     <string name="please_wait">Please wait…</string>
+    <string name="check_control_in_progress">Finding matching control files for your device…</string>
     <string name="maintaining_x_to_y">Maintaining from %1$d%% - %2$d%%</string>
-    <string name="maintaining_description">If device becomes unplugged, disable service</string>
     <string name="waiting_until_x">Charging to %1$d%%</string>
     <string name="waiting_description">Battery will stop charging once limit is reached</string>
     <string name="battery_info_C" translatable="false">U: %1$s V, I: %2$s mA, T: %3$s &#8451;, %4$s</string>

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
+import androidx.core.content.edit
 
 class CustomCtrlFileDataActivity : AppCompatActivity() {
 
@@ -93,11 +94,11 @@ class CustomCtrlFileDataActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             Utils.stopService(this)
-            settings.edit()
-                .putString(Constants.SAVED_PATH_DATA, customPathData)
-                .putString(Constants.SAVED_ENABLED_DATA, customEnabledData)
-                .putString(Constants.SAVED_DISABLED_DATA, customDisabledData)
-                .apply()
+            settings.edit {
+                putString(Constants.SAVED_PATH_DATA, customPathData)
+                putString(Constants.SAVED_ENABLED_DATA, customEnabledData)
+                putString(Constants.SAVED_DISABLED_DATA, customDisabledData)
+            }
             updatedDataText.text = getString(R.string.custom_ctrl_file_info_format, customPathData, customEnabledData, customDisabledData)
             Utils.startServiceIfLimitEnabled(this)
         }

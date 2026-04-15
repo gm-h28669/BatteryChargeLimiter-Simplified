@@ -13,6 +13,7 @@ import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
 import io.github.muntashirakon.bcl.activities.CustomCtrlFileDataActivity
+import androidx.core.content.edit
 
 class PrefsFragment : PreferenceFragmentCompat() {
 
@@ -34,7 +35,7 @@ class PrefsFragment : PreferenceFragmentCompat() {
                     .setMessage(R.string.control_file_heads_up_desc)
                     .setCancelable(false)
                     .setPositiveButton(R.string.control_understand) { _, _ ->
-                        settings.edit().putBoolean("has_opened_ctrl_file", true).apply()
+                        settings.edit { putBoolean("has_opened_ctrl_file", true) }
                         openControlFileDialogFragment(dialogFragment)
                     }.show()
             } else {
@@ -47,8 +48,6 @@ class PrefsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
-
-        setHasOptionsMenu(true)
 
         val theme: ListPreference = findPreference(KEY_THEME)!!
         val customCtrlFileDataSwitch: SwitchPreferenceCompat = findPreference(KEY_CUSTOM_CTRL_FILE_DATA)!!

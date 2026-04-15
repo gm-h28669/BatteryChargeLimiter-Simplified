@@ -129,14 +129,14 @@ off | |_|__|__|__|____|____|________|________|________________|________________|
 ### Timing Diagram (Pulse Sequence)
 When the app detects that charging hasn't stopped, it performs a "Recovery Pulse":
 
-Sequence      | Time      | Action                     | Charger State | backOffTime
---------------|-----------|----------------------------|---------------|-------------
-1. Broadcast  | t=0ms     | onReceive() triggered      | (STUCK ON)    | 500ms
-2. Logic      | t=0ms     | backOffTime doubled        | ON            | 1000ms
-3. Setup      | t=0ms     | Utils.changeState(ON)      | ON            | 1000ms
-4. Schedule   | t=0ms     | Handler.postDelayed(OFF)   | ON            | 1000ms
-5. Pulse Ends | t=1000ms  | Delayed Task executes      | OFF           | 1000ms
-6. Verify     | t=next    | Next broadcast (Success?)  | OFF           | 500ms (Reset)
+|Sequence      | Time      | Action                     | Charger State | backOffTime|
+|--------------|-----------|----------------------------|---------------|-------------|
+|1. Broadcast  | t=0ms     | onReceive() triggered      | (STUCK ON)    | 500ms|
+|2. Logic      | t=0ms     | backOffTime doubled        | ON            | 1000ms|
+|3. Setup      | t=0ms     | Utils.changeState(ON)      | ON            | 1000ms|
+|4. Schedule   | t=0ms     | Handler.postDelayed(OFF)   | ON            | 1000ms|
+|5. Pulse Ends | t=1000ms  | Delayed Task executes      | OFF           | 1000ms|
+|6. Verify     | t=next    | Next broadcast (Success?)  | OFF           | 500ms (Reset)|
 
 
 **Explanation of the sequence:**

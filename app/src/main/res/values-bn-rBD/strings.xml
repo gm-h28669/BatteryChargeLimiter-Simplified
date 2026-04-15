@@ -6,14 +6,11 @@
     <string name="sound_on_limit_reached">চার্জিং সীমায় পৌঁছলে শব্দ করে সতর্ক করো</string>
     <string name="limit">%1$d%% সীমায় চার্জিং নির্ধারিত</string>
     <string name="recharge_below">%1$d%% এর নিচে পুনঃচার্জ</string>
-    <string name="status">অবস্থা: </string>
     <string name="experimental">পরীক্ষামূলক</string>
     <string name="issues">জানা সমস্যা</string>
     <string name="auto_reset_stats">স্বয়ংক্রিয়ভাবে ব্যাটারি তত্ত্ব পুনঃস্থাপিত হবে</string>
     <string name="reset_stats">ব্যাটারি তত্ত্ব পুনঃস্থাপন</string>
-    <string name="disable">বন্ধ</string>
     <string name="open_app">অ্যাপ চালু</string>
-    <string name="device_not_supported">তোমার ডিভাইস সমর্থিত নয়! (এখনো পর্যন্ত)</string>
     <string name="ok">ঠিক আছে</string>
     <string name="no_recharge">স্বয়ংক্রিয়ভাবে রিচার্জ হবে না</string>
     <string name="charging">চার্জ হচ্ছে</string>
@@ -22,8 +19,8 @@
     <string name="not_charging">চার্জ হচ্ছে না</string>
     <string name="unknown">অজানা</string>
     <string name="please_wait">দয়া করে অপেক্ষা কর…</string>
+    <string name="check_control_in_progress">আপনার ডিভাইসের জন্য উপযুক্ত কন্ট্রোল ফাইল খোঁজা হচ্ছে…</string>
     <string name="maintaining_x_to_y">%1$d%% - %2$d%% সীমা বজায় রাখছে।</string>
-    <string name="maintaining_description">চার্জার খুলে ফেললে, সার্ভিস বন্ধ কর</string>
     <string name="waiting_until_x">%1$d%% এর জন্য অপেক্ষমান</string>
     <string name="waiting_description">নির্ধারিত সীমায় পৌঁছলে ব্যাটারি চার্জ হওয়া বন্ধ করে দিবে</string>
     <string name="root_denied">অ্যাপকে রুট পারমিশন দেয়া হয়নি অথবা ডিভাইসটি রুটেড নয়!</string>

@@ -8,11 +8,9 @@
     <string name="sound_on_limit_reached">Alerta sonora al alcanzar el límite de carga</string>
     <string name="limit">Limitar a un %1$d%%</string>
     <string name="recharge_below">Recargar tras un %1$d%%</string>
-    <string name="status">Estado: </string>
     <string name="experimental">EXPERIMENTAL</string>
     <string name="auto_reset_stats">Restaurar estadísticas automáticamente</string>
     <string name="reset_stats">Restaurar estadísticas</string>
-    <string name="device_not_supported">¡Dispositivo no soportado (aún)!</string>
     <string name="ok">VALE</string>
     <string name="no_recharge">Sin recarga automática</string>
     <string name="charging">CARGANDO</string>
@@ -21,6 +19,7 @@
     <string name="not_charging">SIN CARGARSE</string>
     <string name="unknown">DESCONOCIDO</string>
     <string name="please_wait">Espere, por favor</string>
+    <string name="check_control_in_progress">Buscando archivos de control compatibles con su dispositivo…</string>
     <string name="maintaining_x_to_y">Manteniendo %1$d%% - %2$d%% SI está conectado"</string>
     <string name="waiting_until_x">Esperando hasta %1$d%%</string>
     <string name="root_denied">Aplicación o dispositivo sin acceso root.</string>
@@ -46,12 +45,10 @@
     <string name="source_code_title">Código fuente</string>
     <string name="status_ctrl_data_label">Datos del archivo de control</string>
     <string name="issues">PROBLEMAS CONOCIDOS</string>
-    <string name="disable">Desactivar</string>
     <string name="disable_temporarily">Desactivar temporalmente</string>
     <string name="dismiss">Descartar</string>
     <string name="open_app">Abrir aplicación</string>
     <string name="file_data">Archivo de control no seleccionado. Por favor, selecciona uno en Ajustes.</string>
-    <string name="maintaining_description">Si el dispositivo se desconecta, desactivar el servicio</string>
     <string name="waiting_description">La batería dejará de cargarse una vez alcanzado el límite</string>
     <string name="disable_auto_recharge"> Desactivar recarga automática</string>
     <string name="disable_auto_recharge_desc">Experimental: Activar esta opción también oculta la notificación después de alcanzar el límite. Importante: Desactive esta opción antes de desinstalar o reinicie después de desinstalar</string>

@@ -6,6 +6,7 @@ splashscreen = "1.0.1"
 preference = "1.2.1"
 libsu = "5.2.2"
 gson = "2.13.2"
+ktx = "1.12.0"
 
 [libraries]
 google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
@@ -14,7 +15,7 @@ androidx-preference = { group = "androidx.preference", name = "preference", vers
 libsu-core = { group = "com.github.topjohnwu.libsu", name = "core", version.ref = "libsu" }
 google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

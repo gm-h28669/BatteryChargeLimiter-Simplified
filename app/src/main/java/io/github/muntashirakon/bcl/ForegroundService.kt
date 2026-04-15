@@ -6,6 +6,7 @@ import android.app.Service
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.content.pm.ServiceInfo
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.IBinder
@@ -24,6 +25,7 @@ import io.github.muntashirakon.bcl.activities.MainActivity
 import io.github.muntashirakon.bcl.receivers.BatteryReceiver
 import io.github.muntashirakon.bcl.receivers.ControlBatteryChargeReceiver
 import io.github.muntashirakon.bcl.settings.PrefsFragment
+import androidx.core.content.edit
 
 /**
  * Created by harsha on 30/1/17.
@@ -60,7 +62,7 @@ class ForegroundService : Service() {
         Log.d(TAG, "Service created")
         isRunning = true
 
-        settings.edit().putBoolean(NOTIFICATION_LIVE, true).apply()
+        settings.edit { putBoolean(NOTIFICATION_LIVE, true) }
 
         val channel = NotificationChannelCompat.Builder(
             Constants.FOREGROUND_SERVICE_NOTIFICATION_CHANNEL_ID,
@@ -83,10 +85,10 @@ class ForegroundService : Service() {
             startForeground(
                 notifyID,
                 notification,
-                android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE or android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE or ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
             )
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startForeground(notifyID, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
+            startForeground(notifyID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
         } else {
             startForeground(notifyID, notification)
         }
@@ -156,7 +158,7 @@ class ForegroundService : Service() {
         }
         ignoreAutoReset = false
 
-        settings.edit().putBoolean(NOTIFICATION_LIVE, false).apply()
+        settings.edit { putBoolean(NOTIFICATION_LIVE, false) }
         // unregister the battery event receiver
         unregisterReceiver(batteryReceiver)
 
@@ -173,7 +175,7 @@ class ForegroundService : Service() {
     }
 
     companion object {
-        val TAG = ForegroundService::class.java.simpleName
+        val TAG: String = ForegroundService::class.java.simpleName
 
         // returns whether the service is running right now
         var isRunning = false

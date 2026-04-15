@@ -18,6 +18,10 @@ class ControlFileDialogFragmentCompat : PreferenceDialogFragmentCompat() {
     private var ctrlFiles = emptyList<ControlFile>()
     private var default: String? = ""
 
+    override fun getPreference(): ControlFilePreference {
+        return super.getPreference() as ControlFilePreference
+    }
+
     override fun onCreateDialogView(context: Context): View {
         super.onCreateDialogView(context)
         ctrlFiles = Utils.getCtrlFiles(requireContext())
@@ -27,7 +31,7 @@ class ControlFileDialogFragmentCompat : PreferenceDialogFragmentCompat() {
     override fun onBindDialogView(view: View) {
         super.onBindDialogView(view)
         val v = view as ListView
-        default = (preference as ControlFilePreference).getCurrentControlFile()
+        default = preference.getCurrentControlFile()
         v.adapter = ControlFileAdapter(ctrlFiles.filter { it.isValid }, requireContext())
     }
 
@@ -55,17 +59,17 @@ class ControlFileDialogFragmentCompat : PreferenceDialogFragmentCompat() {
                 val inflater = LayoutInflater.from(context)
                 convertView = inflater.inflate(R.layout.cf_row, parent, false)
                 convertView!!.setOnClickListener { h.label!!.performClick() }
-                h.label = convertView.findViewById(R.id.cf_label) as RadioButton
+                h.label = convertView.findViewById(R.id.cf_label)!!
                 h.label!!.setOnClickListener { v ->
                     if (v.isEnabled) {
                         Utils.setCtrlFile(context, v.tag as ControlFile)
-                        (preference as ControlFilePreference).callNotifyChanged()
+                        preference.callNotifyChanged()
                         this@ControlFileDialogFragmentCompat.dismiss()
                     }
                 }
-                h.details = convertView.findViewById(R.id.cf_details) as TextView
-                h.experimental = convertView.findViewById(R.id.cf_experimental) as TextView
-                h.issues = convertView.findViewById(R.id.cf_issues) as TextView
+                h.details = convertView.findViewById(R.id.cf_details)!!
+                h.experimental = convertView.findViewById(R.id.cf_experimental)!!
+                h.issues = convertView.findViewById(R.id.cf_issues)!!
                 convertView.tag = h
             } else {
                 h = convertView.tag as ViewHolder
@@ -75,8 +79,8 @@ class ControlFileDialogFragmentCompat : PreferenceDialogFragmentCompat() {
             h.label!!.tag = cf
             h.label!!.isChecked = cf.file == default
             h.details!!.text = cf.details
-            h.experimental!!.visibility = if (cf.experimental!!) View.VISIBLE else View.GONE
-            h.issues!!.visibility = if (cf.issues!!) View.VISIBLE else View.GONE
+            h.experimental!!.visibility = if (cf.experimental) View.VISIBLE else View.GONE
+            h.issues!!.visibility = if (cf.issues) View.VISIBLE else View.GONE
 
             return convertView
         }

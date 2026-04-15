@@ -24,15 +24,17 @@ class ControlFile {
     @Keep
     val chargeOff: String? = null
     @Keep
-    val experimental: Boolean? = false
+    val experimental: Boolean = false
     @Keep
-    val order: Int? = 0
+    val order: Int = 0
     @Keep
-    val issues: Boolean? = false
+    val issues: Boolean = false
     @Transient
     private var checked = false
     @Transient
     private var valid = false
+
+    fun isChecked(): Boolean = checked
 
     val isValid: Boolean
         get() {

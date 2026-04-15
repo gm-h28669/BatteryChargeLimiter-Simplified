@@ -29,6 +29,7 @@ import java.nio.charset.Charset
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import androidx.core.content.edit
 
 
 enum class ChargeMode {
@@ -150,6 +151,12 @@ object Utils {
         return ctrlFiles!!
     }
 
+    fun areCtrlFilesChecked(context: Context): Boolean {
+        val files = getCtrlFiles(context)
+        val ctrlFilesAreChecked = files.isNotEmpty() && files[0].isChecked()
+        return ctrlFilesAreChecked
+    }
+
     @WorkerThread
     fun validateCtrlFiles(context: Context) {
         for (cf in getCtrlFiles(context)) {
@@ -161,11 +168,13 @@ object Utils {
         //This will immediately reset the current control file
         stopService(context)
         getPrefs(context)
-            .edit().putString(PrefsFragment.KEY_CONTROL_FILE, cf.file).apply()
+            .edit { putString(PrefsFragment.KEY_CONTROL_FILE, cf.file) }
         getSettings(context)
-            .edit().putString(Constants.FILE_KEY, cf.file)
-            .putString(Constants.CHARGE_ON_KEY, cf.chargeOn)
-            .putString(Constants.CHARGE_OFF_KEY, cf.chargeOff).apply()
+            .edit {
+                putString(Constants.FILE_KEY, cf.file)
+                putString(Constants.CHARGE_ON_KEY, cf.chargeOn)
+                putString(Constants.CHARGE_OFF_KEY, cf.chargeOff)
+            }
         //Respawn the service if necessary
         startServiceIfLimitEnabled(context)
     }
@@ -279,11 +288,12 @@ object Utils {
 
     fun setLimit(limit: Int, settings: SharedPreferences) {
         val min = settings.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC)
-        val edit = settings.edit().putInt(Constants.LIMIT, limit)
-        if (min >= limit) {
-            edit.putInt(Constants.MIN, (limit - 1).coerceAtLeast(0))
+        settings.edit {
+            putInt(Constants.LIMIT, limit)
+            if (min >= limit) {
+                putInt(Constants.MIN, (limit - 1).coerceAtLeast(0))
+            }
         }
-        edit.apply()
     }
 
     fun handleLimitChange(context: Context, newLimit: Any?) {
@@ -300,7 +310,7 @@ object Utils {
             if (limit == Constants.MAX_ALLOWED_LIMIT_PC) {
                 val settings = getSettings(context)
                 stopService(context)
-                settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, false).apply()
+                settings.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, false) }
             } else if (limit in Constants.MIN_ALLOWED_LIMIT_PC until Constants.MAX_ALLOWED_LIMIT_PC) {
                 val settings = getSettings(context)
                 // set the new limit
@@ -311,7 +321,7 @@ object Utils {
                 ).show()
                 if (!settings.getBoolean(Constants.NOTIFICATION_LIVE, false)) {
                     if (isCtrlFileSet(context)) {
-                        settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, true).apply()
+                        settings.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, true) }
                         startServiceIfLimitEnabled(context)
                     } else {
                         Toast.makeText(context, R.string.file_data, Toast.LENGTH_SHORT).show()
@@ -320,7 +330,7 @@ object Utils {
             } else {
                 throw NumberFormatException("Battery limit out of range!")
             }
-        } catch (fe: NumberFormatException) {
+        } catch (_ : NumberFormatException) {
             Toast.makeText(context, R.string.intent_limit_invalid, Toast.LENGTH_SHORT).show()
         }
 
@@ -333,7 +343,7 @@ object Utils {
         }
 
         if (!isCtrlFileSet(context)) {
-            settings.edit().putBoolean(Constants.CHARGE_LIMIT_ENABLED, false).apply()
+            settings.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, false) }
             EnableWidget.updateWidget(context, false)
             return
         }

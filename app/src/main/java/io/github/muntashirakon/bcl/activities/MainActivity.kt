@@ -22,6 +22,7 @@ import io.github.muntashirakon.bcl.Utils
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 import io.github.muntashirakon.bcl.settings.SettingsActivity
 import java.util.*
+import androidx.core.content.edit
 
 
 class MainActivity : AppCompatActivity() {
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         if (settingsVersion < versionCode) {
             // update the settings version
-            prefs.edit().putInt(Constants.SETTINGS_VERSION, versionCode.toInt()).apply()
+            prefs.edit { putInt(Constants.SETTINGS_VERSION, versionCode.toInt()) }
         }
     }
 
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
             // whitelist App for Doze Mode
             Shell.cmd("dumpsys deviceidle whitelist +${BuildConfig.APPLICATION_ID}").submit {
                 if (it.isSuccess) {
-                    prefs.edit().putBoolean(Constants.PREVIOUSLY_STARTED, true).apply()
+                    prefs.edit { putBoolean(Constants.PREVIOUSLY_STARTED, true) }
                 }
             }
         }

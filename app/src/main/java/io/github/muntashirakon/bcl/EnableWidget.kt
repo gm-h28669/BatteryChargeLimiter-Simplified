@@ -11,6 +11,7 @@ import android.widget.RemoteViews
 import android.widget.Toast
 import io.github.muntashirakon.bcl.Constants.CHARGE_LIMIT_ENABLED
 import io.github.muntashirakon.bcl.Constants.INTENT_TOGGLE_ACTION
+import androidx.core.content.edit
 
 class EnableWidget : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -33,7 +34,7 @@ class EnableWidget : AppWidgetProvider() {
                     return
                 }
                 val enable = !settings.getBoolean(CHARGE_LIMIT_ENABLED, false)
-                settings.edit().putBoolean(CHARGE_LIMIT_ENABLED, enable).apply()
+                settings.edit { putBoolean(CHARGE_LIMIT_ENABLED, enable) }
                 if (enable) {
                     Utils.startServiceIfLimitEnabled(context)
                 } else {

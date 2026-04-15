@@ -14,7 +14,7 @@ import io.github.muntashirakon.bcl.Utils
  */
 class BootReceiver : BroadcastReceiver() {
     companion object {
-        val TAG = BootReceiver::class.java.simpleName
+        val TAG : String = BootReceiver::class.java.simpleName
     }
 
     override fun onReceive(context: Context, intent: Intent) {

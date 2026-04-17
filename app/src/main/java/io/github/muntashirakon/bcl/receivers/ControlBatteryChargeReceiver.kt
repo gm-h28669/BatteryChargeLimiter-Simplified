@@ -17,6 +17,10 @@ class ControlBatteryChargeReceiver : BroadcastReceiver() {
         val TAG : String = ControlBatteryChargeReceiver::class.java.simpleName
     }
 
+    init {
+        Log.d(TAG, "$TAG Created")
+    }
+
     override fun onReceive(context: Context?, intent: Intent?) {
         if (context == null || intent == null) return
 

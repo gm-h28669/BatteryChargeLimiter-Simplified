@@ -24,6 +24,7 @@ import io.github.muntashirakon.bcl.Constants.SETTINGS
 import io.github.muntashirakon.bcl.activities.MainActivity
 import io.github.muntashirakon.bcl.receivers.BatteryReceiver
 import io.github.muntashirakon.bcl.receivers.ControlBatteryChargeReceiver
+import io.github.muntashirakon.bcl.receivers.PowerConnectionReceiver
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 import androidx.core.content.edit
 
@@ -50,6 +51,7 @@ class ForegroundService : Service() {
     private var notifyID = 1
     private var autoResetActive = false
     private var batteryReceiver: BatteryReceiver? = null
+    private var powerConnectionReceiver: PowerConnectionReceiver? = null
 
     /**
      * Enables the automatic reset on service shutdown
@@ -59,7 +61,7 @@ class ForegroundService : Service() {
     }
 
     override fun onCreate() {
-        Log.d(TAG, "Service created")
+        Log.d(TAG, "$TAG created")
         isRunning = true
 
         settings.edit { putBoolean(NOTIFICATION_LIVE, true) }
@@ -95,6 +97,15 @@ class ForegroundService : Service() {
 
         batteryReceiver = BatteryReceiver(this@ForegroundService)
         registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+
+        //  since Android 8+ (API 26) manifest declared receivers will not get power connect/disconnect events
+        //  we need to create and register dynamically the broadcast receiver in foreground service
+        powerConnectionReceiver = PowerConnectionReceiver(this@ForegroundService)
+        val powerFilter = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_POWER_DISCONNECTED)
+        }
+        registerReceiver(powerConnectionReceiver, powerFilter)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -159,13 +170,17 @@ class ForegroundService : Service() {
         ignoreAutoReset = false
 
         settings.edit { putBoolean(NOTIFICATION_LIVE, false) }
-        // unregister the battery event receiver
+        // unregister the battery and power connection receiver
         unregisterReceiver(batteryReceiver)
+        unregisterReceiver(powerConnectionReceiver)
 
-        // make the BatteryReceiver and dependencies ready for garbage-collection
-        batteryReceiver!!.detach(this)
-        // clear the reference to the battery receiver for GC
+        // make the receivers and dependencies ready for garbage-collection
+        batteryReceiver?.detach(this)
+        powerConnectionReceiver?.detach(this)
+
+        // clear the reference to the receivers for GC
         batteryReceiver = null
+        powerConnectionReceiver = null
 
         isRunning = false
     }

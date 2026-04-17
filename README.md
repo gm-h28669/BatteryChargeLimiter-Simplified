@@ -15,24 +15,37 @@ A fork of **Battery Charge Limit** whose development has been stalled for some t
 ### Features
 - **Main UX**: Updated the main dashboard to clearly show when no control file is selected.
 - **Main UX**: Added logic to prevent enabling the charge limit if no control file is currently selected.
+- **Main UX**: Redesign main screen switch logic to enforce mutual exclusivity between manual override and auto-limit modes.
+- **Main UX**: Add a visual "Limiter" badge on the main screen to show real-time service status (Active/Inactive).
+- **Main UX**: Add "Experimental" and "Known Issues" badges to the control file view in main screen for better transparency on
+- **Main UX**: Optimize Material 3 theme color resolution for the status card background.
 - **Settings UX**: Refactored the "Control file data" section for better clarity. Replaced text "Configurable CTRL file data" with a "Use custom control file".
 - **Settings UX**: The selected control file path or custom configuration is now displayed immediately upon selection.
 - **Settings UX**: Added summaries for "Theme", "Control File", and "Configure Control Data" to improve UX.
-- **Settings UX** Consistent look & feel by applying sentence case style, i.e. only first word is uppercase.
+- **Settings UX**: Consistent look & feel by applying sentence case style, i.e. only first word is uppercase.
+- **Settings UX**: Add a "Stop and Continue" confirmation dialog when changing control file configuration while the service is active.
 - **Notifications**: Modernized the notification channel for better compatibility with Android 13+.
 - **Notifications**: Notification sounds are now restricted to three key events: reaching the upper charge limit, connecting power and disconnecting power.
+- **Config**: Add control file siop_level to control_files (for Samsung)
 - **Robustness**: Added logic to prevent enabling the charge limit if no control file is currently selected.
 - **Localization**: Improved German language translations and localized new settings summaries.
+- **Localization**: Implement localized battery status strings (uppercase) for the UI while maintaining English-only logging.
 
 ### Optimizations
 - **Performance**: Improved `SharedPreferences` performance by batching writes into single `apply()` calls.
 - **Performance**: Optimized startup by moving control file validation to a background thread to prevent UI hangs.
+- **Service Persistence**: The background service now stays active even when the charger is unplugged. This ensures that the app is always ready to enforce limits the moment you plug it back in, without needing to manually restart the service.
+- **Resource Optimization**: Optimized how the app listens for power events to reduce background system load and improve battery efficiency.
+- **Improved Reliability**: Re-engineered the internal charging logic using a "state machine" to more accurately track and manage transitions between charging states, especially on devices with complex power drivers.
 
 ### Bug Fixes
 - **Fix**: Resolved "pre-filled" default value in the custom control file configuration. User must select a control file or define a custom one.
+- **Fix**: Synchronize ForegroundService state updates to prevent race conditions and duplicate "Stop" dialogs.
 
 ### Maintenance
+- **Build**: Generated APKs follow new file naming convention: battery-charge-limiter-<build-variant>.<version>.apk
 - **Documentation**: Added section in this README file that explains [Pulse Mechanism](#intelligent-charging-control-pulse-mechanism)
+- **Documentation**: Added section FOR RELEASE 1.4.1
 
 
 

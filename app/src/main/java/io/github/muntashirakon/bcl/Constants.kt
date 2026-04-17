@@ -14,14 +14,9 @@ object Constants {
     const val CHARGE_ON_KEY = "charge_on"
     const val CHARGE_OFF_KEY = "charge_off"
 
-    const val DEFAULT_FILE = "N/A"
-    const val DEFAULT_ENABLED = "N/A"
-    const val DEFAULT_DISABLED = "N/A"
-
     const val LIMIT = "limit"
     const val MIN = "min"
     const val CHARGE_LIMIT_ENABLED = "enable"
-    const val DISABLE_CHARGE_NOW = "disable_charge_now"
     const val NOTIFICATION_LIVE = "notificationLive"
 
     // ms after reaching limit, where the "unplug" event is recognized as power cut instead of action unplugging
@@ -33,6 +28,7 @@ object Constants {
     const val DEFAULT_LIMIT_PC: Int = 50
     const val DEFAULT_MIN_PC: Int = 40
     const val MIN_ALLOWED_LIMIT_PC: Int = 1
+    const val CURRENT_THRESHOLD_MA: Int = 10
 
     const val NOTIF_MAINTAIN = "ic_maintain"
     const val NOTIF_CHARGE = "ic_charge"

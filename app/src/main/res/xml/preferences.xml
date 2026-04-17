@@ -64,7 +64,7 @@
             app:iconSpaceReserved="false"
             android:key="temp_in_notif"
             android:title="@string/show_battery_info_in_notification"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
 
         <SwitchPreferenceCompat
             app:iconSpaceReserved="false"

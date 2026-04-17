@@ -36,13 +36,13 @@ class PrefsFragment : PreferenceFragmentCompat() {
 
         if (dialogFragment != null) {
             val settings = requireContext().getSharedPreferences(Constants.SETTINGS, 0)
-            if (!settings.getBoolean("has_opened_ctrl_file", false)) {
+            if (!settings.getBoolean(KEY_HAS_OPENED_CTRL_FILE, false)) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.control_file_heads_up_title)
                     .setMessage(R.string.control_file_heads_up_desc)
                     .setCancelable(false)
                     .setPositiveButton(R.string.control_understand) { _, _ ->
-                        settings.edit { putBoolean("has_opened_ctrl_file", true) }
+                        settings.edit { putBoolean(KEY_HAS_OPENED_CTRL_FILE, true) }
                         openControlFileDialogFragment(dialogFragment)
                     }.show()
             } else {
@@ -186,6 +186,9 @@ class PrefsFragment : PreferenceFragmentCompat() {
         const val KEY_CUSTOM_CTRL_FILE_DATA = "custom_ctrl_file_data"
         const val KEY_CUSTOM_CTRL_FILE_SETUP = "custom_ctrl_file_setup"
         const val KEY_TEMP_FAHRENHEIT = "temp_fahrenheit"
+        const val KEY_TEMP_IN_NOTIF = "temp_in_notif"
+        const val KEY_HAS_OPENED_CTRL_FILE = "has_opened_ctrl_file"
+        const val KEY_HIDE_TOAST_ON_SERVICE_CHANGES = "hide_toast_on_service_changes"
         const val KEY_IMMEDIATE_POWER_INTENT_HANDLING = "immediate_power_intent_handling"
         const val KEY_NOTIFICATION_SOUND = "notification_sound"
         const val KEY_AUTO_RESET_STATS = "auto_reset_stats"

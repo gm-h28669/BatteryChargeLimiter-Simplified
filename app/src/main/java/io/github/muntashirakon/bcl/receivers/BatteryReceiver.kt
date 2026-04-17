@@ -43,6 +43,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
     private var preferenceChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
     private val settings = service.getSharedPreferences(SETTINGS, 0)
     private var useNotificationSound = prefs.getBoolean(PrefsFragment.KEY_NOTIFICATION_SOUND, false)
+    private var hideToastOnServiceChanges = prefs.getBoolean(PrefsFragment.KEY_HIDE_TOAST_ON_SERVICE_CHANGES, false)
 
     init {
         Log.d(TAG, "$TAG Created")
@@ -64,11 +65,15 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
                 PrefsFragment.KEY_NOTIFICATION_SOUND -> {
                     this.useNotificationSound = prefs.getBoolean(PrefsFragment.KEY_NOTIFICATION_SOUND, false)
                 }
+                PrefsFragment.KEY_HIDE_TOAST_ON_SERVICE_CHANGES -> {
+                    this.hideToastOnServiceChanges = prefs.getBoolean(PrefsFragment.KEY_HIDE_TOAST_ON_SERVICE_CHANGES, false)
+                }
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
         settings.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
         this.useFahrenheit = prefs.getBoolean(PrefsFragment.KEY_TEMP_FAHRENHEIT, false)
+        this.hideToastOnServiceChanges = prefs.getBoolean(PrefsFragment.KEY_HIDE_TOAST_ON_SERVICE_CHANGES, false)
         reset(settings)
     }
 
@@ -145,7 +150,10 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
 
 
     private fun handleStoppedAtLimitBehavior(batteryLevel: Int, batteryStatus: Int) {
-        if (batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING
+        // use both system status and actual current to determine if we are still charging
+        val isActuallyCharging = Utils.isActuallyCharging(service, batteryStatus)
+
+        if (isActuallyCharging
             && prefs.getBoolean(PrefsFragment.KEY_ENFORCE_CHARGE_LIMIT, true)) {
 
             if (batteryLevel <= limitPercentage + 1) {
@@ -192,18 +200,30 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
             return
         }
 
-        val batteryLevel = Utils.getBatteryLevel(intent)
-        val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
-        val isInitialRun = lastState == ReceiverState.INITIAL
         val pluggedIn = Utils.isDevicePluggedIn(context)
         if (useNotificationSound && lastPluggedIn != null && lastPluggedIn != pluggedIn) {
             service.setNotificationSound()
         }
         lastPluggedIn = pluggedIn
+        val isInitialRun = lastState == ReceiverState.INITIAL
 
-        Log.d(TAG, "State: $lastState Battery: Level=$batteryLevel Status=${Utils.getBatteryStatusText(batteryStatus)} Source=${Utils.getPowerSource(context)}")
+        // log battery and charger info
+        val batteryLevel = Utils.getBatteryLevel(intent)
+        val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+        val batteryCurrentAvgMilliAmps = Utils.getBatteryCurrentAvgInMilliAmps(context)
+        val batteryCurrentAvgStr = Utils.getIntegerOrNotAvailable(batteryCurrentAvgMilliAmps)
+        val chargerCurrentNowInMilliAmps = Utils.getChargerCurrentNowInMilliAmps()
+        val chargerCurrentNowStr = Utils.getIntegerOrNotAvailable(chargerCurrentNowInMilliAmps)
 
-        if (prefs.getBoolean("temp_in_notif", false)) {
+        // This measurement is not helpful, since it is not what has been negotiated between device and power source.
+        // It is simply a configured constant value in driver. Each power source (AC, USB, etc.) has its own configured
+        // value. In reality current_now may be much higher than current_max, depending on power supply.
+        //val chargerCurrentMaxInMilliAmps = Utils.getChargerCurrentMaxInMilliAmps(context)
+        //val chargerCurrentMaxStr = Utils.getIntegerOrNotAvailable(chargerCurrentMaxInMilliAmps)
+
+        Log.d(TAG, "$lastState [Battery: $batteryLevel% ${Utils.getBatteryStatusText(batteryStatus)} ${batteryCurrentAvgStr}mA ${Utils.getPowerSource(context)}] [Charger: ${chargerCurrentNowStr}mA")
+
+        if (prefs.getBoolean(PrefsFragment.KEY_TEMP_IN_NOTIF, true)) {
             Utils.getBatteryInfoAsync(service, intent, useFahrenheit) { info ->
                 service.setNotificationContentText(info)
                 service.updateNotification()

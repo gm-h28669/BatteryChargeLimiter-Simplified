@@ -212,46 +212,123 @@ object Utils {
         }
     }
 
-    // returns averaged current in uA
+    // returns averaged battery current in mA
     // for current measurement the files seem to be more reliable and more likely to contain correct readings (in uA)
     // therefore prioritize files (if they exist) and try to query BatteryManager only if file based approach fails
-    fun getAverageCurrent(context: Context): Int {
-        val currentAvgFiles = arrayOf(
+    fun getBatteryCurrentAvgInMilliAmps(context: Context): Int {
+        val batteryCurrentAvgFiles = arrayOf(
             "/sys/class/power_supply/battery/batt_current_ua_avg",
-            "/sys/class/power_supply/battery/current_avg"
         )
 
-        var rawAverageCurrent = Int.MIN_VALUE
-        for (path in currentAvgFiles) {
+        var batteryCurrentAveragedInMicroAmps = readIntValueFromAnyFile(batteryCurrentAvgFiles)
+        if (batteryCurrentAveragedInMicroAmps == Int.MIN_VALUE) {
+            // fallback
+            val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+            batteryCurrentAveragedInMicroAmps = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
+        }
+        return microToMilliAmps(batteryCurrentAveragedInMicroAmps)
+    }
+
+    // returns actual battery current in mA
+    // for current measurement the files seem to be more reliable and more likely to contain correct readings (in uA)
+    // therefore prioritize files (if they exist) and try to query BatteryManager only if file based approach fails
+    fun getBatteryCurrentNowInMilliAmps(context: Context): Int {
+        val batteryCurrentNowFiles = arrayOf(
+            "/sys/class/power_supply/battery/batt_current_ua_now",
+        )
+
+        var batteryCurrentNowInMicroAmps = readIntValueFromAnyFile(batteryCurrentNowFiles)
+        if (batteryCurrentNowInMicroAmps == Int.MIN_VALUE) {
+            // fallback
+            val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+            batteryCurrentNowInMicroAmps = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW)
+        }
+        return microToMilliAmps(batteryCurrentNowInMicroAmps)
+    }
+
+    // actual current in mA that charger delivers
+    fun getChargerCurrentNowInMilliAmps(): Int {
+        val chargerCurrentNowFiles = arrayOf(
+            "/sys/class/power_supply/battery/current_now",
+        )
+
+        val chargerCurrentNowInMilliAmps = readIntValueFromAnyFile(chargerCurrentNowFiles)
+        return chargerCurrentNowInMilliAmps
+    }
+
+    // maximum current in mA that is returned by driver for currently plugged in power source
+    // This measurement is not helpful, since it is not what has been negotiated between device and power source.
+    // It is simply a configured constant value in driver. Each power source (AC, USB, etc.) has its own configured
+    // value. In reality current_now may be much higher than current_max, depending on power supply.
+    fun getChargerCurrentMaxInMilliAmps(): Int {
+        val chargerCurrentNowFiles = arrayOf(
+            "/sys/class/power_supply/battery/current_max",
+        )
+
+        val chargerCurrentMaxInMilliAmps = readIntValueFromAnyFile(chargerCurrentNowFiles)
+        return chargerCurrentMaxInMilliAmps
+    }
+
+    private fun microToMilliAmps(currentAvg_uA: Int): Int =
+        if (currentAvg_uA != Int.MIN_VALUE) currentAvg_uA / 1000 else Int.MIN_VALUE
+
+    private fun readIntValueFromAnyFile(filePaths: Array<String>): Int {
+        var intValue = Int.MIN_VALUE
+        for (path in filePaths) {
             val result = Shell.cmd("if [ -f \"$path\" ]; then cat \"$path\"; fi").exec()
             if (result.isSuccess && result.out.isNotEmpty()) {
                 val line = result.out[0].trim()
                 if (line.isNotEmpty()) {
                     val value = line.toIntOrNull()
                     if (value != null) {
-                        rawAverageCurrent = value
+                        intValue = value
                         break
                     }
                 }
             }
         }
-        if (rawAverageCurrent == Int.MIN_VALUE) {
-            // fallback
-            val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-            rawAverageCurrent = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
-        }
-        return rawAverageCurrent
+        return intValue
+    }
+
+    /**
+     * Returns true if the battery is actually being charged (positive current flow).
+     * A small threshold (e.g. 50mA) can be used to ignore noise.
+     */
+    fun isCharging(context: Context, thresholdMa: Int = Constants.CURRENT_THRESHOLD_MA): Boolean {
+        val currentMa = getBatteryCurrentAvgInMilliAmps(context)
+        return currentMa != Int.MIN_VALUE && currentMa > thresholdMa
+    }
+
+    /**
+     * Returns true if the system status is CHARGING and the actual current is above the threshold.
+     */
+    fun isActuallyCharging(context: Context, batteryStatus: Int, thresholdMa: Int = Constants.CURRENT_THRESHOLD_MA): Boolean {
+        return batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING && isCharging(context, thresholdMa)
+    }
+
+    fun getVoltageInVolts(intent: Intent): Float {
+        val batteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
+        return if (batteryVoltage != -1) batteryVoltage.toFloat() / 1000f else -1f
+    }
+
+    fun getTemperatureInCelsius(intent: Intent): Float {
+        val batteryTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
+        return if (batteryTemperature != -1) batteryTemperature.toFloat() / 10f else -1f
+    }
+
+    fun convertCelsiusToFahrenheit(tempC: Float): Float {
+        return (tempC * 1.8f) + 32f
     }
 
     fun getBatteryInfo(context: Context, intent: Intent, useFahrenheit: Boolean): String {
-        val batteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
-        val batteryTemperature = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
-        val rawAverageCurrent = getAverageCurrent(context)
+        val batteryVoltageInVolts = getVoltageInVolts(intent)
+        val batteryTemperatureInCelsius = getTemperatureInCelsius(intent)
+        val batteryCurrentAvgInMilliAmps = getBatteryCurrentAvgInMilliAmps(context)
         val powerSource = getPowerSource(context)
-        val voltageStr = if (batteryVoltage != -1) String.format(Locale.ROOT, "%.3f", batteryVoltage.toFloat() / 1000f) else NOT_AVAILABLE
-        val currentStr = if (rawAverageCurrent != Int.MIN_VALUE && rawAverageCurrent != 0) (rawAverageCurrent / 1000).toString() else NOT_AVAILABLE
-        val temperatureStr = if (batteryTemperature != -1) {
-            val temp = if (useFahrenheit) 32f + batteryTemperature * 1.8f / 10f else batteryTemperature / 10f
+        val voltageStr = if (batteryVoltageInVolts != -1f) String.format(Locale.ROOT, "%.3f", batteryVoltageInVolts) else NOT_AVAILABLE
+        val currentStr = getIntegerOrNotAvailable(batteryCurrentAvgInMilliAmps)
+        val temperatureStr = if (batteryTemperatureInCelsius != -1f) {
+            val temp = if (useFahrenheit) convertCelsiusToFahrenheit(batteryTemperatureInCelsius) else batteryTemperatureInCelsius
             String.format(Locale.ROOT, "%.1f", temp)
         } else NOT_AVAILABLE
 
@@ -264,7 +341,11 @@ object Utils {
         )
     }
 
-     // Asynchronously fetches battery info and returns it via a listener on the Main Thread.
+    fun getIntegerOrNotAvailable(value: Int) : String {
+        return if (value != Int.MIN_VALUE) value.toString() else NOT_AVAILABLE
+    }
+
+    // Asynchronously fetches battery info and returns it via a listener on the Main Thread.
     fun getBatteryInfoAsync(context: Context, intent: Intent, useFahrenheit: Boolean, listener: (String) -> Unit) {
         executor.execute {
             val info = getBatteryInfo(context, intent, useFahrenheit)
@@ -368,7 +449,7 @@ object Utils {
         Handler(Looper.getMainLooper()).postDelayed({
             ContextCompat.startForegroundService(context, Intent(context, ForegroundService::class.java))
             // display service enabled Toast message if not disabled in settings
-            if (!getPrefs(context).getBoolean("hide_toast_on_service_changes", false)) {
+            if (!getPrefs(context).getBoolean(PrefsFragment.KEY_HIDE_TOAST_ON_SERVICE_CHANGES, false)) {
                 Toast.makeText(context, R.string.service_enabled, Toast.LENGTH_SHORT).show()
             }
         }, Constants.CHARGING_CHANGE_TOLERANCE_MS)
@@ -393,7 +474,7 @@ object Utils {
             changeState(context, ChargeMode.ON)
         }
         // display service disabled Toast message if not disabled in settings
-        if (wasServiceRunning && !getPrefs(context).getBoolean("hide_toast_on_service_changes", false)) {
+        if (wasServiceRunning && !getPrefs(context).getBoolean(PrefsFragment.KEY_HIDE_TOAST_ON_SERVICE_CHANGES, false)) {
             Toast.makeText(context, R.string.service_disabled, Toast.LENGTH_SHORT).show()
         }
     }

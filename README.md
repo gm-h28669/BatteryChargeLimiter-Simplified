@@ -43,10 +43,8 @@ A fork of **Battery Charge Limit** whose development has been stalled for some t
 - **Fix**: Synchronize ForegroundService state updates to prevent race conditions and duplicate "Stop" dialogs.
 
 ### Maintenance
-- **Build**: Generated APKs follow new file naming convention: battery-charge-limiter-<build-variant>.<version>.apk
+- **Build**: Generated APKs follow new file naming convention: `battery-charge-limiter-<build-variant>.<version>.apk`
 - **Documentation**: Added section in this README file that explains [Pulse Mechanism](#intelligent-charging-control-pulse-mechanism)
-- **Documentation**: Added section FOR RELEASE 1.4.1
-
 
 
 ## What's changed in release 1.4.0

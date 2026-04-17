@@ -103,7 +103,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
      * If battery should be charging, but there's no power supply, stop the service.
      * NOT to be called if charging is expected to be disabled!
      */
-    private fun stopIfUnplugged() {
+    private fun stopServiceIfUnplugged() {
         // save the state that caused this function call
         val triggerState = lastState
         handler.postDelayed({
@@ -123,7 +123,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         service.setNotificationIcon(NOTIF_CHARGE)
         service.setNotificationActionText(service.getString(R.string.disable_temporarily))
         backOffTime = CHARGING_CHANGE_TOLERANCE_MS
-        stopIfUnplugged()
+        stopServiceIfUnplugged()
     }
 
     // executed on state transitions:
@@ -163,7 +163,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         service.setNotificationActionText(service.getString(R.string.disable_temporarily))
         Utils.changeState(service, ChargeMode.ON)
         backOffTime = CHARGING_CHANGE_TOLERANCE_MS
-        stopIfUnplugged()
+        stopServiceIfUnplugged()
     }
 
 
@@ -222,8 +222,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         }
         lastPluggedIn = pluggedIn
 
-        val pluggedInText = if (pluggedIn) { "Yes" } else { "No"}
-        Log.d(TAG, "State: $lastState Battery: Level=$batteryLevel Status=${Utils.getBatteryStatusText(batteryStatus)} PluggedIn=$pluggedInText Source=${Utils.getPowerSource(context)}")
+        Log.d(TAG, "State: $lastState Battery: Level=$batteryLevel Status=${Utils.getBatteryStatusText(batteryStatus)} Source=${Utils.getPowerSource(context)}")
 
         if (prefs.getBoolean("temp_in_notif", false)) {
             Utils.getBatteryInfoAsync(service, intent, useFahrenheit) { info ->

@@ -415,10 +415,10 @@ object Utils {
 
         return if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
             // Custom Data Enabled
-            settings.getString(Constants.SAVED_PATH_DATA, Constants.DEFAULT_FILE)!!
+            settings.getString(Constants.SAVED_PATH_DATA, NOT_AVAILABLE)!!
         } else {
             // Custom Data Disabled
-            settings.getString(Constants.FILE_KEY, Constants.DEFAULT_FILE)!!
+            settings.getString(Constants.FILE_KEY, NOT_AVAILABLE)!!
         }
     }
 
@@ -428,10 +428,10 @@ object Utils {
 
         return if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
             // Custom Data Enabled
-            settings.getString(Constants.SAVED_ENABLED_DATA, Constants.DEFAULT_ENABLED)!!
+            settings.getString(Constants.SAVED_ENABLED_DATA, NOT_AVAILABLE)!!
         } else {
             // Custom Data Disabled
-            settings.getString(Constants.CHARGE_ON_KEY, Constants.DEFAULT_ENABLED)!!
+            settings.getString(Constants.CHARGE_ON_KEY, NOT_AVAILABLE)!!
         }
     }
 
@@ -441,10 +441,10 @@ object Utils {
 
         return if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
             // Custom Data Enabled
-            settings.getString(Constants.SAVED_DISABLED_DATA, Constants.DEFAULT_DISABLED)!!
+            settings.getString(Constants.SAVED_DISABLED_DATA, NOT_AVAILABLE)!!
         } else {
             // Custom Data Disabled
-            settings.getString(Constants.CHARGE_OFF_KEY, Constants.DEFAULT_DISABLED)!!
+            settings.getString(Constants.CHARGE_OFF_KEY, NOT_AVAILABLE)!!
         }
     }
 

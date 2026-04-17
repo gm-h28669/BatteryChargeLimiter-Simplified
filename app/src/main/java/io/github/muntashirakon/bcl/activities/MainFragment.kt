@@ -273,18 +273,27 @@ class MainFragment: Fragment() {
     }
 
     private fun setStatusCTRLFileData() {
+        val isCtrlFileSet = Utils.isCtrlFileSet(requireContext())
+        val statusCtrlData = view?.findViewById<TextView>(R.id.status_ctrl_data)
+        val experimentalLabel = view?.findViewById<TextView>(R.id.experimental_label)
+        val issuesLabel = view?.findViewById<TextView>(R.id.issues_label)
+
+        if (!isCtrlFileSet) {
+            statusCtrlData?.text = getString(R.string.file_data)
+            experimentalLabel?.visibility = View.GONE
+            issuesLabel?.visibility = View.GONE
+            return
+        }
+
         val file = Utils.getCtrlFileData(requireContext())
         val on = Utils.getCtrlEnabledData(requireContext())
         val off = Utils.getCtrlDisabledData(requireContext())
 
-        view?.findViewById<TextView>(R.id.status_ctrl_data)?.text = getString(R.string.custom_ctrl_file_info_format, file, on, off)
+        statusCtrlData?.text = getString(R.string.custom_ctrl_file_info_format, file, on, off)
 
         // Find the specific ControlFile object if it exists in the pre-configured list
         val ctrlFiles = Utils.getCtrlFiles(requireContext())
         val cf = ctrlFiles.find { it.file == file }
-
-        val experimentalLabel = view?.findViewById<TextView>(R.id.experimental_label)
-        val issuesLabel = view?.findViewById<TextView>(R.id.issues_label)
 
         if (cf != null) {
             experimentalLabel?.visibility = if (cf.experimental) View.VISIBLE else View.GONE

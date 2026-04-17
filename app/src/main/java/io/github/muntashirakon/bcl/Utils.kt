@@ -180,8 +180,8 @@ object Utils {
     }
 
     fun getPowerSource(context: Context): String {
-        val intent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-        val plugged = intent?.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) ?: -1
+        val intent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))!!
+        val plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)
         return when (plugged) {
             BatteryManager.BATTERY_PLUGGED_AC -> "AC"
             BatteryManager.BATTERY_PLUGGED_USB -> "USB"
@@ -527,14 +527,25 @@ object Utils {
     }
 
     fun getBatteryStatusText(batteryStatus: Int): String {
-        val batteryStatusText = when (batteryStatus) {
-            BatteryManager.BATTERY_STATUS_UNKNOWN -> "Unknown"
-            BatteryManager.BATTERY_STATUS_CHARGING -> "Charging"
-            BatteryManager.BATTERY_STATUS_DISCHARGING -> "Discharging"
-            BatteryManager.BATTERY_STATUS_NOT_CHARGING -> "Not charging"
-            BatteryManager.BATTERY_STATUS_FULL -> "Full"
-            else -> "Unknown"
+        return when (batteryStatus) {
+            BatteryManager.BATTERY_STATUS_UNKNOWN -> "UNKNOWN"
+            BatteryManager.BATTERY_STATUS_CHARGING -> "CHARGING"
+            BatteryManager.BATTERY_STATUS_DISCHARGING -> "DISCHARGING"
+            BatteryManager.BATTERY_STATUS_NOT_CHARGING -> "NOT CHARGING"
+            BatteryManager.BATTERY_STATUS_FULL -> "FULL"
+            else -> "UNKNOWN"
         }
-        return batteryStatusText
+    }
+
+    fun getBatteryStatusTextLocalized(context: Context, batteryStatus: Int): String {
+        val statusText = when (batteryStatus) {
+            BatteryManager.BATTERY_STATUS_UNKNOWN -> context.getString(R.string.unknown)
+            BatteryManager.BATTERY_STATUS_CHARGING -> context.getString(R.string.charging)
+            BatteryManager.BATTERY_STATUS_DISCHARGING -> context.getString(R.string.discharging)
+            BatteryManager.BATTERY_STATUS_NOT_CHARGING -> context.getString(R.string.not_charging)
+            BatteryManager.BATTERY_STATUS_FULL -> context.getString(R.string.full)
+            else -> context.getString(R.string.unknown)
+        }
+        return statusText.uppercase(Locale.getDefault())
     }
 }

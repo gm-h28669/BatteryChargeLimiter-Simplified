@@ -10,6 +10,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.muntashirakon.bcl.Constants
+import io.github.muntashirakon.bcl.ForegroundService
 import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
 import io.github.muntashirakon.bcl.activities.CustomCtrlFileDataActivity
@@ -22,6 +23,12 @@ class PrefsFragment : PreferenceFragmentCompat() {
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
+        if (preference is ControlFilePreference && ForegroundService.isRunning) {
+            showStopServiceDialog {
+                onDisplayPreferenceDialog(preference)
+            }
+            return
+        }
         var dialogFragment: DialogFragment? = null
         if (preference is ControlFilePreference) {
             dialogFragment = ControlFileDialogFragmentCompat.newInstance(preference.key)
@@ -62,23 +69,28 @@ class PrefsFragment : PreferenceFragmentCompat() {
         }
 
         customCtrlFileDataSwitch.setOnPreferenceChangeListener { _, newValue ->
-            val useCustomControlFile = newValue as Boolean
-            ctrlFilePreference.isVisible = !useCustomControlFile
-            ctrlFileSetupPreference.isVisible = useCustomControlFile
-            ctrlFileSetupPreference.isEnabled = useCustomControlFile
-            true
+            if (ForegroundService.isRunning) {
+                showStopServiceDialog {
+                    customCtrlFileDataSwitch.isChecked = newValue as Boolean
+                }
+                false
+            } else {
+                val useCustomControlFile = newValue as Boolean
+                ctrlFilePreference.isVisible = !useCustomControlFile
+                ctrlFileSetupPreference.isVisible = useCustomControlFile
+                ctrlFileSetupPreference.isEnabled = useCustomControlFile
+                true
+            }
         }
 
         ctrlFileSetupPreference.setOnPreferenceClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.control_file_alert_title)
-                .setMessage(R.string.control_file_alert_desc)
-                .setCancelable(false)
-                .setPositiveButton(R.string.control_understand) { _, _ ->
-                    val ctrlFileIntent = Intent(requireContext(), CustomCtrlFileDataActivity::class.java)
-                    startActivity(ctrlFileIntent)
+            if (ForegroundService.isRunning) {
+                showStopServiceDialog {
+                    openCustomCtrlFileDataActivity()
                 }
-                .show()
+            } else {
+                openCustomCtrlFileDataActivity()
+            }
             true
         }
 
@@ -91,6 +103,32 @@ class PrefsFragment : PreferenceFragmentCompat() {
             ctrlFileSetupPreference.isVisible = false
             ctrlFileSetupPreference.isEnabled = false
         }
+    }
+
+    private fun showStopServiceDialog(onSuccess: () -> Unit) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.stop_service_dialog_title)
+            .setMessage(R.string.stop_service_dialog_message)
+            .setPositiveButton(R.string.stop_and_continue) { _, _ ->
+                ForegroundService.stopService(requireContext())
+                val settings = requireContext().getSharedPreferences(Constants.SETTINGS, 0)
+                settings.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, false) }
+                onSuccess()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun openCustomCtrlFileDataActivity() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.control_file_alert_title)
+            .setMessage(R.string.control_file_alert_desc)
+            .setCancelable(false)
+            .setPositiveButton(R.string.control_understand) { _, _ ->
+                val ctrlFileIntent = Intent(requireContext(), CustomCtrlFileDataActivity::class.java)
+                startActivity(ctrlFileIntent)
+            }
+            .show()
     }
 
     override fun onResume() {

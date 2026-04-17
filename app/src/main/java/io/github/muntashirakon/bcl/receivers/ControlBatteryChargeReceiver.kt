@@ -27,7 +27,7 @@ class ControlBatteryChargeReceiver : BroadcastReceiver() {
         when (intent.action) {
             Constants.INTENT_CHANGE_LIMIT_ACTION -> {
                 Log.d(TAG, "Event received: Charge limit has changed")
-                Utils.handleLimitChange(context, intent.extras?.getString(Intent.EXTRA_TEXT))
+                Utils.handleLimitChange(context, intent.getStringExtra(Intent.EXTRA_TEXT))
             }
 
             Constants.INTENT_DISABLE_ACTION -> {

@@ -89,4 +89,10 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">إغلاق</string>
+    <string name="service_limiter">المحدد</string>
+    <string name="stop_service_dialog_title">خدمة حد البطارية قيد التشغيل</string>
+    <string name="stop_service_dialog_message">يتطلب تغيير ملف التحكم إيقاف خدمة الحد الحالية. هل ترغب في إيقافها والمتابعة؟</string>
+    <string name="stop_and_continue">إيقاف والمتابعة</string>
+    <string name="service_status_active">خدمة حد البطارية نشطة وتراقب.</string>
+    <string name="service_status_inactive">تم تعطيل خدمة حد البطارية.</string>
 </resources>

@@ -37,6 +37,37 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/service_status_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:background="@drawable/status_badge_bg"
+                        android:backgroundTint="?attr/colorSurfaceContainerHigh"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp">
+
+                        <View
+                            android:id="@+id/service_status_dot"
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/service_status_dot"
+                            android:backgroundTint="@color/red" />
+
+                        <TextView
+                            android:id="@+id/service_status_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:text="@string/service_limiter"
+                            android:textAllCaps="true"
+                            android:textAppearance="?attr/textAppearanceLabelLarge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textStyle="bold" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <TextView
                         android:id="@+id/status"
                         android:layout_width="0dp"
@@ -86,7 +117,7 @@
                     android:id="@+id/enable_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
+                    android:checked="false"
                     android:minHeight="56dp"
                     android:paddingHorizontal="16dp"
                     android:text="@string/enable"
@@ -104,6 +135,7 @@
                     android:id="@+id/disable_charge_switch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="false"
                     android:minHeight="56dp"
                     android:paddingHorizontal="16dp"
                     android:text="@string/disable_charge_now"
@@ -233,6 +265,44 @@
                     android:textIsSelectable="true"
                     android:textStyle="bold"
                     tools:text="/sys/class/power_supply/battery/charging_enabled" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/experimental_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/status_badge_bg"
+                        android:backgroundTint="@color/orange"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="2dp"
+                        android:text="@string/experimental"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/issues_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/status_badge_bg"
+                        android:backgroundTint="@color/red"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="2dp"
+                        android:text="@string/issues"
+                        android:textAppearance="?attr/textAppearanceLabelSmall"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </com.google.android.material.card.MaterialCardView>
 

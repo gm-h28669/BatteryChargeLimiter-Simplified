@@ -13,7 +13,6 @@ import io.github.muntashirakon.bcl.Constants.MAX_BACK_OFF_TIME
 import io.github.muntashirakon.bcl.Constants.MIN
 import io.github.muntashirakon.bcl.Constants.NOTIF_CHARGE
 import io.github.muntashirakon.bcl.Constants.NOTIF_MAINTAIN
-import io.github.muntashirakon.bcl.Constants.POWER_CHANGE_TOLERANCE_MS
 import io.github.muntashirakon.bcl.Constants.SETTINGS
 import io.github.muntashirakon.bcl.ForegroundService
 import io.github.muntashirakon.bcl.R
@@ -99,22 +98,6 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         return stateHasChanged
     }
 
-    /**
-     * If battery should be charging, but there's no power supply, stop the service.
-     * NOT to be called if charging is expected to be disabled!
-     */
-    private fun stopServiceIfUnplugged() {
-        // save the state that caused this function call
-        val triggerState = lastState
-        handler.postDelayed({
-            // continue only if the state didn't change in the meantime
-            if (triggerState == lastState && !Utils.isDevicePluggedIn(service)) {
-                Log.d(TAG, "Stopping service, since power supply not plugged in")
-                Utils.stopService(service, false)
-            }
-        }, POWER_CHANGE_TOLERANCE_MS)
-    }
-
     // executed on state transition: INITIAL -> INITIAL_CHARGING
     private fun handleInitialCharging(batteryLevel: Int) {
         Log.d(TAG, "Started initial charging. New State: ${ReceiverState.INITIAL_CHARGING} Level=$batteryLevel")
@@ -123,7 +106,6 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         service.setNotificationIcon(NOTIF_CHARGE)
         service.setNotificationActionText(service.getString(R.string.disable_temporarily))
         backOffTime = CHARGING_CHANGE_TOLERANCE_MS
-        stopServiceIfUnplugged()
     }
 
     // executed on state transitions:
@@ -143,10 +125,6 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         service.enableAutoReset()
         Utils.changeState(service, ChargeMode.OFF)
 
-        if (prefs.getBoolean(PrefsFragment.KEY_DISABLE_AUTO_RECHARGE, false)) {
-            Utils.stopService(service, false)
-        }
-
         // set the "maintain" notification, this must not change from now
         service.setNotificationTitle(
             service.getString(R.string.maintaining_x_to_y, rechargePercentage, limitPercentage)
@@ -163,7 +141,6 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         service.setNotificationActionText(service.getString(R.string.disable_temporarily))
         Utils.changeState(service, ChargeMode.ON)
         backOffTime = CHARGING_CHANGE_TOLERANCE_MS
-        stopServiceIfUnplugged()
     }
 
 
@@ -207,7 +184,9 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
 
 
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (context == null || intent == null) return
+
         // ignore events while trying to fix charging state, see below
         if (Utils.isChangePending(backOffTime * 2)) {
             return

@@ -87,4 +87,10 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">বন্ধ</string>
+    <string name="service_limiter">লিমিটার</string>
+    <string name="stop_service_dialog_title">ব্যাটারি সীমা সেবাটি চলছে</string>
+    <string name="stop_service_dialog_message">কন্ট্রোল ফাইল পরিবর্তন করতে বর্তমান সার্ভিসটি বন্ধ করা প্রয়োজন। আপনি কি এটি বন্ধ করে এগিয়ে যেতে চান?</string>
+    <string name="stop_and_continue">বন্ধ করুন এবং এগিয়ে যান</string>
+    <string name="service_status_active">ব্যাটারি সীমা সেবাটি সক্রিয় এবং পর্যবেক্ষণ করছে।</string>
+    <string name="service_status_inactive">ব্যাটারি সীমা সেবাটি নিষ্ক্রিয়।</string>
 </resources>

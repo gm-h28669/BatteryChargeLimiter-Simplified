@@ -94,4 +94,10 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">Close</string>
+    <string name="service_limiter">Limiter</string>
+    <string name="service_status_active">Battery limit service is active and monitoring.</string>
+    <string name="service_status_inactive">Battery limit service is disabled.</string>
+    <string name="stop_service_dialog_title">Battery limit service is running</string>
+    <string name="stop_service_dialog_message">Changing the control file requires stopping the current limit service. Would you like to stop it and continue?</string>
+    <string name="stop_and_continue">Stop and Continue</string>
 </resources>

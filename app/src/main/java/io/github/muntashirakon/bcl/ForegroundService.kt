@@ -3,6 +3,7 @@ package io.github.muntashirakon.bcl
 import android.Manifest
 import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
@@ -42,7 +43,6 @@ class ForegroundService : Service() {
     private val prefs by lazy(LazyThreadSafetyMode.NONE) { Utils.getPrefs(this) }
     private val notificationManager by lazy(LazyThreadSafetyMode.NONE) {
         NotificationManagerCompat.from(this)
-
     }
     private val mNotifyBuilder by lazy(LazyThreadSafetyMode.NONE) {
         NotificationCompat.Builder(this, Constants.FOREGROUND_SERVICE_NOTIFICATION_CHANNEL_ID)
@@ -100,7 +100,7 @@ class ForegroundService : Service() {
 
         //  since Android 8+ (API 26) manifest declared receivers will not get power connect/disconnect events
         //  we need to create and register dynamically the broadcast receiver in foreground service
-        powerConnectionReceiver = PowerConnectionReceiver(this@ForegroundService)
+        powerConnectionReceiver = PowerConnectionReceiver()
         val powerFilter = IntentFilter().apply {
             addAction(Intent.ACTION_POWER_CONNECTED)
             addAction(Intent.ACTION_POWER_DISCONNECTED)
@@ -176,7 +176,7 @@ class ForegroundService : Service() {
 
         // make the receivers and dependencies ready for garbage-collection
         batteryReceiver?.detach(this)
-        powerConnectionReceiver?.detach(this)
+        powerConnectionReceiver?.detach()
 
         // clear the reference to the receivers for GC
         batteryReceiver = null
@@ -201,6 +201,17 @@ class ForegroundService : Service() {
          */
         internal fun ignoreAutoReset() {
             ignoreAutoReset = true
+        }
+
+        /**
+         * Stops the foreground service if it's running
+         */
+        fun stopService(context: Context) {
+            if (isRunning) {
+                val intent = Intent(context, ForegroundService::class.java)
+                context.stopService(intent)
+                isRunning = false
+            }
         }
     }
 }

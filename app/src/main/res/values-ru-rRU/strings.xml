@@ -88,4 +88,10 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">Закрыть</string>
+    <string name="service_limiter">Ограничитель</string>
+    <string name="stop_service_dialog_title">Служба ограничения заряда запущена</string>
+    <string name="stop_service_dialog_message">Для изменения управляющего файла необходимо остановить текущую службу ограничения. Хотите остановить ее и продолжить?</string>
+    <string name="stop_and_continue">Остановить и продолжить</string>
+    <string name="service_status_active">Служба ограничения заряда активна и выполняет мониторинг.</string>
+    <string name="service_status_inactive">Служба ограничения заряда отключена.</string>
 </resources>

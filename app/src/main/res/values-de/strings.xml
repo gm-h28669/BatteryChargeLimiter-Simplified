@@ -89,4 +89,10 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">Schließen</string>
+    <string name="service_limiter">Begrenzer</string>
+    <string name="stop_service_dialog_title">Batterielimit-Dienst läuft</string>
+    <string name="stop_service_dialog_message">Das Ändern der Steuerdatei erfordert das Beenden des aktuellen Grenzwert-Dienstes. Möchten Sie ihn beenden und fortfahren?</string>
+    <string name="stop_and_continue">Beenden und fortfahren</string>
+    <string name="service_status_active">Der Batterielimit-Dienst ist aktiv und überwacht.</string>
+    <string name="service_status_inactive">Der Batterielimit-Dienst ist deaktiviert.</string>
 </resources>

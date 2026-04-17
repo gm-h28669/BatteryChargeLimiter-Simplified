@@ -88,4 +88,10 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">Sluit</string>
+    <string name="service_limiter">Begrenzer</string>
+    <string name="stop_service_dialog_title">Batterijlimiet-service wordt uitgevoerd</string>
+    <string name="stop_service_dialog_message">Het wijzigen van het controlebestand vereist het stoppen van de huidige limiet-service. Wilt u deze stoppen en doorgaan?</string>
+    <string name="stop_and_continue">Stoppen en doorgaan</string>
+    <string name="service_status_active">Batterijlimiet-service is actief en monitort.</string>
+    <string name="service_status_inactive">Batterijlimiet-service is uitgeschakeld.</string>
 </resources>

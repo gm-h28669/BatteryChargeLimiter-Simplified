@@ -88,4 +88,10 @@
         \n- <a href="https://github.com/sriharshaarangi/BatteryChargeLimit">BatteryChargeLimit</a>
     </string>
     <string name="close">Chiudi</string>
+    <string name="service_limiter">Limitatore</string>
+    <string name="stop_service_dialog_title">Servizio di limite batteria in esecuzione</string>
+    <string name="stop_service_dialog_message">La modifica del file di controllo richiede l\'interruzione del servizio di limite attuale. Vuoi interromperlo e continuare?</string>
+    <string name="stop_and_continue">Interrompi e continua</string>
+    <string name="service_status_active">Il servizio di limite batteria è attivo e sta monitorando.</string>
+    <string name="service_status_inactive">Il servizio di limite batteria è disattivato.</string>
 </resources>

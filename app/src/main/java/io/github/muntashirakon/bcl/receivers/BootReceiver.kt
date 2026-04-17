@@ -21,7 +21,8 @@ class BootReceiver : BroadcastReceiver() {
         Log.d(TAG, "$TAG Created")
     }
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (context == null || intent == null) return
         if (Intent.ACTION_BOOT_COMPLETED == intent.action) {
             Log.d(TAG, "Booting completed. Start service if limit checking enabled")
             Utils.startServiceIfLimitEnabled(context)

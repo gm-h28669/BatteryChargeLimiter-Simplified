@@ -20,7 +20,7 @@ import io.github.muntashirakon.bcl.settings.PrefsFragment
  * 2024: Updated to be dynamically registered by ForegroundService.
  */
 
-class PowerConnectionReceiver(private val service: ForegroundService) : BroadcastReceiver() {
+class PowerConnectionReceiver() : BroadcastReceiver() {
     init {
         Log.d(TAG, "$TAG Created")
     }
@@ -29,7 +29,8 @@ class PowerConnectionReceiver(private val service: ForegroundService) : Broadcas
         private val TAG = PowerConnectionReceiver::class.java.simpleName
     }
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (context == null || intent == null) return
         val action = intent.action
         Log.d(TAG, "onReceive: action=$action")
 
@@ -57,12 +58,11 @@ class PowerConnectionReceiver(private val service: ForegroundService) : Broadcas
         if (isConnected) {
             Log.d(TAG, "Power supply was plugged in. Service is already running.")
         } else if (isDisconnected) {
-            Log.d(TAG, "Power supply was unplugged. Stop service")
-            Utils.stopService(service, false)
+            Log.d(TAG, "Power supply was unplugged. Service will continue running to monitor battery state.")
         }
     }
 
-    fun detach(context: Context) {
+    fun detach() {
         Log.d(TAG, "$TAG Receiver detached")
     }
 }

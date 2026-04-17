@@ -1,20 +1,36 @@
 package io.github.muntashirakon.bcl.activities
 
 import android.Manifest
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.SharedPreferences
+import android.content.res.ColorStateList
 import android.content.pm.PackageManager
-import android.os.*
+import android.os.BatteryManager
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.CompoundButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.slider.Slider
 import com.google.android.material.switchmaterial.SwitchMaterial
-import io.github.muntashirakon.bcl.*
+import io.github.muntashirakon.bcl.ChargeMode
+import io.github.muntashirakon.bcl.Constants
+import io.github.muntashirakon.bcl.ForegroundService
+import io.github.muntashirakon.bcl.R
+import io.github.muntashirakon.bcl.Utils
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 import androidx.core.content.edit
 
@@ -27,6 +43,8 @@ class MainFragment: Fragment() {
     private val statusText by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.status) }
     private val batteryInfo by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.battery_info) }
     private val batteryLevelText by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<TextView>(R.id.battery_level) }
+    private val serviceStatusDot by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<View>(R.id.service_status_dot) }
+    private val serviceStatusBadge by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<View>(R.id.service_status_badge) }
     private val enableSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.enable_switch) }
     private val disableChargeSwitch by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<SwitchMaterial>(R.id.disable_charge_switch) }
     private val statusCard by lazy(LazyThreadSafetyMode.NONE) { view?.findViewById<com.google.android.material.card.MaterialCardView>(R.id.status_card) }
@@ -77,7 +95,7 @@ class MainFragment: Fragment() {
         preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
             when (key) {
                 PrefsFragment.KEY_TEMP_FAHRENHEIT -> updateBatteryInfo(
-                    context?.registerReceiver(
+                    requireContext().registerReceiver(
                         null,
                         IntentFilter(Intent.ACTION_BATTERY_CHANGED)
                     )!!
@@ -85,7 +103,6 @@ class MainFragment: Fragment() {
                 PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA,
                 PrefsFragment.KEY_CONTROL_FILE -> {
                     updateUi()
-                    setStatusCTRLFileData()
                 }
             }
         }
@@ -139,10 +156,15 @@ class MainFragment: Fragment() {
         }
 
         resetBatteryStatsButton.setOnClickListener { Utils.resetBatteryStats(requireContext()) }
-//        autoResetSwitch.setOnCheckedChangeListener { _, isChecked ->
-//            settings.edit().putBoolean(AUTO_RESET_STATS, isChecked).apply() }
-//        notificationSound.setOnCheckedChangeListener { _, isChecked ->
-//            settings.edit().putBoolean(NOTIFICATION_SOUND, isChecked).apply() }
+
+        serviceStatusBadge?.setOnClickListener {
+            val isRunning = ForegroundService.isRunning
+            Toast.makeText(
+                requireContext(),
+                if (isRunning) R.string.service_status_active else R.string.service_status_inactive,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
         setStatusCTRLFileData()
 
@@ -155,180 +177,176 @@ class MainFragment: Fragment() {
 
     override fun onStart() {
         super.onStart()
-        context?.registerReceiver(charging, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-        // the limits could have been changed by an Intent, so update the UI here
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED)
+        requireContext().registerReceiver(charging, intentFilter)
         updateUi()
-        setStatusCTRLFileData()
     }
 
     override fun onStop() {
-        context?.unregisterReceiver(charging)
         super.onStop()
+        requireContext().unregisterReceiver(charging)
     }
 
     override fun onDestroy() {
-        serviceUpdateHandler.removeCallbacks(serviceUpdateRunnable)
-        prefs?.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
         super.onDestroy()
+        prefs?.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
+        serviceUpdateHandler.removeCallbacks(serviceUpdateRunnable)
     }
 
-    //OnCheckedChangeListener for Switch elements
     private val switchListener = CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+        if (!Utils.isCtrlFileSet(requireContext())) {
+            if (isChecked) {
+                buttonView.isChecked = false
+                Toast.makeText(requireContext(), R.string.file_data, Toast.LENGTH_SHORT).show()
+            }
+            return@OnCheckedChangeListener
+        }
+
         when (buttonView.id) {
             R.id.enable_switch -> {
-                if (isChecked && !Utils.isCtrlFileSet(requireContext())) {
-                    buttonView.isChecked = false
-                    Toast.makeText(requireContext(), R.string.file_data, Toast.LENGTH_SHORT).show()
-                    return@OnCheckedChangeListener
-                }
-                settings?.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, isChecked) }
                 if (isChecked) {
+                    disableChargeSwitch?.isChecked = false
+                    settings?.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, true) }
                     Utils.startServiceIfLimitEnabled(requireContext())
-                    disableSwitches(listOf(disableChargeSwitch))
                 } else {
+                    settings?.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, false) }
                     Utils.stopService(requireContext())
-                    enableSwitches(listOf(disableChargeSwitch))
                 }
-                EnableWidget.updateWidget(requireContext(), isChecked)
             }
             R.id.disable_charge_switch -> {
                 if (isChecked) {
+                    enableSwitch?.isChecked = false
+                    settings?.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, false) }
+                    Utils.stopService(requireContext())
                     Utils.changeState(requireContext(), ChargeMode.OFF)
-                    settings?.edit { putBoolean(Constants.DISABLE_CHARGE_NOW, true) }
-                    disableSwitches(listOf(enableSwitch))
                 } else {
                     Utils.changeState(requireContext(), ChargeMode.ON)
-                    settings?.edit { putBoolean(Constants.DISABLE_CHARGE_NOW, false) }
-                    if (Utils.isCtrlFileSet(requireContext())) {
-                        enableSwitches(listOf(enableSwitch))
-                    }
                 }
             }
         }
+        updateServiceStatusIndicator()
     }
 
-    //to update battery status on UI
-    private val charging = object : BroadcastReceiver() {
-        private var previousStatus = BatteryManager.BATTERY_STATUS_UNKNOWN
+    private val charging: BroadcastReceiver = object : BroadcastReceiver() {
+        private var previousStatus: Int = -1
 
         override fun onReceive(context: Context, intent: Intent) {
-            val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
-            if (batteryStatus != previousStatus) {
-                previousStatus = batteryStatus
-                when (batteryStatus) {
-                    BatteryManager.BATTERY_STATUS_CHARGING -> {
-                        statusText?.setText(R.string.charging)
-                        val green = ContextCompat.getColor(context, R.color.darkGreen)
-                        statusText?.setTextColor(green)
-                        batteryLevelText?.setTextColor(green)
-                        val chargingColor = ContextCompat.getColor(context, R.color.charging_bg)
-                        statusCard?.setCardBackgroundColor(chargingColor)
-                    }
-                    BatteryManager.BATTERY_STATUS_DISCHARGING -> {
-                        statusText?.setText(R.string.discharging)
-                        val orange = ContextCompat.getColor(context, R.color.orange)
-                        statusText?.setTextColor(orange)
-                        batteryLevelText?.setTextColor(orange)
-                        val dischargingColor = ContextCompat.getColor(context, R.color.discharging_bg)
-                        statusCard?.setCardBackgroundColor(dischargingColor)
-                    }
-                    BatteryManager.BATTERY_STATUS_FULL -> {
-                        statusText?.setText(R.string.full)
-                        val green = ContextCompat.getColor(context, R.color.darkGreen)
-                        statusText?.setTextColor(green)
-                        batteryLevelText?.setTextColor(green)
-                        val chargingColor = ContextCompat.getColor(context, R.color.charging_bg)
-                        statusCard?.setCardBackgroundColor(chargingColor)
-                    }
-                    BatteryManager.BATTERY_STATUS_NOT_CHARGING -> {
-                        statusText?.setText(R.string.not_charging)
-                        val orange = ContextCompat.getColor(context, R.color.orange)
-                        statusText?.setTextColor(orange)
-                        batteryLevelText?.setTextColor(orange)
-                        val dischargingColor = ContextCompat.getColor(context, R.color.discharging_bg)
-                        statusCard?.setCardBackgroundColor(dischargingColor)
-                    }
-                    else -> {
-                        statusText?.setText(R.string.unknown)
-                        val red = ContextCompat.getColor(context, R.color.red)
-                        statusText?.setTextColor(red)
-                        batteryLevelText?.setTextColor(red)
-                    }
-                }
-            }
-            batteryLevelText?.text = getString(R.string.percentage, Utils.getBatteryLevel(intent))
+            val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
+            val level = Utils.getBatteryLevel(intent)
+            
+            statusText?.text = Utils.getBatteryStatusTextLocalized(requireContext(), batteryStatus)
+            batteryLevelText?.text = getString(R.string.percentage, level)
             updateBatteryInfo(intent)
+
+            if (batteryStatus != previousStatus) {
+                statusCard?.setCardBackgroundColor(
+                    when (batteryStatus) {
+                        BatteryManager.BATTERY_STATUS_CHARGING -> ContextCompat.getColor(context, R.color.charging_bg)
+                        BatteryManager.BATTERY_STATUS_DISCHARGING -> ContextCompat.getColor(context, R.color.discharging_bg)
+                        else -> {
+                            val typedValue = android.util.TypedValue()
+                            val resolved = context.theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceContainerHigh, typedValue, true)
+                            if (resolved) typedValue.data else ContextCompat.getColor(context, android.R.color.transparent)
+                        }
+                    }
+                )
+                previousStatus = batteryStatus
+            }
+            updateServiceStatusIndicator()
         }
     }
 
     private fun updateBatteryInfo(intent: Intent) {
         Utils.getBatteryInfoAsync(
-            requireContext(), intent,
-            prefs?.getBoolean(PrefsFragment.KEY_TEMP_FAHRENHEIT, false)!!
+            requireContext(),
+            intent,
+            prefs?.getBoolean(PrefsFragment.KEY_TEMP_FAHRENHEIT, false) ?: false
         ) { info ->
             batteryInfo?.text = info
         }
     }
 
-    private fun disableSwitches(switches: List<SwitchMaterial?>) {
-        for (switch in switches) {
-            switch?.isEnabled = false
-        }
-    }
-
-    private fun enableSwitches(switches: List<SwitchMaterial?>) {
-        for (switch in switches) {
-            switch?.isEnabled = true
-        }
-    }
-
     private fun updateMinText(min: Int?) {
-        when (min) {
-            0 -> minText?.setText(R.string.no_recharge)
-            else -> minText?.text = getString(R.string.recharge_below, min)
-        }
+        val minVal = min ?: settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC) ?: Constants.DEFAULT_MIN_PC
+        minText?.text = if (minVal == 0) getString(R.string.no_recharge) else getString(R.string.recharge_below, minVal)
     }
 
     private fun setStatusCTRLFileData() {
-        val statusCTRLData = view?.findViewById<TextView>(R.id.status_ctrl_data)
-        val context = requireContext()
-        val settings = Utils.getSettings(context)
-        val preferences = Utils.getPrefs(context)
+        val file = Utils.getCtrlFileData(requireContext())
+        val on = Utils.getCtrlEnabledData(requireContext())
+        val off = Utils.getCtrlDisabledData(requireContext())
 
-        val isSet = if (preferences.getBoolean(PrefsFragment.KEY_CUSTOM_CTRL_FILE_DATA, false)) {
-            settings.contains(Constants.SAVED_PATH_DATA)
-        } else {
-            settings.contains(Constants.FILE_KEY)
-        }
+        view?.findViewById<TextView>(R.id.status_ctrl_data)?.text = getString(R.string.custom_ctrl_file_info_format, file, on, off)
 
-        if (isSet) {
-            statusCTRLData?.text = String.format(
-                "%s, %s, %s",
-                Utils.getCtrlFileData(context),
-                Utils.getCtrlEnabledData(context),
-                Utils.getCtrlDisabledData(context)
-            )
+        // Find the specific ControlFile object if it exists in the pre-configured list
+        val ctrlFiles = Utils.getCtrlFiles(requireContext())
+        val cf = ctrlFiles.find { it.file == file }
+
+        val experimentalLabel = view?.findViewById<TextView>(R.id.experimental_label)
+        val issuesLabel = view?.findViewById<TextView>(R.id.issues_label)
+
+        if (cf != null) {
+            experimentalLabel?.visibility = if (cf.experimental) View.VISIBLE else View.GONE
+            issuesLabel?.visibility = if (cf.issues) View.VISIBLE else View.GONE
         } else {
-            statusCTRLData?.setText(R.string.file_data)
+            // If it's a custom file not in the list, we assume it's experimental for safety
+            experimentalLabel?.visibility = View.VISIBLE
+            issuesLabel?.visibility = View.GONE
         }
     }
 
     private fun updateUi() {
-        val intent = requireContext().registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-        if (intent != null) {
-            batteryLevelText?.text = getString(R.string.percentage, Utils.getBatteryLevel(intent))
-        }
+        setStatusCTRLFileData()
         val isCtrlFileSet = Utils.isCtrlFileSet(requireContext())
-        enableSwitch?.isEnabled = isCtrlFileSet
-        enableSwitch?.isChecked = isCtrlFileSet && settings?.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false) == true
-        disableChargeSwitch?.isChecked = settings?.getBoolean(Constants.DISABLE_CHARGE_NOW, false) == true
-        val max = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC
-        val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC) ?: Constants.DEFAULT_MIN_PC
-        
-        maxSlider?.value = max.toFloat()
-        minSlider?.value = min.toFloat()
+        val limitEnabled = settings?.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false) ?: false
 
-        maxText?.text = getString(R.string.limit, max)
+        enableSwitch?.isEnabled = isCtrlFileSet
+        disableChargeSwitch?.isEnabled = isCtrlFileSet
+
+        if (!isCtrlFileSet) {
+            enableSwitch?.isChecked = false
+            disableChargeSwitch?.isChecked = false
+            Utils.stopService(requireContext())
+        } else {
+            enableSwitch?.isChecked = limitEnabled
+        }
+
+        val limit = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC
+        maxSlider?.value = limit.toFloat()
+        maxText?.text = getString(R.string.limit, limit)
+
+        val min = settings?.getInt(Constants.MIN, Constants.DEFAULT_MIN_PC) ?: Constants.DEFAULT_MIN_PC
+        minSlider?.value = min.toFloat()
         updateMinText(min)
+
+        updateServiceStatusIndicator()
+    }
+
+    private fun updateServiceStatusIndicator() {
+        // Use a delay slightly longer than the service start delay (500ms) to ensure it's up
+        serviceUpdateHandler.postDelayed({
+            if (!isAdded) return@postDelayed
+            val isRunning = ForegroundService.isRunning
+            
+            serviceStatusDot?.backgroundTintList = ColorStateList.valueOf(
+                if (isRunning) ContextCompat.getColor(requireContext(), R.color.darkGreen)
+                else ContextCompat.getColor(requireContext(), R.color.red)
+            )
+
+            serviceStatusBadge?.apply {
+                val isRunning = ForegroundService.isRunning
+                backgroundTintList = ColorStateList.valueOf(
+                    if (isRunning) ContextCompat.getColor(requireContext(), R.color.lightGreen)
+                    else {
+                        // Use a neutral color for inactive state (Surface Container High)
+                        val typedValue = android.util.TypedValue()
+                        val resolved = requireContext().theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceContainerHigh, typedValue, true)
+                        if (resolved) typedValue.data else ContextCompat.getColor(requireContext(), android.R.color.darker_gray)
+                    }
+                )
+                alpha = if (isRunning) 1.0f else 0.6f
+            }
+        }, 800)
     }
 }

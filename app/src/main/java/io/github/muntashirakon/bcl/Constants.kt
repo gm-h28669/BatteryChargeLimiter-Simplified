@@ -28,7 +28,7 @@ object Constants {
     const val DEFAULT_LIMIT_PC: Int = 50
     const val DEFAULT_MIN_PC: Int = 40
     const val MIN_ALLOWED_LIMIT_PC: Int = 1
-    const val CURRENT_THRESHOLD_MA: Int = 10
+    const val CURRENT_THRESHOLD_MA: Int = 100
 
     const val NOTIF_MAINTAIN = "ic_maintain"
     const val NOTIF_CHARGE = "ic_charge"

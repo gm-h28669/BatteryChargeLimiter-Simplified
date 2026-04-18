@@ -210,6 +210,8 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         // log battery and charger info
         val batteryLevel = Utils.getBatteryLevel(intent)
         val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+        val isActuallyCharging = Utils.isActuallyCharging(service, batteryStatus)
+        val chargingStr = if (isActuallyCharging) "CHARGING" else "DISCHARGING"
         val batteryCurrentAvgMilliAmps = Utils.getBatteryCurrentAvgInMilliAmps(context)
         val batteryCurrentAvgStr = Utils.getIntegerOrNotAvailable(batteryCurrentAvgMilliAmps)
         val chargerCurrentNowInMilliAmps = Utils.getChargerCurrentNowInMilliAmps()
@@ -221,7 +223,7 @@ class BatteryReceiver(private val service: ForegroundService) : BroadcastReceive
         //val chargerCurrentMaxInMilliAmps = Utils.getChargerCurrentMaxInMilliAmps(context)
         //val chargerCurrentMaxStr = Utils.getIntegerOrNotAvailable(chargerCurrentMaxInMilliAmps)
 
-        Log.d(TAG, "$lastState [Battery: $batteryLevel% ${Utils.getBatteryStatusText(batteryStatus)} ${batteryCurrentAvgStr}mA ${Utils.getPowerSource(context)}] [Charger: ${chargerCurrentNowStr}mA")
+        Log.d(TAG, "[Controller: $lastState $chargingStr]  [Battery: $batteryLevel% ${Utils.getBatteryStatusText(batteryStatus)} ${batteryCurrentAvgStr}mA ${Utils.getPowerSource(context)}] [Charger: ${chargerCurrentNowStr}mA]")
 
         if (prefs.getBoolean(PrefsFragment.KEY_TEMP_IN_NOTIF, true)) {
             Utils.getBatteryInfoAsync(service, intent, useFahrenheit) { info ->

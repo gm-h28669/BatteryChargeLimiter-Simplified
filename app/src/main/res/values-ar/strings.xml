@@ -93,6 +93,8 @@
     <string name="stop_service_dialog_title">خدمة حد البطارية قيد التشغيل</string>
     <string name="stop_service_dialog_message">يتطلب تغيير ملف التحكم إيقاف خدمة الحد الحالية. هل ترغب في إيقافها والمتابعة؟</string>
     <string name="stop_and_continue">إيقاف والمتابعة</string>
+    <string name="monitoring_battery">مراقبة البطارية</string>
     <string name="service_status_active">خدمة حد البطارية نشطة وتراقب.</string>
     <string name="service_status_inactive">تم تعطيل خدمة حد البطارية.</string>
+    <string name="status_calculated_by_app">تَمَّ الْحِسَابُ بواسطة التطبيق</string>
 </resources>

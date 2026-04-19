@@ -269,8 +269,8 @@ object Utils {
         return chargerCurrentMaxInMilliAmps
     }
 
-    private fun microToMilliAmps(currentAvg_uA: Int): Int =
-        if (currentAvg_uA != Int.MIN_VALUE) currentAvg_uA / 1000 else Int.MIN_VALUE
+    private fun microToMilliAmps(currentInMicroAmps: Int): Int =
+        if (currentInMicroAmps != Int.MIN_VALUE) currentInMicroAmps / 1000 else Int.MIN_VALUE
 
     private fun readIntValueFromAnyFile(filePaths: Array<String>): Int {
         var intValue = Int.MIN_VALUE
@@ -324,6 +324,10 @@ object Utils {
         val batteryVoltageInVolts = getVoltageInVolts(intent)
         val batteryTemperatureInCelsius = getTemperatureInCelsius(intent)
         val batteryCurrentAvgInMilliAmps = getBatteryCurrentAvgInMilliAmps(context)
+        val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+        val isActuallyCharging = isActuallyCharging(context, batteryStatus)
+        val status = getBatteryStatusTextLocalized(context, batteryStatus, isActuallyCharging)
+
         val powerSource = getPowerSource(context)
         val voltageStr = if (batteryVoltageInVolts != -1f) String.format(Locale.ROOT, "%.3f", batteryVoltageInVolts) else NOT_AVAILABLE
         val currentStr = getIntegerOrNotAvailable(batteryCurrentAvgInMilliAmps)
@@ -332,13 +336,15 @@ object Utils {
             String.format(Locale.ROOT, "%.1f", temp)
         } else NOT_AVAILABLE
 
-        return context.getString(
+        val info = context.getString(
             if (useFahrenheit) R.string.battery_info_F else R.string.battery_info_C,
             voltageStr,
             currentStr,
             temperatureStr,
             powerSource
         )
+
+        return "$status\n$info"
     }
 
     fun getIntegerOrNotAvailable(value: Int) : String {
@@ -447,12 +453,16 @@ object Utils {
             }
         }
         Handler(Looper.getMainLooper()).postDelayed({
-            ContextCompat.startForegroundService(context, Intent(context, ForegroundService::class.java))
+            startService(context)
             // display service enabled Toast message if not disabled in settings
             if (!getPrefs(context).getBoolean(PrefsFragment.KEY_HIDE_TOAST_ON_SERVICE_CHANGES, false)) {
                 Toast.makeText(context, R.string.service_enabled, Toast.LENGTH_SHORT).show()
             }
         }, Constants.CHARGING_CHANGE_TOLERANCE_MS)
+    }
+
+    fun startService(context: Context) {
+        ContextCompat.startForegroundService(context, Intent(context, ForegroundService::class.java))
     }
 
     fun getPrefs(context: Context): SharedPreferences {
@@ -618,15 +628,21 @@ object Utils {
         }
     }
 
-    fun getBatteryStatusTextLocalized(context: Context, batteryStatus: Int): String {
-        val statusText = when (batteryStatus) {
+    fun getBatteryStatusTextLocalized(context: Context, batteryStatus: Int, isActuallyCharging: Boolean): String {
+        var statusText = when (batteryStatus) {
             BatteryManager.BATTERY_STATUS_UNKNOWN -> context.getString(R.string.unknown)
-            BatteryManager.BATTERY_STATUS_CHARGING -> context.getString(R.string.charging)
+            BatteryManager.BATTERY_STATUS_CHARGING -> context.getString(if (isActuallyCharging) R.string.charging else R.string.not_charging)
             BatteryManager.BATTERY_STATUS_DISCHARGING -> context.getString(R.string.discharging)
             BatteryManager.BATTERY_STATUS_NOT_CHARGING -> context.getString(R.string.not_charging)
             BatteryManager.BATTERY_STATUS_FULL -> context.getString(R.string.full)
             else -> context.getString(R.string.unknown)
         }
+
+        if (batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING ||
+            (batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING && !isActuallyCharging)) {
+            statusText += " (${context.getString(R.string.status_calculated_by_app)})"
+        }
+
         return statusText.uppercase(Locale.getDefault())
     }
 }

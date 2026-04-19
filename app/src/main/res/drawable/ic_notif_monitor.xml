@@ -1,0 +1,20 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="24dp"
+    android:width="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Background: White Filled Circle -->
+    <path
+        android:fillColor="#ffffff"
+        android:pathData="M12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2z" />
+    <!-- Eye Shape: Ellipse with Black Border -->
+    <path
+        android:fillColor="#ffffff"
+        android:strokeColor="#000000"
+        android:strokeWidth="1.2"
+        android:pathData="M12,8c-3.5,0 -6.4,2.2 -7,4c0.6,1.8 3.5,4 7,4s6.4,-2.2 7,-4C18.4,10.2 15.5,8 12,8z" />
+    <!-- Iris: Black Filled Circle -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,12m-2.2,0a2.2,2.2 0,1,1 4.4,0a2.2,2.2 0,1,1 -4.4,0" />
+</vector>

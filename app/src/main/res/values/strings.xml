@@ -100,4 +100,6 @@
     <string name="stop_service_dialog_title">Battery limit service is running</string>
     <string name="stop_service_dialog_message">Changing the control file requires stopping the current limit service. Would you like to stop it and continue?</string>
     <string name="stop_and_continue">Stop and Continue</string>
+    <string name="monitoring_battery">Monitoring battery</string>
+    <string name="status_calculated_by_app">CALCULATED BY APP</string>
 </resources>

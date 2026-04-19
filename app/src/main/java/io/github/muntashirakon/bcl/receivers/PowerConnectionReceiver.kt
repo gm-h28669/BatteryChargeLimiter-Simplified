@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import io.github.muntashirakon.bcl.Constants.POWER_CHANGE_TOLERANCE_MS
+import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.ForegroundService
 import io.github.muntashirakon.bcl.Utils
 import io.github.muntashirakon.bcl.settings.PrefsFragment
@@ -17,10 +17,10 @@ import io.github.muntashirakon.bcl.settings.PrefsFragment
  * milliseconds where the respective "changes" of the power supply will be ignored.
  *
  * 21/4/17 milux: Changed to avoid service (re)start because of fake power on event
- * 2024: Updated to be dynamically registered by ForegroundService.
+ * 17/4/26 Updated to be dynamically registered by ForegroundService.
  */
 
-class PowerConnectionReceiver() : BroadcastReceiver() {
+class PowerConnectionReceiver(private val service: ForegroundService) : BroadcastReceiver() {
     init {
         Log.d(TAG, "$TAG Created")
     }
@@ -31,35 +31,29 @@ class PowerConnectionReceiver() : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         if (context == null || intent == null) return
-        val action = intent.action
-        Log.d(TAG, "onReceive: action=$action")
+        val action = intent.action ?: return
 
-        val isConnected = action == Intent.ACTION_POWER_CONNECTED || action == "${context.packageName}.ACTION_TEST_CONNECTED"
-        val isDisconnected = action == Intent.ACTION_POWER_DISCONNECTED || action == "${context.packageName}.ACTION_TEST_DISCONNECTED"
+        val isConnected = action == Intent.ACTION_POWER_CONNECTED
 
-        // ignore new events after power change or during state fixing
+        // log events after power change or during state fixing
         if (!Utils.getPrefs(context).getBoolean(PrefsFragment.KEY_IMMEDIATE_POWER_INTENT_HANDLING, false)
-            && Utils.isChangePending((BatteryReceiver.backOffTime * 2).coerceAtLeast(POWER_CHANGE_TOLERANCE_MS))) {
+            && Utils.isChangePending((BatteryControlReceiver.backOffTime * 2).coerceAtLeast(Constants.POWER_CHANGE_TOLERANCE_MS))) {
 
             if (isConnected) {
-                // ignore connected event only if service is running
-                if (ForegroundService.isRunning
-                    || Utils.getPrefs(context).getBoolean(PrefsFragment.KEY_DISABLE_AUTO_RECHARGE, false)
-                ) {
-                    Log.d(TAG, "Charging on transition in progress: ignore event")
-                    return
-                }
-            } else if (isDisconnected) {
-                Log.d(TAG, "Charging off transition in progress: ignore event")
-                return
+                Log.d(TAG, "Power connected event received while a state transition is in progress.")
+            } else {
+                Log.d(TAG, "Power disconnected event received while a state transition is in progress.")
             }
         }
 
         if (isConnected) {
-            Log.d(TAG, "Power supply was plugged in. Service is already running.")
-        } else if (isDisconnected) {
-            Log.d(TAG, "Power supply was unplugged. Service will continue running to monitor battery state.")
+            Log.d(TAG, "Power supply was plugged in.")
+        } else {
+            Log.d(TAG, "Power supply was unplugged.")
         }
+
+        // Trigger an immediate update of the notification to reflect the new power state
+        service.refreshNotification()
     }
 
     fun detach() {

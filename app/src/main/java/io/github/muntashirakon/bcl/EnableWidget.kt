@@ -9,15 +9,13 @@ import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import android.widget.Toast
-import io.github.muntashirakon.bcl.Constants.CHARGE_LIMIT_ENABLED
-import io.github.muntashirakon.bcl.Constants.INTENT_TOGGLE_ACTION
 import androidx.core.content.edit
 
 class EnableWidget : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_button)
         val settings = Utils.getSettings(context)
-        val isEnabled = settings.getBoolean(CHARGE_LIMIT_ENABLED, false)
+        val isEnabled = settings.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false)
         remoteViews.setImageViewResource(R.id.enable, getImage(isEnabled))
         remoteViews.setOnClickPendingIntent(R.id.enable, buildButtonPendingIntent(context))
 
@@ -25,7 +23,7 @@ class EnableWidget : AppWidgetProvider() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action == INTENT_TOGGLE_ACTION) {
+        if (intent.action == Constants.INTENT_TOGGLE_ACTION) {
             val settings = Utils.getSettings(context)
             if (Utils.isRooted()) {
                 if (!Utils.isCtrlFileSet(context)) {
@@ -33,8 +31,8 @@ class EnableWidget : AppWidgetProvider() {
                     updateWidget(context, false)
                     return
                 }
-                val enable = !settings.getBoolean(CHARGE_LIMIT_ENABLED, false)
-                settings.edit { putBoolean(CHARGE_LIMIT_ENABLED, enable) }
+                val enable = !settings.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false)
+                settings.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, enable) }
                 if (enable) {
                     Utils.startServiceIfLimitEnabled(context)
                 } else {
@@ -71,7 +69,7 @@ class EnableWidget : AppWidgetProvider() {
             return PendingIntent.getBroadcast(
                 context,
                 0,
-                Intent(context, EnableWidget::class.java).setAction(INTENT_TOGGLE_ACTION),
+                Intent(context, EnableWidget::class.java).setAction(Constants.INTENT_TOGGLE_ACTION),
                 PendingIntent.FLAG_UPDATE_CURRENT or flagImmutable
             )
         }

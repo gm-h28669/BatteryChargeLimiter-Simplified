@@ -93,6 +93,8 @@
     <string name="stop_service_dialog_title">Serviciul de limitare a bateriei rulează</string>
     <string name="stop_service_dialog_message">Schimbarea fișierului de control necesită oprirea serviciului de limitare curent. Doriți să îl opriți și să continuați?</string>
     <string name="stop_and_continue">Oprește și continuă</string>
+    <string name="monitoring_battery">Monitorizarea bateriei</string>
     <string name="service_status_active">Serviciul de limitare a bateriei este activ și monitorizează.</string>
     <string name="service_status_inactive">Serviciul de limitare a bateriei este dezactivat.</string>
+    <string name="status_calculated_by_app">CALCULAT DE APLICAȚIE</string>
 </resources>

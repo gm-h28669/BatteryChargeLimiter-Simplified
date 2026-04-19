@@ -92,6 +92,8 @@
     <string name="stop_service_dialog_title">பேட்டரி வரம்பு சேவை இயங்குகிறது</string>
     <string name="stop_service_dialog_message">கட்டுப்பாட்டு கோப்பை மாற்ற தற்போதைய வரம்பு சேவையை நிறுத்த வேண்டும். நீங்கள் அதை நிறுத்திவிட்டு தொடர விரும்புகிறீர்களா?</string>
     <string name="stop_and_continue">நிறுத்திவிட்டு தொடரவும்</string>
+    <string name="monitoring_battery">பேட்டரியைக் கண்காணிக்கிறது</string>
     <string name="service_status_active">பேட்டரி வரம்பு சேவை செயலில் உள்ளது மற்றும் கண்காணிக்கிறது.</string>
     <string name="service_status_inactive">பேட்டரி வரம்பு சேவை முடக்கப்பட்டுள்ளது.</string>
+    <string name="status_calculated_by_app">செயலியால் கணக்கிடப்பட்டது</string>
 </resources>

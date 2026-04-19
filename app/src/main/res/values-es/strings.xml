@@ -93,6 +93,8 @@
     <string name="stop_service_dialog_title">El servicio de límite de batería está activo</string>
     <string name="stop_service_dialog_message">Cambiar el archivo de control requiere detener el servicio de límite actual. ¿Desea detenerlo y continuar?</string>
     <string name="stop_and_continue">Detener y continuar</string>
+    <string name="monitoring_battery">Monitoreando la batería</string>
     <string name="service_status_active">El servicio de límite de batería está activo y monitoreando.</string>
     <string name="service_status_inactive">El servicio de límite de batería está desactivado.</string>
+    <string name="status_calculated_by_app">CALCULADO POR LA APLICACIÓN</string>
 </resources>

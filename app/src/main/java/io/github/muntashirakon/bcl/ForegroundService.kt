@@ -6,6 +6,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.media.RingtoneManager
@@ -17,13 +18,9 @@ import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import io.github.muntashirakon.bcl.Constants.INTENT_DISABLE_ACTION
-import io.github.muntashirakon.bcl.Constants.NOTIFICATION_LIVE
-import io.github.muntashirakon.bcl.Constants.NOTIF_CHARGE
-import io.github.muntashirakon.bcl.Constants.NOTIF_MAINTAIN
-import io.github.muntashirakon.bcl.Constants.SETTINGS
 import io.github.muntashirakon.bcl.activities.MainActivity
-import io.github.muntashirakon.bcl.receivers.BatteryReceiver
+import io.github.muntashirakon.bcl.receivers.BatteryControlReceiver
+import io.github.muntashirakon.bcl.receivers.BatteryMonitorReceiver
 import io.github.muntashirakon.bcl.receivers.ControlBatteryChargeReceiver
 import io.github.muntashirakon.bcl.receivers.PowerConnectionReceiver
 import io.github.muntashirakon.bcl.settings.PrefsFragment
@@ -39,7 +36,7 @@ import androidx.core.content.edit
  */
 class ForegroundService : Service() {
 
-    private val settings by lazy(LazyThreadSafetyMode.NONE) { this.getSharedPreferences(SETTINGS, 0) }
+    private val settings by lazy(LazyThreadSafetyMode.NONE) { this.getSharedPreferences(Constants.SETTINGS, 0) }
     private val prefs by lazy(LazyThreadSafetyMode.NONE) { Utils.getPrefs(this) }
     private val notificationManager by lazy(LazyThreadSafetyMode.NONE) {
         NotificationManagerCompat.from(this)
@@ -50,8 +47,15 @@ class ForegroundService : Service() {
     }
     private var notifyID = 1
     private var autoResetActive = false
-    private var batteryReceiver: BatteryReceiver? = null
+    private var batteryControlReceiver: BatteryControlReceiver? = null
+    private var batteryMonitorReceiver: BatteryMonitorReceiver? = null
     private var powerConnectionReceiver: PowerConnectionReceiver? = null
+
+    private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _: SharedPreferences, key: String? ->
+        if (key == Constants.CHARGE_LIMIT_ENABLED) {
+            switchReceivers()
+        }
+    }
 
     /**
      * Enables the automatic reset on service shutdown
@@ -64,7 +68,7 @@ class ForegroundService : Service() {
         Log.d(TAG, "$TAG created")
         isRunning = true
 
-        settings.edit { putBoolean(NOTIFICATION_LIVE, true) }
+        settings.edit { putBoolean(Constants.NOTIFICATION_LIVE, true) }
 
         val channel = NotificationChannelCompat.Builder(
             Constants.FOREGROUND_SERVICE_NOTIFICATION_CHANNEL_ID,
@@ -95,12 +99,12 @@ class ForegroundService : Service() {
             startForeground(notifyID, notification)
         }
 
-        batteryReceiver = BatteryReceiver(this@ForegroundService)
-        registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        settings.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
+        switchReceivers()
 
         //  since Android 8+ (API 26) manifest declared receivers will not get power connect/disconnect events
         //  we need to create and register dynamically the broadcast receiver in foreground service
-        powerConnectionReceiver = PowerConnectionReceiver()
+        powerConnectionReceiver = PowerConnectionReceiver(this)
         val powerFilter = IntentFilter().apply {
             addAction(Intent.ACTION_POWER_CONNECTED)
             addAction(Intent.ACTION_POWER_DISCONNECTED)
@@ -121,7 +125,7 @@ class ForegroundService : Service() {
         val pendingIntentDisable = PendingIntent.getBroadcast(
             this,
             0,
-            Intent(this, ControlBatteryChargeReceiver::class.java).setAction(INTENT_DISABLE_ACTION),
+            Intent(this, ControlBatteryChargeReceiver::class.java).setAction(Constants.INTENT_DISABLE_ACTION),
             PendingIntent.FLAG_UPDATE_CURRENT or flagImmutable
         )
         mNotifyBuilder.addAction(0, actionText, pendingIntentDisable)
@@ -137,10 +141,10 @@ class ForegroundService : Service() {
     }
 
     fun setNotificationIcon(iconType: String) {
-        if (iconType == NOTIF_MAINTAIN) {
-            mNotifyBuilder.setSmallIcon(R.drawable.ic_notif_maintain)
-        } else if (iconType == NOTIF_CHARGE) {
-            mNotifyBuilder.setSmallIcon(R.drawable.ic_notif_charge)
+        when (iconType) {
+            Constants.NOTIF_MAINTAIN -> mNotifyBuilder.setSmallIcon(R.drawable.ic_notif_maintain)
+            Constants.NOTIF_CHARGE -> mNotifyBuilder.setSmallIcon(R.drawable.ic_notif_charge)
+            Constants.NOTIF_MONITOR -> mNotifyBuilder.setSmallIcon(R.drawable.ic_notif_monitor)
         }
     }
 
@@ -150,6 +154,14 @@ class ForegroundService : Service() {
             return
         }
         notificationManager.notify(notifyID, mNotifyBuilder.build())
+    }
+
+    fun refreshNotification() {
+        val batteryIntent = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        if (batteryIntent != null) {
+            batteryControlReceiver?.onReceive(this, batteryIntent)
+            batteryMonitorReceiver?.onReceive(this, batteryIntent)
+        }
     }
 
     fun setNotificationSound() {
@@ -162,6 +174,37 @@ class ForegroundService : Service() {
         }
     }
 
+    private fun switchReceivers() {
+        val limitEnabled = settings.getBoolean(Constants.CHARGE_LIMIT_ENABLED, false)
+        Log.d(TAG, "Switching receivers. Limit enabled: $limitEnabled")
+
+        // Unregister existing receivers
+        batteryControlReceiver?.let {
+            unregisterReceiver(it)
+            it.detach(this)
+        }
+        batteryControlReceiver = null
+
+        batteryMonitorReceiver?.let {
+            unregisterReceiver(it)
+            it.detach()
+        }
+        batteryMonitorReceiver = null
+
+        if (limitEnabled) {
+            batteryControlReceiver = BatteryControlReceiver(this)
+            registerReceiver(batteryControlReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        } else {
+            batteryMonitorReceiver = BatteryMonitorReceiver(this)
+            registerReceiver(batteryMonitorReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            // Manually trigger once to show initial info
+            val batteryIntent = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            if (batteryIntent != null) {
+                batteryMonitorReceiver?.onReceive(this, batteryIntent)
+            }
+        }
+    }
+
     override fun onDestroy() {
         Log.d(TAG, "Service removed")
         if (autoResetActive && !ignoreAutoReset && prefs.getBoolean(PrefsFragment.KEY_AUTO_RESET_STATS, false)) {
@@ -169,17 +212,26 @@ class ForegroundService : Service() {
         }
         ignoreAutoReset = false
 
-        settings.edit { putBoolean(NOTIFICATION_LIVE, false) }
+        settings.edit { putBoolean(Constants.NOTIFICATION_LIVE, false) }
+        settings.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
+
         // unregister the battery and power connection receiver
-        unregisterReceiver(batteryReceiver)
+        batteryControlReceiver?.let {
+            unregisterReceiver(it)
+            it.detach(this)
+        }
+        batteryMonitorReceiver?.let {
+            unregisterReceiver(it)
+            it.detach()
+        }
         unregisterReceiver(powerConnectionReceiver)
 
         // make the receivers and dependencies ready for garbage-collection
-        batteryReceiver?.detach(this)
         powerConnectionReceiver?.detach()
 
         // clear the reference to the receivers for GC
-        batteryReceiver = null
+        batteryControlReceiver = null
+        batteryMonitorReceiver = null
         powerConnectionReceiver = null
 
         isRunning = false

@@ -32,6 +32,7 @@ object Constants {
 
     const val NOTIF_MAINTAIN = "ic_maintain"
     const val NOTIF_CHARGE = "ic_charge"
+    const val NOTIF_MONITOR = "ic_monitor"
 
     const val INTENT_TOGGLE_ACTION = BuildConfig.APPLICATION_ID + ".action.TOGGLE"
     const val INTENT_DISABLE_ACTION = BuildConfig.APPLICATION_ID + ".action.DISABLE"

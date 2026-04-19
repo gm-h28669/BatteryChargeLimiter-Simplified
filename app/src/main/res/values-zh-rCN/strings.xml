@@ -92,6 +92,8 @@
     <string name="stop_service_dialog_title">电池限充服务正在运行</string>
     <string name="stop_service_dialog_message">更改控制文件需要停止当前的限充服务。您要停止并继续吗？</string>
     <string name="stop_and_continue">停止并继续</string>
+    <string name="monitoring_battery">电池监控中</string>
     <string name="service_status_active">电池限充服务已激活并正在监控。</string>
     <string name="service_status_inactive">电池限充服务已禁用。</string>
+    <string name="status_calculated_by_app">由应用计算</string>
 </resources>

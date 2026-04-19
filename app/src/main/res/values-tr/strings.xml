@@ -92,6 +92,8 @@
     <string name="stop_service_dialog_title">Pil sınırı servisi çalışıyor</string>
     <string name="stop_service_dialog_message">Kontrol dosyasını değiştirmek, mevcut sınırlandırma servisinin durdurulmasını gerektirir. Durdurup devam etmek istiyor musunuz?</string>
     <string name="stop_and_continue">Durdur ve Devam Et</string>
+    <string name="monitoring_battery">Pil izleniyor</string>
     <string name="service_status_active">Pil sınırı servisi aktif ve izliyor.</string>
     <string name="service_status_inactive">Pil sınırı servisi devre dışı.</string>
+    <string name="status_calculated_by_app">UYGULAMA TARAFINDAN HESAPLANAN</string>
 </resources>

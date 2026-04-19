@@ -21,8 +21,8 @@ import io.github.muntashirakon.bcl.R
 import io.github.muntashirakon.bcl.Utils
 import io.github.muntashirakon.bcl.settings.PrefsFragment
 import io.github.muntashirakon.bcl.settings.SettingsActivity
-import java.util.*
 import androidx.core.content.edit
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {

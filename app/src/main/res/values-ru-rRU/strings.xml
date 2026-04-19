@@ -92,6 +92,8 @@
     <string name="stop_service_dialog_title">Служба ограничения заряда запущена</string>
     <string name="stop_service_dialog_message">Для изменения управляющего файла необходимо остановить текущую службу ограничения. Хотите остановить ее и продолжить?</string>
     <string name="stop_and_continue">Остановить и продолжить</string>
+    <string name="monitoring_battery">Мониторинг батареи</string>
     <string name="service_status_active">Служба ограничения заряда активна и выполняет мониторинг.</string>
     <string name="service_status_inactive">Служба ограничения заряда отключена.</string>
+    <string name="status_calculated_by_app">РАССЧИТАНО ПРИЛОЖЕНИЕМ</string>
 </resources>

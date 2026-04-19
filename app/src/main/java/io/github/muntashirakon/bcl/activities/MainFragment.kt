@@ -179,6 +179,8 @@ class MainFragment: Fragment() {
         super.onStart()
         val intentFilter = IntentFilter()
         intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED)
+        intentFilter.addAction(Intent.ACTION_POWER_CONNECTED)
+        intentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED)
         requireContext().registerReceiver(charging, intentFilter)
         updateUi()
     }
@@ -211,14 +213,14 @@ class MainFragment: Fragment() {
                     Utils.startServiceIfLimitEnabled(requireContext())
                 } else {
                     settings?.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, false) }
-                    Utils.stopService(requireContext())
+                    Utils.startService(requireContext())
                 }
             }
             R.id.disable_charge_switch -> {
                 if (isChecked) {
                     enableSwitch?.isChecked = false
                     settings?.edit { putBoolean(Constants.CHARGE_LIMIT_ENABLED, false) }
-                    Utils.stopService(requireContext())
+                    Utils.startService(requireContext())
                     Utils.changeState(requireContext(), ChargeMode.OFF)
                 } else {
                     Utils.changeState(requireContext(), ChargeMode.ON)
@@ -234,8 +236,9 @@ class MainFragment: Fragment() {
         override fun onReceive(context: Context, intent: Intent) {
             val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             val level = Utils.getBatteryLevel(intent)
+            val isActuallyCharging = Utils.isActuallyCharging(requireContext(), batteryStatus)
             
-            statusText?.text = Utils.getBatteryStatusTextLocalized(requireContext(), batteryStatus)
+            statusText?.text = Utils.getBatteryStatusTextLocalized(requireContext(), batteryStatus, isActuallyCharging)
             batteryLevelText?.text = getString(R.string.percentage, level)
             updateBatteryInfo(intent)
 
@@ -319,6 +322,10 @@ class MainFragment: Fragment() {
             Utils.stopService(requireContext())
         } else {
             enableSwitch?.isChecked = limitEnabled
+            // If control file is set, ensure service is running (either in Limit mode or Monitoring mode)
+            if (!ForegroundService.isRunning) {
+                Utils.startService(requireContext())
+            }
         }
 
         val limit = settings?.getInt(Constants.LIMIT, Constants.DEFAULT_LIMIT_PC) ?: Constants.DEFAULT_LIMIT_PC

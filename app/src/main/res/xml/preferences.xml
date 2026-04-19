@@ -77,7 +77,7 @@
             android:key="enforce_charge_limit"
             android:title="@string/enforce_charge_limit"
             android:summary="@string/enforce_charge_limit_desc"
-            android:defaultValue="true" />
+            android:defaultValue="false" />
 
     </PreferenceCategory>
 

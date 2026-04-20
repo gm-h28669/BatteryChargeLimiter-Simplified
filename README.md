@@ -10,6 +10,29 @@ A fork of **Battery Charge Limit** whose development has been stalled for some t
 <img src="screenshots/settings-light-theme.png" alt="Settings Screen Light Theme" />
 <img src="screenshots/main-dark-theme.png" alt="Main Screen Dark Theme" />
 
+## What's New in Release 1.4.2
+
+### Features
+- **Main UX**: Enhanced battery status on the main screen and notifications to show the charging status calculated by the app based on real-time current sensing.
+- **Main UX**: Added a "CALCULATED" indicator next to battery status when the app's logic differs from the system report.
+- **Settings UX**: "Show battery info in notification" is now enabled by default. "Enforce charge limit" is now disabled by default.
+- **Monitoring Mode**: Introduced a new "Monitoring Mode" (active when the limiter is disabled) that provides real-time battery info in the notification body.
+- **Charge Limit Control**: Improved charge limit logic using real-time current sensing to bypass occasionally unreliable battery status reported by Android.
+
+### Optimizations
+- **Performance**: Standardized all current measurements to mA and added a current threshold (100mA) to filter sensor noise.
+- **State Machine**: Updated the internal state machine to use current sensing, preventing unnecessary "pulse" loops when the hardware stops charging but the system report lags.
+
+### Bug Fixes
+- **Fix**: Fixed an issue where a control file was selected by default on a fresh install. Users must now explicitly select a configuration.
+- **Fix**: Fixed a UI bug where 0 mA current was displayed incorrectly as `---`.
+- **Fix**: Fixed a dashboard background color glitch by respecting the app's calculated charging state over the system status.
+- **Fix**: Decoupled technical battery specs from status text to prevent UI duplication.
+
+### Maintenance
+- **Logging**: Added charger current measurements to logs and extended overall logging for better troubleshooting.
+- **Refactoring**: Renamed `BatteryReceiver` to `BatteryControlReceiver` and performed general code cleanup.
+
 ## What's changed in release 1.4.1
 
 ### Features

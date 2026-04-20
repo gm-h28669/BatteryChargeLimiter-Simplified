@@ -96,5 +96,5 @@
     <string name="monitoring_battery">Monitorizarea bateriei</string>
     <string name="service_status_active">Serviciul de limitare a bateriei este activ și monitorizează.</string>
     <string name="service_status_inactive">Serviciul de limitare a bateriei este dezactivat.</string>
-    <string name="status_calculated_by_app">CALCULAT DE APLICAȚIE</string>
+    <string name="status_calculated_by_app">CALCULAT</string>
 </resources>

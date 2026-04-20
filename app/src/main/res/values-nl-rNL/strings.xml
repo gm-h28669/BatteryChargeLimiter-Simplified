@@ -95,5 +95,5 @@
     <string name="monitoring_battery">Batterij wordt gemonitord</string>
     <string name="service_status_active">Batterijlimiet-service is actief en monitort.</string>
     <string name="service_status_inactive">Batterijlimiet-service is uitgeschakeld.</string>
-    <string name="status_calculated_by_app">BEREKEND DOOR APP</string>
+    <string name="status_calculated_by_app">BEREKEND</string>
 </resources>

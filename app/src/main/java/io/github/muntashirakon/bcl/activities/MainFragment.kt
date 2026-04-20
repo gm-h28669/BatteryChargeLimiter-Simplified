@@ -232,29 +232,39 @@ class MainFragment: Fragment() {
 
     private val charging: BroadcastReceiver = object : BroadcastReceiver() {
         private var previousStatus: Int = -1
+        private var previousActuallyCharging: Boolean? = null
+
+        fun getDefaultColor(context: Context) : Int {
+            val typedValue = android.util.TypedValue()
+            val resolved = context.theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceContainerHigh, typedValue, true)
+            return if (resolved) typedValue.data else ContextCompat.getColor(
+                context,
+                android.R.color.transparent
+            )
+        }
 
         override fun onReceive(context: Context, intent: Intent) {
             val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             val level = Utils.getBatteryLevel(intent)
-            val isActuallyCharging = Utils.isActuallyCharging(requireContext(), batteryStatus)
-            
+            val isActuallyCharging = Utils.isActuallyCharging(requireContext(), Constants.CURRENT_THRESHOLD_MA)
+
             statusText?.text = Utils.getBatteryStatusTextLocalized(requireContext(), batteryStatus, isActuallyCharging)
             batteryLevelText?.text = getString(R.string.percentage, level)
             updateBatteryInfo(intent)
 
-            if (batteryStatus != previousStatus) {
+            if (batteryStatus != previousStatus || isActuallyCharging != previousActuallyCharging) {
                 statusCard?.setCardBackgroundColor(
                     when (batteryStatus) {
-                        BatteryManager.BATTERY_STATUS_CHARGING -> ContextCompat.getColor(context, R.color.charging_bg)
-                        BatteryManager.BATTERY_STATUS_DISCHARGING -> ContextCompat.getColor(context, R.color.discharging_bg)
-                        else -> {
-                            val typedValue = android.util.TypedValue()
-                            val resolved = context.theme.resolveAttribute(com.google.android.material.R.attr.colorSurfaceContainerHigh, typedValue, true)
-                            if (resolved) typedValue.data else ContextCompat.getColor(context, android.R.color.transparent)
-                        }
+                        BatteryManager.BATTERY_STATUS_CHARGING,
+                        BatteryManager.BATTERY_STATUS_DISCHARGING,
+                        BatteryManager.BATTERY_STATUS_NOT_CHARGING ->
+                            ContextCompat.getColor(context, if (isActuallyCharging) R.color.charging_bg else R.color.discharging_bg)
+                        else ->
+                            getDefaultColor(context)
                     }
                 )
                 previousStatus = batteryStatus
+                previousActuallyCharging = isActuallyCharging
             }
             updateServiceStatusIndicator()
         }

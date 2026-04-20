@@ -95,5 +95,5 @@
     <string name="monitoring_battery">Monitoraggio della batteria</string>
     <string name="service_status_active">Il servizio di limite batteria è attivo e sta monitorando.</string>
     <string name="service_status_inactive">Il servizio di limite batteria è disattivato.</string>
-    <string name="status_calculated_by_app">CALCOLATO DALL\'APP</string>
+    <string name="status_calculated_by_app">CALCOLATO</string>
 </resources>

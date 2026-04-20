@@ -95,5 +95,5 @@
     <string name="monitoring_battery">Pil izleniyor</string>
     <string name="service_status_active">Pil sınırı servisi aktif ve izliyor.</string>
     <string name="service_status_inactive">Pil sınırı servisi devre dışı.</string>
-    <string name="status_calculated_by_app">UYGULAMA TARAFINDAN HESAPLANAN</string>
+    <string name="status_calculated_by_app">HESAPLANDI</string>
 </resources>

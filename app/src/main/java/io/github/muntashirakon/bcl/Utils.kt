@@ -293,17 +293,11 @@ object Utils {
     /**
      * Returns true if the battery is actually being charged (positive current flow).
      * A small threshold (e.g. 50mA) can be used to ignore noise.
+     * If current could not be read (value = Int.MinValue) then return true
      */
-    fun isCharging(context: Context, thresholdMa: Int = Constants.CURRENT_THRESHOLD_MA): Boolean {
-        val currentMa = getBatteryCurrentAvgInMilliAmps(context)
-        return currentMa != Int.MIN_VALUE && currentMa > thresholdMa
-    }
-
-    /**
-     * Returns true if the system status is CHARGING and the actual current is above the threshold.
-     */
-    fun isActuallyCharging(context: Context, batteryStatus: Int, thresholdMa: Int = Constants.CURRENT_THRESHOLD_MA): Boolean {
-        return batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING && isCharging(context, thresholdMa)
+    fun isActuallyCharging(context: Context, thresholdMa: Int = Constants.CURRENT_THRESHOLD_MA): Boolean {
+        val currentInMilliAmps = getBatteryCurrentAvgInMilliAmps(context)
+        return currentInMilliAmps == Int.MIN_VALUE || currentInMilliAmps > thresholdMa
     }
 
     fun getVoltageInVolts(intent: Intent): Float {
@@ -324,9 +318,6 @@ object Utils {
         val batteryVoltageInVolts = getVoltageInVolts(intent)
         val batteryTemperatureInCelsius = getTemperatureInCelsius(intent)
         val batteryCurrentAvgInMilliAmps = getBatteryCurrentAvgInMilliAmps(context)
-        val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
-        val isActuallyCharging = isActuallyCharging(context, batteryStatus)
-        val status = getBatteryStatusTextLocalized(context, batteryStatus, isActuallyCharging)
 
         val powerSource = getPowerSource(context)
         val voltageStr = if (batteryVoltageInVolts != -1f) String.format(Locale.ROOT, "%.3f", batteryVoltageInVolts) else NOT_AVAILABLE
@@ -336,15 +327,13 @@ object Utils {
             String.format(Locale.ROOT, "%.1f", temp)
         } else NOT_AVAILABLE
 
-        val info = context.getString(
+        return context.getString(
             if (useFahrenheit) R.string.battery_info_F else R.string.battery_info_C,
             voltageStr,
             currentStr,
             temperatureStr,
             powerSource
         )
-
-        return "$status\n$info"
     }
 
     fun getIntegerOrNotAvailable(value: Int) : String {
@@ -631,16 +620,23 @@ object Utils {
     fun getBatteryStatusTextLocalized(context: Context, batteryStatus: Int, isActuallyCharging: Boolean): String {
         var statusText = when (batteryStatus) {
             BatteryManager.BATTERY_STATUS_UNKNOWN -> context.getString(R.string.unknown)
-            BatteryManager.BATTERY_STATUS_CHARGING -> context.getString(if (isActuallyCharging) R.string.charging else R.string.not_charging)
+            BatteryManager.BATTERY_STATUS_CHARGING -> context.getString(if (isActuallyCharging) R.string.charging else R.string.discharging)
             BatteryManager.BATTERY_STATUS_DISCHARGING -> context.getString(R.string.discharging)
             BatteryManager.BATTERY_STATUS_NOT_CHARGING -> context.getString(R.string.not_charging)
             BatteryManager.BATTERY_STATUS_FULL -> context.getString(R.string.full)
             else -> context.getString(R.string.unknown)
         }
 
-        if (batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING ||
-            (batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING && !isActuallyCharging)) {
-            statusText += " (${context.getString(R.string.status_calculated_by_app)})"
+        if (isActuallyCharging) {
+            if (batteryStatus == BatteryManager.BATTERY_STATUS_FULL ||
+                batteryStatus == BatteryManager.BATTERY_STATUS_NOT_CHARGING ||
+                batteryStatus == BatteryManager.BATTERY_STATUS_DISCHARGING) {
+                statusText += " (?)"
+            }
+        } else {
+            if (batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING) {
+                statusText += " (${context.getString(R.string.status_calculated_by_app)})"
+            }
         }
 
         return statusText.uppercase(Locale.getDefault())

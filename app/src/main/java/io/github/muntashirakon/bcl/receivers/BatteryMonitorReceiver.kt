@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
+import android.os.BatteryManager
 import android.util.Log
 import io.github.muntashirakon.bcl.Constants
 import io.github.muntashirakon.bcl.ForegroundService
@@ -37,7 +38,18 @@ class BatteryMonitorReceiver(private val service: ForegroundService) : Broadcast
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == Intent.ACTION_BATTERY_CHANGED) {
-            Log.d(TAG, "Battery changed event received")
+            val batteryLevel = Utils.getBatteryLevel(intent)
+            val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+            val isActuallyCharging = Utils.isActuallyCharging(service, Constants.CURRENT_THRESHOLD_MA)
+
+            val chargingStr = if (isActuallyCharging) "CHARGING" else "DISCHARGING"
+            val batteryCurrentAvgMilliAmps = Utils.getBatteryCurrentAvgInMilliAmps(context)
+            val batteryCurrentAvgStr = Utils.getIntegerOrNotAvailable(batteryCurrentAvgMilliAmps)
+            val chargerCurrentNowInMilliAmps = Utils.getChargerCurrentNowInMilliAmps()
+            val chargerCurrentNowStr = Utils.getIntegerOrNotAvailable(chargerCurrentNowInMilliAmps)
+
+            Log.d(TAG, "[Monitor: $chargingStr]  [Battery: $batteryLevel% ${Utils.getBatteryStatusText(batteryStatus)} ${batteryCurrentAvgStr}mA ${Utils.getPowerSource(context)}] [Charger: ${chargerCurrentNowStr}mA]")
+
             updateNotification(intent)
         }
     }
@@ -48,7 +60,11 @@ class BatteryMonitorReceiver(private val service: ForegroundService) : Broadcast
         service.setNotificationActionText(service.getString(R.string.dismiss))
 
         Utils.getBatteryInfoAsync(service, intent, useFahrenheit) { info ->
-            service.setNotificationContentText(info)
+            val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+            val isActuallyCharging = Utils.isActuallyCharging(service, Constants.CURRENT_THRESHOLD_MA)
+            val status = Utils.getBatteryStatusTextLocalized(service, batteryStatus, isActuallyCharging)
+            
+            service.setNotificationContentText("$status\n$info")
             service.updateNotification()
         }
     }

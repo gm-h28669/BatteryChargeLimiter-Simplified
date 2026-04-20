@@ -95,5 +95,5 @@
     <string name="monitoring_battery">பேட்டரியைக் கண்காணிக்கிறது</string>
     <string name="service_status_active">பேட்டரி வரம்பு சேவை செயலில் உள்ளது மற்றும் கண்காணிக்கிறது.</string>
     <string name="service_status_inactive">பேட்டரி வரம்பு சேவை முடக்கப்பட்டுள்ளது.</string>
-    <string name="status_calculated_by_app">செயலியால் கணக்கிடப்பட்டது</string>
+    <string name="status_calculated_by_app">கணக்கிடப்பட்டது</string>
 </resources>

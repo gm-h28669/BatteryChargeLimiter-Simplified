@@ -95,5 +95,5 @@
     <string name="monitoring_battery">Мониторинг батареи</string>
     <string name="service_status_active">Служба ограничения заряда активна и выполняет мониторинг.</string>
     <string name="service_status_inactive">Служба ограничения заряда отключена.</string>
-    <string name="status_calculated_by_app">РАССЧИТАНО ПРИЛОЖЕНИЕМ</string>
+    <string name="status_calculated_by_app">РАССЧИТАНО</string>
 </resources>

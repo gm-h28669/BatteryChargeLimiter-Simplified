@@ -95,5 +95,5 @@
     <string name="monitoring_battery">电池监控中</string>
     <string name="service_status_active">电池限充服务已激活并正在监控。</string>
     <string name="service_status_inactive">电池限充服务已禁用。</string>
-    <string name="status_calculated_by_app">由应用计算</string>
+    <string name="status_calculated_by_app">已计算</string>
 </resources>

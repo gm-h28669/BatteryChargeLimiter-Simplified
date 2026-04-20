@@ -53,7 +53,11 @@ class BatteryControlReceiver(private val service: ForegroundService) : Broadcast
                     )
                     if (batteryIntent != null) {
                         Utils.getBatteryInfoAsync(service, batteryIntent, useFahrenheit) { info ->
-                            service.setNotificationContentText(info)
+                            val batteryStatus = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
+                            val isActuallyCharging = Utils.isActuallyCharging(service, Constants.CURRENT_THRESHOLD_MA)
+                            val status = Utils.getBatteryStatusTextLocalized(service, batteryStatus, isActuallyCharging)
+
+                            service.setNotificationContentText("$status\n$info")
                             service.updateNotification()
                         }
                     }
@@ -150,7 +154,7 @@ class BatteryControlReceiver(private val service: ForegroundService) : Broadcast
 
     private fun handleStoppedAtLimitBehavior(batteryLevel: Int, batteryStatus: Int) {
         // use both system status and actual current to determine if we are still charging
-        val isActuallyCharging = Utils.isActuallyCharging(service, batteryStatus)
+        val isActuallyCharging = batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING && Utils.isActuallyCharging(service, Constants.CURRENT_THRESHOLD_MA)
 
         if (isActuallyCharging
             && prefs.getBoolean(PrefsFragment.KEY_ENFORCE_CHARGE_LIMIT, true)) {
@@ -209,7 +213,7 @@ class BatteryControlReceiver(private val service: ForegroundService) : Broadcast
         // log battery and charger info
         val batteryLevel = Utils.getBatteryLevel(intent)
         val batteryStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN)
-        val isActuallyCharging = Utils.isActuallyCharging(service, batteryStatus)
+        val isActuallyCharging = Utils.isActuallyCharging(service, Constants.CURRENT_THRESHOLD_MA)
 
         val chargingStr = if (isActuallyCharging) "CHARGING" else "DISCHARGING"
         val batteryCurrentAvgMilliAmps = Utils.getBatteryCurrentAvgInMilliAmps(context)
@@ -227,7 +231,8 @@ class BatteryControlReceiver(private val service: ForegroundService) : Broadcast
 
         if (prefs.getBoolean(PrefsFragment.KEY_TEMP_IN_NOTIF, true)) {
             Utils.getBatteryInfoAsync(service, intent, useFahrenheit) { info ->
-                service.setNotificationContentText(info)
+                val status = Utils.getBatteryStatusTextLocalized(service, batteryStatus, isActuallyCharging)
+                service.setNotificationContentText("$status\n$info")
                 service.updateNotification()
             }
         } else {

@@ -94,5 +94,5 @@
     <string name="monitoring_battery">ব্যাটারি পর্যবেক্ষণ করছে</string>
     <string name="service_status_active">ব্যাটারি সীমা সেবাটি সক্রিয় এবং পর্যবেক্ষণ করছে।</string>
     <string name="service_status_inactive">ব্যাটারি সীমা সেবাটি নিষ্ক্রিয়।</string>
-    <string name="status_calculated_by_app">অ্যাপ দ্বারা হিসাবকৃত</string>
+    <string name="status_calculated_by_app">হিসাবকৃত</string>
 </resources>
